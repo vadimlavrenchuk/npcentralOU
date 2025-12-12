@@ -1,4 +1,4 @@
-import "../styles/pages/equipment.css";
+import "../styles/pages/equipment.scss";
 
 export default function Equipment() {
   return (

@@ -3,6 +3,8 @@ node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+package-lock.json
+yarn.lock
 
 # Frontend / Backend folders
 frontend/node_modules/
@@ -35,6 +37,10 @@ logs/*
 .idea/
 .DS_Store
 Thumbs.db
+
+# Sass cache
+.sass-cache/
+*.map
 
 # Coverage
 coverage/

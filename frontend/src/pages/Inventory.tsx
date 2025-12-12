@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
-import "../styles/pages/inventory.css";
+import "../styles/pages/inventory.scss";
 
 type Part = {
   id: number;

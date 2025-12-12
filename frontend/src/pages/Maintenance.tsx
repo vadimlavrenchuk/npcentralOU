@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
-import "../styles/pages/maintenance.css";
+import "../styles/pages/maintenance.scss";
 
 type MaintenanceItem = {
   id: number;
