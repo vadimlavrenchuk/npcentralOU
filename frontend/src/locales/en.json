@@ -1,0 +1,49 @@
+{
+  "nav": {
+    "dashboard": "Dashboard",
+    "equipment": "Equipment",
+    "inventory": "Inventory",
+    "maintenance": "Maintenance",
+    "workorders": "Work Orders"
+  },
+  "common": {
+    "addNew": "Add New",
+    "addNewEquipment": "Add New Equipment",
+    "addNewPart": "Add New Part",
+    "brand": "Brand",
+    "name": "Name",
+    "partNumber": "Part Number",
+    "quantityInStock": "Quantity in Stock",
+    "orderedQuantity": "Ordered Quantity",
+    "orderedStatus": "Ordered Status",
+    "operatingHours": "Operating Hours",
+    "action": "Action",
+    "create": "Create",
+    "cancel": "Cancel",
+    "close": "Close",
+    "viewMaintenance": "View Maintenance",
+    "addToWarehouse": "Add to warehouse",
+    "order": "Order",
+    "status": {
+      "none": "—",
+      "pending": "Pending",
+      "notReceived": "Not received"
+    }
+  },
+  "pages": {
+    "dashboard": "Dashboard",
+    "equipment": "Equipment",
+    "inventory": "Spare Parts Warehouse",
+    "maintenance": "Regular Maintenance",
+    "workorders": "Work Orders"
+  },
+  "maintenance": {
+    "noMaintenance": "No maintenance items defined for this equipment.",
+    "module": "Module",
+    "hoursInterval": "Hours Interval",
+    "description": "Description"
+  },
+  "inventory": {
+    "title": "Spare Parts Warehouse"
+  }
+}

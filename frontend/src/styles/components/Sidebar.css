@@ -29,3 +29,12 @@
 .sidebar-menu a:hover {
   color: white;
 }
+.sidebar-languages {
+  margin-top: auto;
+  border-top: 1px solid #374151;
+  padding-top: 20px;
+}
+
+.sidebar-languages p {
+  color: #9ca3af;
+}

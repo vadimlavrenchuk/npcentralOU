@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 import "../styles/pages/inventory.css";
 
 type Part = {
@@ -11,6 +12,7 @@ type Part = {
 };
 
 export default function Inventory() {
+  const { t } = useTranslation();
   const initialParts: Part[] = useMemo(
     () => [
       { id: 1, name: "Valve, pressure", partNumber: "VLV-1001", quantity: 12, orderedQuantity: 0, orderedStatus: "None" },
@@ -46,13 +48,13 @@ export default function Inventory() {
 
   return (
     <div className="page">
-      <h1 className="page-title">Склад запчастей</h1>
+      <h1 className="page-title">{t("inventory.title")}</h1>
 
       <button
         onClick={() => setShowForm(!showForm)}
         className="mb-4 px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700"
       >
-        + Add New Part
+        + {t("common.addNewPart")}
       </button>
 
       {showForm && (
@@ -60,21 +62,21 @@ export default function Inventory() {
           <div className="flex gap-2 mb-2">
             <input
               type="text"
-              placeholder="Part name"
+              placeholder={t("common.name")}
               value={formData.name}
               onChange={(e) => setFormData({ ...formData, name: e.target.value })}
               className="px-2 py-1 border rounded"
             />
             <input
               type="text"
-              placeholder="Part number"
+              placeholder={t("common.partNumber")}
               value={formData.partNumber}
               onChange={(e) => setFormData({ ...formData, partNumber: e.target.value })}
               className="px-2 py-1 border rounded"
             />
             <input
               type="number"
-              placeholder="Initial quantity"
+              placeholder={t("common.quantityInStock")}
               value={formData.quantity}
               onChange={(e) => setFormData({ ...formData, quantity: Number(e.target.value) })}
               className="px-2 py-1 border rounded"
@@ -82,13 +84,13 @@ export default function Inventory() {
           </div>
           <div className="flex gap-2">
             <button onClick={addNewPart} className="px-3 py-1 bg-green-600 text-white rounded">
-              Create
+              {t("common.create")}
             </button>
             <button
               onClick={() => setShowForm(false)}
               className="px-3 py-1 bg-gray-400 text-white rounded"
             >
-              Cancel
+              {t("common.cancel")}
             </button>
           </div>
         </div>
@@ -99,22 +101,22 @@ export default function Inventory() {
           <thead className="bg-gray-50">
             <tr>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Name
+                {t("common.name")}
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Part Number
+                {t("common.partNumber")}
               </th>
               <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Quantity in Stock
+                {t("common.quantityInStock")}
               </th>
               <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Ordered Quantity
+                {t("common.orderedQuantity")}
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Ordered Status
+                {t("common.orderedStatus")}
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Action
+                {t("common.action")}
               </th>
             </tr>
           </thead>
@@ -130,6 +132,7 @@ export default function Inventory() {
 }
 
 function PartRow({ part, onUpdate }: { part: Part; onUpdate: (p: Part) => void }) {
+  const { t } = useTranslation();
   const [qty, setQty] = useState<number>(1);
 
   function handleAdd() {
@@ -161,11 +164,11 @@ function PartRow({ part, onUpdate }: { part: Part; onUpdate: (p: Part) => void }
       <td className="px-6 py-4 whitespace-nowrap text-sm text-right">{part.orderedQuantity || 0}</td>
       <td className="px-6 py-4 whitespace-nowrap text-sm">
         {part.orderedStatus === "None" ? (
-          <span className="text-green-600">—</span>
+          <span className="text-green-600">{t("common.status.none")}</span>
         ) : part.orderedStatus === "Pending" ? (
-          <span className="text-yellow-600">Pending</span>
+          <span className="text-yellow-600">{t("common.status.pending")}</span>
         ) : (
-          <span className="text-red-600">Not received</span>
+          <span className="text-red-600">{t("common.status.notReceived")}</span>
         )}
       </td>
       <td className="px-6 py-4 whitespace-nowrap text-sm">
@@ -179,10 +182,10 @@ function PartRow({ part, onUpdate }: { part: Part; onUpdate: (p: Part) => void }
             className="w-20 px-2 py-1 border rounded"
           />
           <button onClick={handleAdd} className="px-3 py-1 bg-blue-600 text-white rounded">
-            Add to warehouse
+            {t("common.addToWarehouse")}
           </button>
           <button onClick={handleOrder} className="px-3 py-1 bg-yellow-500 text-white rounded">
-            Order
+            {t("common.order")}
           </button>
         </div>
       </td>

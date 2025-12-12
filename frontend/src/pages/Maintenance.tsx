@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 import "../styles/pages/maintenance.css";
 
 type MaintenanceItem = {
@@ -17,6 +18,7 @@ type Equipment = {
 };
 
 export default function Maintenance() {
+  const { t } = useTranslation();
   const initialEquipment: Equipment[] = useMemo(
     () => [
       {
@@ -75,13 +77,13 @@ export default function Maintenance() {
 
   return (
     <div className="page">
-      <h1 className="page-title">Регулярное обслуживание</h1>
+      <h1 className="page-title">{t("pages.maintenance")}</h1>
 
       <button
         onClick={() => setShowForm(!showForm)}
         className="mb-4 px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700"
       >
-        + Add New Equipment
+        + {t("common.addNewEquipment")}
       </button>
 
       {showForm && (
@@ -89,21 +91,21 @@ export default function Maintenance() {
           <div className="flex gap-2 mb-2">
             <input
               type="text"
-              placeholder="Brand"
+              placeholder={t("common.brand")}
               value={formData.brand}
               onChange={(e) => setFormData({ ...formData, brand: e.target.value })}
               className="px-2 py-1 border rounded"
             />
             <input
               type="text"
-              placeholder="Equipment name"
+              placeholder={t("common.name")}
               value={formData.name}
               onChange={(e) => setFormData({ ...formData, name: e.target.value })}
               className="px-2 py-1 border rounded"
             />
             <input
               type="number"
-              placeholder="Operating hours"
+              placeholder={t("common.operatingHours")}
               value={formData.operatingHours}
               onChange={(e) => setFormData({ ...formData, operatingHours: Number(e.target.value) })}
               className="px-2 py-1 border rounded"
@@ -111,13 +113,13 @@ export default function Maintenance() {
           </div>
           <div className="flex gap-2">
             <button onClick={addNewEquipment} className="px-3 py-1 bg-green-600 text-white rounded">
-              Create
+              {t("common.create")}
             </button>
             <button
               onClick={() => setShowForm(false)}
               className="px-3 py-1 bg-gray-400 text-white rounded"
             >
-              Cancel
+              {t("common.cancel")}
             </button>
           </div>
         </div>
@@ -128,16 +130,16 @@ export default function Maintenance() {
           <thead className="bg-gray-50">
             <tr>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Brand
+                {t("common.brand")}
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Equipment Name
+                {t("common.name")}
               </th>
               <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Operating Hours
+                {t("common.operatingHours")}
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Action
+                {t("common.action")}
               </th>
             </tr>
           </thead>
@@ -173,6 +175,7 @@ function EquipmentRow({
   onUpdate: (e: Equipment) => void;
   onViewMaintenance: (e: Equipment) => void;
 }) {
+  const { t } = useTranslation();
   const [hours, setHours] = useState<number>(equipment.operatingHours);
 
   function handleHoursChange(value: number) {
@@ -199,7 +202,7 @@ function EquipmentRow({
           onClick={() => onViewMaintenance(equipment)}
           className="px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700"
         >
-          View Maintenance
+          {t("common.viewMaintenance")}
         </button>
       </td>
     </tr>
@@ -213,6 +216,7 @@ function MaintenanceModal({
   equipment: Equipment;
   onClose: () => void;
 }) {
+  const { t } = useTranslation();
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
       <div className="bg-white rounded-lg p-6 max-w-2xl w-full max-h-96 overflow-y-auto">
@@ -220,7 +224,7 @@ function MaintenanceModal({
           {equipment.brand} - {equipment.name}
         </h2>
         <p className="mb-4 text-gray-600">
-          Operating Hours: <span className="font-semibold">{equipment.operatingHours}</span>
+          {t("common.operatingHours")}: <span className="font-semibold">{equipment.operatingHours}</span>
         </p>
 
         {equipment.maintenanceItems.length > 0 ? (
@@ -229,13 +233,13 @@ function MaintenanceModal({
               <thead className="bg-gray-50">
                 <tr>
                   <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">
-                    Module
+                    {t("maintenance.module")}
                   </th>
                   <th className="px-4 py-2 text-right text-xs font-medium text-gray-500 uppercase">
-                    Hours Interval
+                    {t("maintenance.hoursInterval")}
                   </th>
                   <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">
-                    Description
+                    {t("maintenance.description")}
                   </th>
                 </tr>
               </thead>
@@ -255,7 +259,7 @@ function MaintenanceModal({
             </table>
           </div>
         ) : (
-          <p className="text-gray-500">No maintenance items defined for this equipment.</p>
+          <p className="text-gray-500">{t("maintenance.noMaintenance")}</p>
         )}
 
         <div className="mt-6">
@@ -263,7 +267,7 @@ function MaintenanceModal({
             onClick={onClose}
             className="px-4 py-2 bg-gray-400 text-white rounded hover:bg-gray-500"
           >
-            Close
+            {t("common.close")}
           </button>
         </div>
       </div>
