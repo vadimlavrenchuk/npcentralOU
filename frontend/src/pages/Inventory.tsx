@@ -16,7 +16,7 @@ export default function Inventory() {
   const initialParts: Part[] = useMemo(
     () => [
       { id: 1, name: "Valve, pressure", partNumber: "VLV-1001", quantity: 12, orderedQuantity: 0, orderedStatus: "None" },
-      { id: 2, name: "Filter cartridge", partNumber: "FLT-2203", quantity: 5, orderedQuantity: 3, orderedStatus: "Pending" },
+      { id: 2, name: "Filter cartridge", partNumber: "FLT-2203", quantity: 3, orderedQuantity: 3, orderedStatus: "Pending" },
       { id: 3, name: "O-ring set", partNumber: "OR-330", quantity: 0, orderedQuantity: 10, orderedStatus: "Not received" },
       { id: 4, name: "Bearing 6204", partNumber: "BR-6204", quantity: 20, orderedQuantity: 0, orderedStatus: "None" },
     ],

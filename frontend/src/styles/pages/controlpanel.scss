@@ -1,0 +1,68 @@
+.controlpanel-page .card {
+  background: white;
+  padding: 16px;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+}
+
+.controlpanel-page .card h3 {
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.controlpanel-page .schedule {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.controlpanel-page .schedule th,
+.controlpanel-page .schedule td {
+  padding: 6px 8px;
+  border-bottom: 1px solid #eee;
+  text-align: left;
+}
+
+.controlpanel-page .priority-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.controlpanel-page .reminders,
+.controlpanel-page .new-tasks,
+.controlpanel-page .warehouse {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.controlpanel-page .bottom-card {
+  background: white;
+  padding: 12px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.04);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.controlpanel-page .bottom-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+.controlpanel-page .bottom-card .title {
+  font-weight: 600;
+}
+
+.controlpanel-page .ok {
+  color: #16a34a;
+}
+
+.controlpanel-page .warehouse li {
+  padding: 4px 0;
+}
+

@@ -1,17 +1,17 @@
-import { Outlet, useLocation } from "react-router-dom";
+import { Outlet } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Sidebar from "../components/Sidebar";
 import "../styles/layout/MainLayout.scss";
 
 export default function MainLayout() {
-  const location = useLocation();
-  const hideSidebar = location.pathname === "/" || location.pathname.startsWith("/dashboard");
-
   return (
     <div className="layout-container">
-      {!hideSidebar && <Sidebar />}
+      <Sidebar />
 
       <main className="layout-content">
         <Outlet />
+        <ToastContainer position="top-right" hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
       </main>
     </div>
   );
