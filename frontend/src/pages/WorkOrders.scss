@@ -1,0 +1,93 @@
+/**
+ * Work Orders Page Styles
+ */
+
+@use '../styles/variables' as *;
+
+.work-orders {
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: $spacing-6;
+  }
+
+  &__title {
+    font-size: $font-size-3xl;
+    font-weight: $font-weight-bold;
+    color: $color-text-primary;
+    margin: 0;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-4;
+  }
+}
+
+.work-order-item {
+  padding: $spacing-4;
+  border: 1px solid $color-border-light;
+  border-radius: $radius-base;
+  transition: all $transition-fast;
+
+  &:hover {
+    border-color: $color-primary;
+    box-shadow: $shadow-sm;
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: $spacing-2;
+
+    h3 {
+      font-size: $font-size-lg;
+      font-weight: $font-weight-semibold;
+      color: $color-text-primary;
+      margin: 0;
+    }
+  }
+
+  p {
+    font-size: $font-size-sm;
+    color: $color-text-secondary;
+    margin: 0;
+  }
+}
+
+.status {
+  padding: $spacing-1 $spacing-3;
+  border-radius: $radius-sm;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-semibold;
+  text-transform: uppercase;
+
+  &--pending {
+    background-color: $color-warning-bg;
+    color: $color-warning-text;
+  }
+
+  &--in_progress {
+    background-color: $color-info-bg;
+    color: $color-info-text;
+  }
+
+  &--completed {
+    background-color: $color-success-bg;
+    color: $color-success-text;
+  }
+
+  &--cancelled {
+    background-color: $color-gray-200;
+    color: $color-gray-600;
+  }
+}
+
+.empty-state {
+  text-align: center;
+  padding: $spacing-12;
+  color: $color-text-secondary;
+}

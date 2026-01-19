@@ -1,0 +1,158 @@
+{
+  "app": {
+    "name": "MechanicPro",
+    "subtitle": "Työpajan hallinta"
+  },
+  "nav": {
+    "dashboard": "Hallintapaneeli",
+    "workOrders": "Työtilaukset",
+    "inventory": "Varasto",
+    "equipment": "Laitteet",
+    "reports": "Raportit",
+    "users": "Käyttäjät"
+  },
+  "dashboard": {
+    "title": "Hallintapaneeli",
+    "recentActivity": "Viimeisimmät tapahtumat",
+    "upcomingMaintenance": "Tuleva huolto",
+    "noActivity": "Ei viimeaikaista toimintaa",
+    "noMaintenance": "Ei tulevaa huoltoa",
+    "stats": {
+      "workOrders": "Työtilaukset",
+      "urgentTasks": "Kiireelliset tehtävät",
+      "equipment": "Laitteet",
+      "inventory": "Varastossa",
+      "total": "Yhteensä",
+      "pending": "Odottaa",
+      "inProgress": "Käynnissä",
+      "completed": "Valmis",
+      "operational": "Toiminnassa",
+      "maintenance": "Huollossa",
+      "broken": "Rikki",
+      "lowStock": "Vähissä",
+      "outOfStock": "Loppu"
+    },
+    "error": "Virhe tilastojen lataamisessa",
+    "loading": "Ladataan..."
+  },
+  "workOrders": {
+    "title": "Työtilaukset",
+    "createNew": "Uusi työtilaus",
+    "table": {
+      "id": "Numero",
+      "title": "Otsikko",
+      "equipment": "Laite",
+      "priority": "Prioriteetti",
+      "status": "Tila",
+      "assignedTo": "Vastuuhenkilö",
+      "dueDate": "Määräaika",
+      "actions": "Toiminnot"
+    },
+    "status": {
+      "pending": "Odottaa",
+      "inProgress": "Käynnissä",
+      "completed": "Valmis",
+      "cancelled": "Peruutettu"
+    },
+    "priority": {
+      "low": "Matala",
+      "medium": "Keskitaso",
+      "high": "Korkea",
+      "critical": "Kriittinen"
+    },
+    "form": {
+      "title": "Otsikko",
+      "description": "Kuvaus",
+      "equipment": "Valitse laite",
+      "priority": "Prioriteetti",
+      "assignedTo": "Vastuuhenkilö",
+      "dueDate": "Määräaika",
+      "submit": "Luo työtilaus",
+      "cancel": "Peruuta"
+    },
+    "noData": "Ei työtilauksia",
+    "error": "Virhe työtilausten lataamisessa"
+  },
+  "equipment": {
+    "title": "Laitteet",
+    "addNew": "Lisää laite",
+    "table": {
+      "name": "Nimi",
+      "model": "Malli",
+      "serialNumber": "Sarjanumero",
+      "status": "Tila",
+      "location": "Sijainti",
+      "lastMaintenance": "Viimeisin huolto",
+      "actions": "Toiminnot"
+    },
+    "status": {
+      "operational": "Toiminnassa",
+      "maintenance": "Huollossa",
+      "broken": "Rikki",
+      "retired": "Poistettu käytöstä"
+    },
+    "noData": "Ei laitteita",
+    "error": "Virhe laitteiden lataamisessa"
+  },
+  "inventory": {
+    "title": "Varasto",
+    "addNew": "Lisää tuote",
+    "allCategories": "Kaikki kategoriat",
+    "table": {
+      "name": "Nimi",
+      "sku": "Tuotekoodi",
+      "category": "Kategoria",
+      "quantity": "Määrä",
+      "unit": "Yksikkö",
+      "minQuantity": "Vähimmäismäärä",
+      "price": "Hinta",
+      "supplier": "Toimittaja",
+      "actions": "Toiminnot"
+    },
+    "category": {
+      "Electrics": "Sähkötekniikka",
+      "Mechanics": "Mekaniikka",
+      "Hydraulics": "Hydrauliikka",
+      "Pneumatics": "Pneumatiikka",
+      "Consumables": "Kulutustarvikkeet",
+      "spare_parts": "Varaosat",
+      "tools": "Työkalut",
+      "consumables": "Kulutustarvikkeet",
+      "safety_equipment": "Turvavarusteet"
+    },
+    "operations": {
+      "receive": "Vastaanota varasto",
+      "issue": "Varastojen jako",
+      "currentStock": "Nykyinen varasto",
+      "quantityToAdd": "Lisättävä määrä",
+      "quantityToSubtract": "Jaettava määrä",
+      "newQuantity": "Uusi määrä"
+    },
+    "noData": "Ei tuotteita",
+    "error": "Virhe varaston lataamisessa"
+  },
+  "common": {
+    "search": "Hae...",
+    "filter": "Suodata",
+    "export": "Vie",
+    "edit": "Muokkaa",
+    "delete": "Poista",
+    "view": "Näytä",
+    "save": "Tallenna",
+    "cancel": "Peruuta",
+    "close": "Sulje",
+    "loading": "Ladataan...",
+    "error": "Virhe",
+    "success": "Onnistui",
+    "noData": "Ei tietoja",
+    "actions": "Toiminnot",
+    "date": "Päivämäärä",
+    "time": "Aika",
+    "user": "Käyttäjä",
+    "logout": "Kirjaudu ulos",
+    "profile": "Profiili",
+    "settings": "Asetukset",
+    "notifications": "Ilmoitukset",
+    "language": "Kieli"
+  }
+}

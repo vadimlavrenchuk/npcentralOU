@@ -1,0 +1,400 @@
+/**
+ * Inventory Page Styles - Smart Inventory Module with Glassmorphism
+ */
+
+@use '../styles/variables' as *;
+
+.inventory-page {
+  padding: $spacing-6;
+
+  .page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: $spacing-6;
+  }
+
+  .page-title {
+    font-size: $font-size-3xl;
+    font-weight: $font-weight-bold;
+    color: $color-white;
+    margin: 0;
+    letter-spacing: -0.02em;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  }
+}
+
+// Filters Section
+.inventory-filters {
+  margin-bottom: $spacing-4;
+  padding: $spacing-4 !important;
+
+  .filter-group {
+    display: flex;
+    gap: $spacing-4;
+    align-items: center;
+
+    @media (max-width: 768px) {
+      flex-direction: column;
+      align-items: stretch;
+    }
+  }
+
+  .search-box {
+    position: relative;
+    flex: 1;
+    max-width: 400px;
+
+    @media (max-width: 768px) {
+      max-width: 100%;
+    }
+
+    .search-icon {
+      position: absolute;
+      left: $spacing-3;
+      top: 50%;
+      transform: translateY(-50%);
+      color: rgba(255, 255, 255, 0.5);
+      pointer-events: none;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: $spacing-2 $spacing-3 $spacing-2 calc($spacing-3 + 28px);
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: $radius-base;
+      color: $color-white;
+      font-size: $font-size-base;
+      transition: all 0.3s ease;
+
+      &::placeholder {
+        color: rgba(255, 255, 255, 0.5);
+      }
+
+      &:focus {
+        outline: none;
+        border-color: $color-primary;
+        background: rgba(255, 255, 255, 0.08);
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+      }
+    }
+  }
+
+  .category-select {
+    padding: $spacing-2 $spacing-3;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: $radius-base;
+    color: $color-white;
+    font-size: $font-size-base;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 200px;
+
+    &:hover {
+      border-color: $color-primary;
+    }
+
+    &:focus {
+      outline: none;
+      border-color: $color-primary;
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    }
+
+    option {
+      background: $color-sidebar-bg;
+      color: $color-white;
+    }
+  }
+}
+
+// Table Card
+.inventory-table-card {
+  padding: 0 !important;
+  overflow: hidden;
+
+  .empty-state {
+    padding: $spacing-8;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: $font-size-lg;
+  }
+
+  .table-container {
+    overflow-x: auto;
+  }
+}
+
+// Inventory Table with Glassmorphism
+.inventory-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+
+  thead {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px);
+
+    tr {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    th {
+      padding: $spacing-4 $spacing-3;
+      text-align: left;
+      font-size: $font-size-sm;
+      font-weight: 600;
+      color: #cbd5e1;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      white-space: nowrap;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+
+      &:first-child {
+        padding-left: $spacing-5;
+      }
+
+      &:last-child {
+        padding-right: $spacing-5;
+      }
+    }
+  }
+
+  tbody {
+    tr {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(15px);
+      }
+
+      &.low-stock {
+        background: rgba(239, 68, 68, 0.08);
+
+        &:hover {
+          background: rgba(239, 68, 68, 0.12);
+          box-shadow: inset 0 0 20px rgba(239, 68, 68, 0.1);
+        }
+      }
+    }
+
+    td {
+      padding: $spacing-3;
+      color: rgba(255, 255, 255, 0.9);
+      font-size: $font-size-base;
+      vertical-align: middle;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+
+      &:first-child {
+        padding-left: $spacing-5;
+      }
+
+      &:last-child {
+        padding-right: $spacing-5;
+      }
+
+      &.sku-cell {
+        font-family: 'Courier New', monospace;
+        color: #94a3b8;
+        font-size: $font-size-sm;
+      }
+
+      &.name-cell {
+        font-weight: 500;
+        color: $color-white;
+      }
+
+      &.category-cell {
+        color: #cbd5e1;
+        font-size: $font-size-sm;
+      }
+
+      &.quantity-cell {
+        .quantity-wrapper {
+          display: flex;
+          align-items: center;
+          gap: $spacing-2;
+        }
+      }
+
+      &.low-stock-value {
+        color: #fca5a5;
+        font-weight: 600;
+        background: rgba(239, 68, 68, 0.2);
+        box-shadow: 0 0 10px rgba(239, 68, 68, 0.5);
+        border-radius: $radius-base;
+        padding: $spacing-2 $spacing-3;
+        
+        .warning-icon {
+          color: #ef4444;
+          animation: pulse 2s infinite;
+        }
+      }
+
+      &.unit-cell {
+        color: #94a3b8;
+        font-size: $font-size-sm;
+      }
+
+      &.min-quantity-cell {
+        color: #94a3b8;
+      }
+
+      &.price-cell {
+        font-weight: 500;
+        color: #86efac;
+      }
+
+      &.actions-cell {
+        .action-buttons {
+          display: flex;
+          gap: $spacing-2;
+        }
+
+        .action-btn {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 36px;
+          height: 36px;
+          background: rgba(255, 255, 255, 0.05);
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          border-radius: $radius-base;
+          color: $color-white;
+          cursor: pointer;
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+          &:hover {
+            transform: translateY(-2px);
+          }
+
+          &--add {
+            &:hover {
+              background: rgba(16, 185, 129, 0.2);
+              border-color: $color-success;
+              box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+            }
+          }
+
+          &--subtract {
+            &:hover {
+              background: rgba(245, 158, 11, 0.2);
+              border-color: $color-warning;
+              box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// Operation Modal Styles
+.operation-modal {
+  .modal-item-info {
+    margin-bottom: $spacing-6;
+    padding-bottom: $spacing-4;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+    h3 {
+      font-size: $font-size-xl;
+      font-weight: $font-weight-bold;
+      color: $color-white;
+      margin: 0 0 $spacing-2 0;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    }
+
+    .item-sku {
+      font-size: $font-size-sm;
+      color: #94a3b8;
+      margin: 0 0 $spacing-1 0;
+      font-family: 'Courier New', monospace;
+    }
+
+    .item-current-stock {
+      font-size: $font-size-base;
+      color: rgba(255, 255, 255, 0.7);
+      margin: 0;
+
+      strong {
+        color: $color-white;
+        font-weight: 600;
+      }
+    }
+  }
+
+  .modal-form {
+    margin-bottom: $spacing-6;
+
+    label {
+      display: block;
+      margin-bottom: $spacing-2;
+      font-size: $font-size-sm;
+      font-weight: 500;
+      color: #cbd5e1;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    }
+
+    .quantity-input {
+      width: 100%;
+      padding: $spacing-3;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: $radius-base;
+      color: $color-white;
+      font-size: $font-size-lg;
+      font-weight: 600;
+      text-align: center;
+      transition: all 0.3s ease;
+
+      &:focus {
+        outline: none;
+        border-color: $color-primary;
+        background: rgba(255, 255, 255, 0.08);
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+      }
+    }
+
+    .modal-result {
+      margin-top: $spacing-4;
+      padding: $spacing-3;
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: $radius-base;
+      text-align: center;
+      font-size: $font-size-base;
+      color: rgba(255, 255, 255, 0.7);
+
+      strong {
+        font-size: $font-size-xl;
+        font-weight: 700;
+
+        &.text-success {
+          color: $color-success;
+        }
+
+        &.text-warning {
+          color: $color-warning;
+        }
+      }
+    }
+  }
+
+  .modal-actions {
+    display: flex;
+    gap: $spacing-3;
+    justify-content: flex-end;
+  }
+}
+
+// Pulse animation for warning icon
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}

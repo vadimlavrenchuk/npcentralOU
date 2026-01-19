@@ -3,11 +3,13 @@
  */
 
 import React, { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Plus } from 'lucide-react';
 import { Button, Card } from '../components/shared';
 import { useEquipment } from '../hooks';
 
 export const Equipment: React.FC = () => {
+  const { t } = useTranslation();
   const { equipment, loading, error, fetchEquipment } = useEquipment();
 
   useEffect(() => {
@@ -15,15 +17,15 @@ export const Equipment: React.FC = () => {
   }, [fetchEquipment]);
 
   if (loading && equipment.length === 0) {
-    return <div className="page-loading">Загрузка...</div>;
+    return <div className="page-loading">{t('common.loading')}</div>;
   }
 
   return (
     <div className="equipment-page">
       <div className="page-header">
-        <h1 className="page-title">Оборудование</h1>
+        <h1 className="page-title">{t('equipment.title')}</h1>
         <Button variant="primary" icon={<Plus size={20} />}>
-          Добавить оборудование
+          {t('equipment.addNew')}
         </Button>
       </div>
 
@@ -32,7 +34,7 @@ export const Equipment: React.FC = () => {
       <Card>
         {equipment.length === 0 ? (
           <div className="empty-state">
-            <p>Нет оборудования</p>
+            <p>{t('equipment.noData')}</p>
           </div>
         ) : (
           <div>

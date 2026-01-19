@@ -1,0 +1,89 @@
+@use '../../styles/variables' as *;
+
+.language-switcher {
+  position: relative;
+
+  &__button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: transparent;
+    border: 1px solid $color-border;
+    border-radius: $radius-md;
+    color: $color-text;
+    cursor: pointer;
+    transition: all 0.2s;
+
+    &:hover {
+      background: $color-background-secondary;
+      border-color: $color-primary;
+    }
+  }
+
+  &__current {
+    font-size: 0.875rem;
+    font-weight: 500;
+  }
+
+  &__dropdown {
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    right: 0;
+    background: $color-background-secondary;
+    border: 1px solid $color-border;
+    border-radius: $radius-md;
+    box-shadow: $shadow-lg;
+    min-width: 150px;
+    z-index: 1000;
+    overflow: hidden;
+    animation: fadeIn 0.2s;
+  }
+
+  &__option {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    width: 100%;
+    padding: 0.75rem 1rem;
+    background: transparent;
+    border: none;
+    color: $color-text;
+    cursor: pointer;
+    transition: background 0.2s;
+    text-align: left;
+
+    &:hover {
+      background: $color-background-hover;
+    }
+
+    &--active {
+      background: $color-primary;
+      color: white;
+
+      &:hover {
+        background: $color-primary;
+      }
+    }
+  }
+
+  &__flag {
+    font-size: 1.25rem;
+  }
+
+  &__name {
+    font-size: 0.875rem;
+    font-weight: 500;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

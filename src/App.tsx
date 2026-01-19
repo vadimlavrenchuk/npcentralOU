@@ -2,6 +2,7 @@
  * Main App Component с маршрутизацией
  */
 
+import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { MainLayout } from './components/layout';
 import { Dashboard, WorkOrders, Equipment, Inventory } from './pages';
