@@ -1,0 +1,74 @@
+/**
+ * Card Styles - Premium High-Tech
+ */
+
+@use '../../styles/variables' as *;
+
+.card {
+  background: rgba(30, 41, 59, 0.65);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border: 0.5px solid rgba(255, 255, 255, 0.1);
+  border-radius: $radius-lg;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  &--hoverable:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    border-color: rgba(255, 255, 255, 0.15);
+  }
+
+  &--padding-none {
+    padding: 0;
+  }
+
+  &--padding-sm {
+    padding: $spacing-4;
+  }
+
+  &--padding-md {
+    padding: $spacing-6;
+  }
+
+  &--padding-lg {
+    padding: $spacing-8;
+  }
+
+  &__header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: $spacing-2;
+    margin-bottom: $spacing-4;
+  }
+
+  &__header-content {
+    flex: 1;
+  }
+
+  &__title {
+    font-size: $font-size-xl;
+    font-weight: $font-weight-bold;
+    color: $color-text-primary;
+    margin: 0 0 $spacing-1 0;
+    white-space: normal;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  }
+
+  &__subtitle {
+    font-size: $font-size-sm;
+    color: rgba(255, 255, 255, 0.7);
+    margin: 0;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  }
+
+  &__actions {
+    flex-shrink: 0;
+  }
+
+  &__body {
+    // Content spacing handled by children
+  }
+}

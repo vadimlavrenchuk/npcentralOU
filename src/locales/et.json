@@ -1,0 +1,158 @@
+{
+  "app": {
+    "name": "MechanicPro",
+    "subtitle": "Töökoja haldus"
+  },
+  "nav": {
+    "dashboard": "Juhtpaneel",
+    "workOrders": "Töökäsud",
+    "inventory": "Ladu",
+    "equipment": "Seadmed",
+    "reports": "Aruanded",
+    "users": "Kasutajad"
+  },
+  "dashboard": {
+    "title": "Juhtpaneel",
+    "recentActivity": "Viimane tegevus",
+    "upcomingMaintenance": "Eelseisev hooldus",
+    "noActivity": "Viimast tegevust pole",
+    "noMaintenance": "Eelseisvat hooldust pole",
+    "stats": {
+      "workOrders": "Töökäsud",
+      "urgentTasks": "Kiirelised ülesanded",
+      "equipment": "Seadmed",
+      "inventory": "Laos",
+      "total": "Kokku",
+      "pending": "Ootel",
+      "inProgress": "Töös",
+      "completed": "Valmis",
+      "operational": "Töös",
+      "maintenance": "Hoolduses",
+      "broken": "Katki",
+      "lowStock": "Väheses koguses",
+      "outOfStock": "Otsas"
+    },
+    "error": "Viga statistika laadimisel",
+    "loading": "Laadimine..."
+  },
+  "workOrders": {
+    "title": "Töökäsud",
+    "createNew": "Uus töökäsk",
+    "table": {
+      "id": "Number",
+      "title": "Pealkiri",
+      "equipment": "Seade",
+      "priority": "Prioriteet",
+      "status": "Staatus",
+      "assignedTo": "Määratud",
+      "dueDate": "Tähtaeg",
+      "actions": "Tegevused"
+    },
+    "status": {
+      "pending": "Ootel",
+      "inProgress": "Töös",
+      "completed": "Valmis",
+      "cancelled": "Tühistatud"
+    },
+    "priority": {
+      "low": "Madal",
+      "medium": "Keskmine",
+      "high": "Kõrge",
+      "critical": "Kriitiline"
+    },
+    "form": {
+      "title": "Pealkiri",
+      "description": "Kirjeldus",
+      "equipment": "Vali seade",
+      "priority": "Prioriteet",
+      "assignedTo": "Määra kasutajale",
+      "dueDate": "Tähtaeg",
+      "submit": "Loo töökäsk",
+      "cancel": "Tühista"
+    },
+    "noData": "Töökäske pole",
+    "error": "Viga töökäskude laadimisel"
+  },
+  "equipment": {
+    "title": "Seadmed",
+    "addNew": "Lisa seade",
+    "table": {
+      "name": "Nimi",
+      "model": "Mudel",
+      "serialNumber": "Seerianumber",
+      "status": "Staatus",
+      "location": "Asukoht",
+      "lastMaintenance": "Viimane hooldus",
+      "actions": "Tegevused"
+    },
+    "status": {
+      "operational": "Töös",
+      "maintenance": "Hoolduses",
+      "broken": "Katki",
+      "retired": "Kasutuselt kõrvaldatud"
+    },
+    "noData": "Seadmeid pole",
+    "error": "Viga seadmete laadimisel"
+  },
+  "inventory": {
+    "title": "Ladu",
+    "addNew": "Lisa toode",
+    "allCategories": "Kõik kategooriad",
+    "table": {
+      "name": "Nimi",
+      "sku": "Tootekood",
+      "category": "Kategooria",
+      "quantity": "Kogus",
+      "unit": "Ühik",
+      "minQuantity": "Min kogus",
+      "price": "Hind",
+      "supplier": "Tarnija",
+      "actions": "Tegevused"
+    },
+    "category": {
+      "Electrics": "Elekter",
+      "Mechanics": "Mehhaanika",
+      "Hydraulics": "Hüdraulika",
+      "Pneumatics": "Pneumaatika",
+      "Consumables": "Kulumaterjalid",
+      "spare_parts": "Varuosad",
+      "tools": "Tööriistad",
+      "consumables": "Kulumaterjalid",
+      "safety_equipment": "Ohutusvahendid"
+    },
+    "operations": {
+      "receive": "Laoseisu suurendamine",
+      "issue": "Laoseisu vähendamine",
+      "currentStock": "Praegune laoseis",
+      "quantityToAdd": "Lisatav kogus",
+      "quantityToSubtract": "Vähendatav kogus",
+      "newQuantity": "Uus kogus"
+    },
+    "noData": "Tooteid pole",
+    "error": "Viga lao laadimisel"
+  },
+  "common": {
+    "search": "Otsi...",
+    "filter": "Filtreeri",
+    "export": "Ekspordi",
+    "edit": "Muuda",
+    "delete": "Kustuta",
+    "view": "Vaata",
+    "save": "Salvesta",
+    "cancel": "Tühista",
+    "close": "Sulge",
+    "loading": "Laadimine...",
+    "error": "Viga",
+    "success": "Edukas",
+    "noData": "Andmed puuduvad",
+    "actions": "Tegevused",
+    "date": "Kuupäev",
+    "time": "Aeg",
+    "user": "Kasutaja",
+    "logout": "Logi välja",
+    "profile": "Profiil",
+    "settings": "Seaded",
+    "notifications": "Teavitused",
+    "language": "Keel"
+  }
+}

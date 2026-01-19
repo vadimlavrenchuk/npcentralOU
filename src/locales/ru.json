@@ -1,0 +1,158 @@
+{
+  "app": {
+    "name": "MechanicPro",
+    "subtitle": "Управление участком"
+  },
+  "nav": {
+    "dashboard": "Дашборд",
+    "workOrders": "Заказы на работы",
+    "inventory": "Склад",
+    "equipment": "Оборудование",
+    "reports": "Отчёты",
+    "users": "Сотрудники"
+  },
+  "dashboard": {
+    "title": "Панель управления",
+    "recentActivity": "Последняя активность",
+    "upcomingMaintenance": "Предстоящее обслуживание",
+    "noActivity": "Нет последней активности",
+    "noMaintenance": "Нет предстоящего обслуживания",
+    "stats": {
+      "workOrders": "Заказы на работы",
+      "urgentTasks": "Срочные задачи",
+      "equipment": "Оборудование",
+      "inventory": "Предметов на складе",
+      "total": "Всего",
+      "pending": "Ожидает",
+      "inProgress": "В работе",
+      "completed": "Завершено",
+      "operational": "В работе",
+      "maintenance": "На обслуживании",
+      "broken": "Сломано",
+      "lowStock": "Мало на складе",
+      "outOfStock": "Нет на складе"
+    },
+    "error": "Ошибка загрузки статистики",
+    "loading": "Загрузка..."
+  },
+  "workOrders": {
+    "title": "Заказы на работы",
+    "createNew": "Новый заказ",
+    "table": {
+      "id": "Номер",
+      "title": "Название",
+      "equipment": "Оборудование",
+      "priority": "Приоритет",
+      "status": "Статус",
+      "assignedTo": "Назначен",
+      "dueDate": "Срок выполнения",
+      "actions": "Действия"
+    },
+    "status": {
+      "pending": "Ожидает",
+      "inProgress": "В работе",
+      "completed": "Завершено",
+      "cancelled": "Отменено"
+    },
+    "priority": {
+      "low": "Низкий",
+      "medium": "Средний",
+      "high": "Высокий",
+      "critical": "Критический"
+    },
+    "form": {
+      "title": "Название",
+      "description": "Описание",
+      "equipment": "Выберите оборудование",
+      "priority": "Приоритет",
+      "assignedTo": "Назначить на",
+      "dueDate": "Срок выполнения",
+      "submit": "Создать заказ",
+      "cancel": "Отмена"
+    },
+    "noData": "Заказов нет",
+    "error": "Ошибка загрузки заказов"
+  },
+  "equipment": {
+    "title": "Оборудование",
+    "addNew": "Добавить оборудование",
+    "table": {
+      "name": "Название",
+      "model": "Модель",
+      "serialNumber": "Серийный номер",
+      "status": "Статус",
+      "location": "Местоположение",
+      "lastMaintenance": "Последнее обслуживание",
+      "actions": "Действия"
+    },
+    "status": {
+      "operational": "В работе",
+      "maintenance": "На обслуживании",
+      "broken": "Сломано",
+      "retired": "Списано"
+    },
+    "noData": "Оборудование не найдено",
+    "error": "Ошибка загрузки оборудования"
+  },
+  "inventory": {
+    "title": "Склад",
+    "addNew": "Добавить товар",
+    "allCategories": "Все категории",
+    "table": {
+      "name": "Название",
+      "sku": "Артикул",
+      "category": "Категория",
+      "quantity": "Количество",
+      "unit": "Ед. изм.",
+      "minQuantity": "Мин. количество",
+      "price": "Цена",
+      "supplier": "Поставщик",
+      "actions": "Действия"
+    },
+    "category": {
+      "Electrics": "Электрика",
+      "Mechanics": "Механика",
+      "Hydraulics": "Гидравлика",
+      "Pneumatics": "Пневматика",
+      "Consumables": "Расходники",
+      "spare_parts": "Запчасти",
+      "tools": "Инструменты",
+      "consumables": "Расходные материалы",
+      "safety_equipment": "Средства защиты"
+    },
+    "operations": {
+      "receive": "Приход товара",
+      "issue": "Расход товара",
+      "currentStock": "Текущий запас",
+      "quantityToAdd": "Количество для прихода",
+      "quantityToSubtract": "Количество для расхода",
+      "newQuantity": "Новое количество"
+    },
+    "noData": "Товары не найдены",
+    "error": "Ошибка загрузки склада"
+  },
+  "common": {
+    "search": "Поиск...",
+    "filter": "Фильтр",
+    "export": "Экспорт",
+    "edit": "Изменить",
+    "delete": "Удалить",
+    "view": "Просмотр",
+    "save": "Сохранить",
+    "cancel": "Отмена",
+    "close": "Закрыть",
+    "loading": "Загрузка...",
+    "error": "Ошибка",
+    "success": "Успешно",
+    "noData": "Нет данных",
+    "actions": "Действия",
+    "date": "Дата",
+    "time": "Время",
+    "user": "Пользователь",
+    "logout": "Выйти",
+    "profile": "Профиль",
+    "settings": "Настройки",
+    "notifications": "Уведомления",
+    "language": "Язык"
+  }
+}

@@ -1,0 +1,158 @@
+{
+  "app": {
+    "name": "MechanicPro",
+    "subtitle": "Workshop Management"
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "workOrders": "Work Orders",
+    "inventory": "Inventory",
+    "equipment": "Equipment",
+    "reports": "Reports",
+    "users": "Users"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "recentActivity": "Recent Activity",
+    "upcomingMaintenance": "Upcoming Maintenance",
+    "noActivity": "No recent activity",
+    "noMaintenance": "No upcoming maintenance",
+    "stats": {
+      "workOrders": "Work Orders",
+      "urgentTasks": "Urgent Tasks",
+      "equipment": "Equipment",
+      "inventory": "Inventory Items",
+      "total": "Total",
+      "pending": "Pending",
+      "inProgress": "In Progress",
+      "completed": "Completed",
+      "operational": "Operational",
+      "maintenance": "Maintenance",
+      "broken": "Broken",
+      "lowStock": "Low Stock",
+      "outOfStock": "Out of Stock"
+    },
+    "error": "Error loading statistics",
+    "loading": "Loading..."
+  },
+  "workOrders": {
+    "title": "Work Orders",
+    "createNew": "New Work Order",
+    "table": {
+      "id": "ID",
+      "title": "Title",
+      "equipment": "Equipment",
+      "priority": "Priority",
+      "status": "Status",
+      "assignedTo": "Assigned To",
+      "dueDate": "Due Date",
+      "actions": "Actions"
+    },
+    "status": {
+      "pending": "Pending",
+      "inProgress": "In Progress",
+      "completed": "Completed",
+      "cancelled": "Cancelled"
+    },
+    "priority": {
+      "low": "Low",
+      "medium": "Medium",
+      "high": "High",
+      "critical": "Critical"
+    },
+    "form": {
+      "title": "Title",
+      "description": "Description",
+      "equipment": "Select Equipment",
+      "priority": "Priority",
+      "assignedTo": "Assign To",
+      "dueDate": "Due Date",
+      "submit": "Create Work Order",
+      "cancel": "Cancel"
+    },
+    "noData": "No work orders found",
+    "error": "Error loading work orders"
+  },
+  "equipment": {
+    "title": "Equipment",
+    "addNew": "Add Equipment",
+    "table": {
+      "name": "Name",
+      "model": "Model",
+      "serialNumber": "Serial Number",
+      "status": "Status",
+      "location": "Location",
+      "lastMaintenance": "Last Maintenance",
+      "actions": "Actions"
+    },
+    "status": {
+      "operational": "Operational",
+      "maintenance": "Maintenance",
+      "broken": "Broken",
+      "retired": "Retired"
+    },
+    "noData": "No equipment found",
+    "error": "Error loading equipment"
+  },
+  "inventory": {
+    "title": "Inventory",
+    "addNew": "Add Item",
+    "allCategories": "All Categories",
+    "table": {
+      "name": "Name",
+      "sku": "SKU",
+      "category": "Category",
+      "quantity": "Quantity",
+      "unit": "Unit",
+      "minQuantity": "Min Quantity",
+      "price": "Price",
+      "supplier": "Supplier",
+      "actions": "Actions"
+    },
+    "category": {
+      "Electrics": "Electrics",
+      "Mechanics": "Mechanics",
+      "Hydraulics": "Hydraulics",
+      "Pneumatics": "Pneumatics",
+      "Consumables": "Consumables",
+      "spare_parts": "Spare Parts",
+      "tools": "Tools",
+      "consumables": "Consumables",
+      "safety_equipment": "Safety Equipment"
+    },
+    "operations": {
+      "receive": "Receive Stock",
+      "issue": "Issue Stock",
+      "currentStock": "Current Stock",
+      "quantityToAdd": "Quantity to Add",
+      "quantityToSubtract": "Quantity to Issue",
+      "newQuantity": "New Quantity"
+    },
+    "noData": "No items found",
+    "error": "Error loading inventory"
+  },
+  "common": {
+    "search": "Search...",
+    "filter": "Filter",
+    "export": "Export",
+    "edit": "Edit",
+    "delete": "Delete",
+    "view": "View",
+    "save": "Save",
+    "cancel": "Cancel",
+    "close": "Close",
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "noData": "No data available",
+    "actions": "Actions",
+    "date": "Date",
+    "time": "Time",
+    "user": "User",
+    "logout": "Logout",
+    "profile": "Profile",
+    "settings": "Settings",
+    "notifications": "Notifications",
+    "language": "Language"
+  }
+}

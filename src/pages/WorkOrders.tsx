@@ -3,17 +3,20 @@
  */
 
 import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Plus } from 'lucide-react';
 import { Button, Card, Modal } from '../components/shared';
 import { useWorkOrders } from '../hooks';
 import './WorkOrders.scss';
 
 export const WorkOrders: React.FC = () => {
+  const { t } = useTranslation();
   const { 
     workOrders, 
     loading, 
     error, 
     fetchWorkOrders,
+    createWorkOrder 
   } = useWorkOrders();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -22,20 +25,25 @@ export const WorkOrders: React.FC = () => {
     fetchWorkOrders();
   }, [fetchWorkOrders]);
 
+  const handleCreate = async () => {
+    // TODO: Implement form logic
+    setIsModalOpen(false);
+  };
+
   if (loading && workOrders.length === 0) {
-    return <div className="page-loading">Загрузка...</div>;
+    return <div className="page-loading">{t('common.loading')}</div>;
   }
 
   return (
     <div className="work-orders">
       <div className="work-orders__header">
-        <h1 className="work-orders__title">Заказы на работы</h1>
+        <h1 className="work-orders__title">{t('workOrders.title')}</h1>
         <Button 
           variant="primary" 
           icon={<Plus size={20} />}
           onClick={() => setIsModalOpen(true)}
         >
-          Создать заказ
+          {t('workOrders.createNew')}
         </Button>
       </div>
 
@@ -44,7 +52,7 @@ export const WorkOrders: React.FC = () => {
       <Card>
         {workOrders.length === 0 ? (
           <div className="empty-state">
-            <p>Нет заказов на работы</p>
+            <p>{t('workOrders.noData')}</p>
           </div>
         ) : (
           <div className="work-orders__list">
@@ -53,7 +61,7 @@ export const WorkOrders: React.FC = () => {
                 <div className="work-order-item__header">
                   <h3>{order.title}</h3>
                   <span className={`status status--${order.status}`}>
-                    {order.status}
+                    {t(`workOrders.status.${order.status}`)}
                   </span>
                 </div>
                 <p>{order.description}</p>
@@ -66,9 +74,9 @@ export const WorkOrders: React.FC = () => {
       <Modal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
-        title="Создать заказ на работу"
+        title={t('workOrders.createNew')}
       >
-        <p>Форма создания заказа будет здесь</p>
+        <p>{t('workOrders.form.title')}</p>
       </Modal>
     </div>
   );

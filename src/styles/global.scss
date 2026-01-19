@@ -27,9 +27,12 @@ body {
   font-family: $font-family-base;
   font-size: $font-size-base;
   line-height: $line-height-normal;
-  color: $color-text-primary;
-  background-color: $color-bg-secondary;
+  color: $color-white;
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+  background-attachment: fixed;
   min-height: 100vh;
+  background-color: $color-bg-secondary;
+  letter-spacing: -0.01em;
 }
 
 // ============================================================================
@@ -45,6 +48,7 @@ h6 {
   font-weight: $font-weight-bold;
   line-height: $line-height-tight;
   color: $color-text-primary;
+  letter-spacing: -0.02em;
 }
 
 h1 {
