@@ -5,8 +5,9 @@
 import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Plus } from 'lucide-react';
-import { Button, Card } from '../components/shared';
-import { useEquipment } from '../hooks';
+import { Button, Card } from '../../components/shared';
+import { useEquipment } from '../../hooks';
+import './Equipment.scss';
 
 export const Equipment: React.FC = () => {
   const { t } = useTranslation();

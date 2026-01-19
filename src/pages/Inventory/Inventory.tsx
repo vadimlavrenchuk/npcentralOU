@@ -5,9 +5,9 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Plus, Search, PackagePlus, PackageMinus, AlertTriangle } from 'lucide-react';
-import { Button, Card, Modal } from '../components/shared';
-import { useInventory } from '../hooks';
-import type { InventoryItem } from '../types';
+import { Button, Card, Modal } from '../../components/shared';
+import { useInventory } from '../../hooks';
+import type { InventoryItem } from '../../types';
 import './Inventory.scss';
 
 export const Inventory: React.FC = () => {

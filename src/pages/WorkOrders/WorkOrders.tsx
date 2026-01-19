@@ -5,8 +5,8 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Plus } from 'lucide-react';
-import { Button, Card, Modal } from '../components/shared';
-import { useWorkOrders } from '../hooks';
+import { Button, Card, Modal } from '../../components/shared';
+import { useWorkOrders } from '../../hooks';
 import './WorkOrders.scss';
 
 export const WorkOrders: React.FC = () => {
