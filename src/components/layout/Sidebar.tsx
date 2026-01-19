@@ -23,7 +23,7 @@ const menuItems: SidebarItem[] = [
   { titleKey: 'nav.inventory', icon: Package, path: '/inventory' },
   { titleKey: 'nav.equipment', icon: Wrench, path: '/equipment' },
   { titleKey: 'nav.reports', icon: BarChart3, path: '/reports' },
-  { titleKey: 'nav.users', icon: Users, path: '/users' },
+  { titleKey: 'nav.users', icon: Users, path: '/employees' },
 ];
 
 const languages: Language[] = [

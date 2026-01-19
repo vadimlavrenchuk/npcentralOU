@@ -1,0 +1,16 @@
+/**
+ * Employees Page Styles
+ */
+
+@use '../../styles/variables' as *;
+
+.employees-page {
+  padding: $spacing-6;
+
+  h1 {
+    margin-bottom: $spacing-6;
+    color: #ffffff;
+    font-size: 2rem;
+    font-weight: 600;
+  }
+}

@@ -5,8 +5,8 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
-import { Card } from '../components/shared';
-import { useDashboard } from '../hooks';
+import { Card } from '../../components/shared';
+import { useDashboard } from '../../hooks';
 import { 
   ClipboardList, 
   Wrench, 
