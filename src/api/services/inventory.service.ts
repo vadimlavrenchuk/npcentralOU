@@ -26,7 +26,15 @@ export const inventoryService = {
   },
 
   async create(data: CreateInventoryItemDto): Promise<InventoryItem> {
-    return apiClient.post<InventoryItem>('/inventory', data);
+    console.log('inventoryService.create called with:', data);
+    try {
+      const result = await apiClient.post<InventoryItem>('/inventory', data);
+      console.log('inventoryService.create result:', result);
+      return result;
+    } catch (error) {
+      console.error('inventoryService.create error:', error);
+      throw error;
+    }
   },
 
   async update(id: string, data: UpdateInventoryItemDto): Promise<InventoryItem> {
@@ -37,8 +45,15 @@ export const inventoryService = {
     return apiClient.delete<void>(`/inventory/${id}`);
   },
 
-  async adjustQuantity(id: string, quantity: number, reason?: string): Promise<InventoryItem> {
-    return apiClient.patch<InventoryItem>(`/inventory/${id}/adjust`, { quantity, reason });
+  async adjustQuantity(
+    id: string, 
+    quantityChange: number, 
+    operation: 'add' | 'subtract'
+  ): Promise<InventoryItem> {
+    return apiClient.patch<InventoryItem>(`/inventory/${id}`, { 
+      quantityChange, 
+      operation 
+    });
   },
 
   async getLowStock(): Promise<InventoryItem[]> {

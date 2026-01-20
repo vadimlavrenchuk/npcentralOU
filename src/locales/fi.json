@@ -97,6 +97,7 @@
   "inventory": {
     "title": "Varasto",
     "addNew": "Lisää tuote",
+    "addItem": "Lisää uusi tuote",
     "allCategories": "Kaikki kategoriat",
     "table": {
       "name": "Nimi",
@@ -105,9 +106,18 @@
       "quantity": "Määrä",
       "unit": "Yksikkö",
       "minQuantity": "Vähimmäismäärä",
+      "unitPrice": "Yksikköhinta",
       "price": "Hinta",
       "supplier": "Toimittaja",
       "actions": "Toiminnot"
+    },
+    "form": {
+      "nameEn": "Nimi (englanti)",
+      "nameEt": "Nimi (viro)",
+      "nameFi": "Nimi (suomi)",
+      "nameRu": "Nimi (venäjä)",
+      "location": "Sijainti",
+      "supplier": "Toimittaja"
     },
     "category": {
       "Electrics": "Sähkötekniikka",
@@ -137,6 +147,7 @@
     "export": "Vie",
     "edit": "Muokkaa",
     "delete": "Poista",
+    "confirmDelete": "Haluatko varmasti poistaa tämän tuotteen",
     "view": "Näytä",
     "save": "Tallenna",
     "cancel": "Peruuta",

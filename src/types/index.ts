@@ -200,17 +200,18 @@ export interface UpdateEquipmentDto {
 }
 
 export interface CreateInventoryItemDto {
-  name: string;
+  name: I18nString;
   category: string;
   sku: string;
   quantity: number;
   unit: string;
   minQuantity: number;
   maxQuantity?: number;
-  location: string;
+  location?: string;
   supplier?: string;
   unitPrice?: number;
   notes?: string;
+  description?: string;
 }
 
 export interface UpdateInventoryItemDto {
