@@ -97,6 +97,7 @@
   "inventory": {
     "title": "Inventory",
     "addNew": "Add Item",
+    "addItem": "Add New Item",
     "allCategories": "All Categories",
     "table": {
       "name": "Name",
@@ -105,9 +106,18 @@
       "quantity": "Quantity",
       "unit": "Unit",
       "minQuantity": "Min Quantity",
+      "unitPrice": "Unit Price",
       "price": "Price",
       "supplier": "Supplier",
       "actions": "Actions"
+    },
+    "form": {
+      "nameEn": "Name (English)",
+      "nameEt": "Name (Estonian)",
+      "nameFi": "Name (Finnish)",
+      "nameRu": "Name (Russian)",
+      "location": "Location",
+      "supplier": "Supplier"
     },
     "category": {
       "Electrics": "Electrics",
@@ -137,6 +147,7 @@
     "export": "Export",
     "edit": "Edit",
     "delete": "Delete",
+    "confirmDelete": "Are you sure you want to delete this item",
     "view": "View",
     "save": "Save",
     "cancel": "Cancel",

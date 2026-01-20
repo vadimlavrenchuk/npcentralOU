@@ -20,7 +20,9 @@
 }
 
 .modal {
-  background: $color-white;
+  background: rgba(30, 41, 59, 0.95);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: $radius-lg;
   box-shadow: $shadow-2xl;
   width: 100%;
@@ -50,13 +52,13 @@
     align-items: center;
     justify-content: space-between;
     padding: $spacing-6;
-    border-bottom: 1px solid $color-border-light;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   }
 
   &__title {
     font-size: $font-size-2xl;
     font-weight: $font-weight-bold;
-    color: $color-text-primary;
+    color: $color-white;
     margin: 0;
   }
 
@@ -68,6 +70,7 @@
     padding: $spacing-6;
     overflow-y: auto;
     flex: 1;
+    color: $color-white;
   }
 
   &__footer {
@@ -76,7 +79,7 @@
     justify-content: flex-end;
     gap: $spacing-3;
     padding: $spacing-6;
-    border-top: 1px solid $color-border-light;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
   }
 }
 

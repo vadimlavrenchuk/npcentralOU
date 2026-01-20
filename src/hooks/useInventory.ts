@@ -117,12 +117,6 @@ export const useInventory = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  // Initialize with demo data
-  useEffect(() => {
-    setItems(DEMO_INVENTORY);
-    setTotal(DEMO_INVENTORY.length);
-  }, []);
-
   const fetchInventory = useCallback(async (
     filters?: InventoryFilters,
     pagination?: PaginationParams
@@ -130,17 +124,27 @@ export const useInventory = () => {
     try {
       setLoading(true);
       setError(null);
-      // For now, use demo data. In production, uncomment the API call:
-      // const response = await inventoryService.getAll(filters, pagination);
-      // setItems(response.data);
-      // setTotal(response.total);
       
-      // Simulate API delay
-      await new Promise(resolve => setTimeout(resolve, 300));
-      setItems(DEMO_INVENTORY);
-      setTotal(DEMO_INVENTORY.length);
+      // Fetch from real API
+      const response = await inventoryService.getAll(filters, pagination);
+      // response is already unwrapped by apiClient (returns response.data.data)
+      // So response = { total, data } where data is the array
+      if (Array.isArray(response)) {
+        setItems(response);
+        setTotal(response.length);
+      } else if (response && typeof response === 'object' && 'data' in response) {
+        setItems((response as any).data || []);
+        setTotal((response as any).total || 0);
+      } else {
+        setItems([]);
+        setTotal(0);
+      }
     } catch (err: any) {
+      console.error('Error fetching inventory:', err);
       setError(err.message || 'Ошибка загрузки склада');
+      // Fallback to empty array on error
+      setItems([]);
+      setTotal(0);
     } finally {
       setLoading(false);
     }
@@ -166,7 +170,7 @@ export const useInventory = () => {
       setLoading(true);
       setError(null);
       const newItem = await inventoryService.create(data);
-      setItems((prev) => [newItem, ...prev]);
+      setItems((prev) => [newItem, ...(Array.isArray(prev) ? prev : [])]);
       setTotal((prev) => prev + 1);
       return newItem;
     } catch (err: any) {
@@ -213,13 +217,13 @@ export const useInventory = () => {
 
   const adjustQuantity = useCallback(async (
     id: string,
-    quantity: number,
-    reason?: string
+    quantityChange: number,
+    operation: 'add' | 'subtract'
   ): Promise<boolean> => {
     try {
       setLoading(true);
       setError(null);
-      const updated = await inventoryService.adjustQuantity(id, quantity, reason);
+      const updated = await inventoryService.adjustQuantity(id, quantityChange, operation);
       setItems((prev) => prev.map((item) => (item.id === id ? updated : item)));
       return true;
     } catch (err: any) {

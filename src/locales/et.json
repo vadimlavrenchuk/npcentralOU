@@ -97,17 +97,27 @@
   "inventory": {
     "title": "Ladu",
     "addNew": "Lisa toode",
+    "addItem": "Lisa uus toode",
     "allCategories": "Kõik kategooriad",
     "table": {
       "name": "Nimi",
-      "sku": "Tootekood",
+      "sku": "SKU",
       "category": "Kategooria",
       "quantity": "Kogus",
       "unit": "Ühik",
       "minQuantity": "Min kogus",
+      "unitPrice": "Ühiku hind",
       "price": "Hind",
       "supplier": "Tarnija",
       "actions": "Tegevused"
+    },
+    "form": {
+      "nameEn": "Nimi (inglise keeles)",
+      "nameEt": "Nimi (eesti keeles)",
+      "nameFi": "Nimi (soome keeles)",
+      "nameRu": "Nimi (vene keeles)",
+      "location": "Asukoht",
+      "supplier": "Tarnija"
     },
     "category": {
       "Electrics": "Elekter",
@@ -137,6 +147,7 @@
     "export": "Ekspordi",
     "edit": "Muuda",
     "delete": "Kustuta",
+    "confirmDelete": "Kas olete kindel, et soovite selle toote kustutada",
     "view": "Vaata",
     "save": "Salvesta",
     "cancel": "Tühista",

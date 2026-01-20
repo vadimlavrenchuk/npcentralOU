@@ -6,7 +6,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import { Card } from '../../components/shared';
-import { useDashboard } from '../../hooks';
+import { useDashboardStats } from '../../hooks/useDashboardStats';
 import { 
   ClipboardList, 
   Wrench, 
@@ -46,7 +46,7 @@ const cardVariants = {
 
 export const Dashboard: React.FC = () => {
   const { t } = useTranslation();
-  const { stats, loading, error } = useDashboard();
+  const { stats, loading, error } = useDashboardStats();
 
   if (loading) {
     return <div className="page-loading">{t('common.loading')}</div>;
@@ -80,7 +80,7 @@ export const Dashboard: React.FC = () => {
               <ClipboardList size={32} />
             </div>
             <div className="stat-card__content">
-              <div className="stat-card__value">{stats?.workOrders.total || 0}</div>
+              <div className="stat-card__value">{stats?.activeOrders || 0}</div>
               <div className="stat-card__label">{t('dashboard.stats.workOrders')}</div>
             </div>
           </Card>
@@ -92,8 +92,8 @@ export const Dashboard: React.FC = () => {
               <AlertTriangle size={32} />
             </div>
             <div className="stat-card__content">
-              <div className="stat-card__value">{stats?.workOrders.pending || 0}</div>
-              <div className="stat-card__label">{t('dashboard.stats.pending')}</div>
+              <div className="stat-card__value">{stats?.totalItems || 0}</div>
+              <div className="stat-card__label">{t('dashboard.stats.inventory')}</div>
             </div>
           </Card>
         </motion.div>
@@ -104,8 +104,8 @@ export const Dashboard: React.FC = () => {
               <Wrench size={32} />
             </div>
             <div className="stat-card__content">
-              <div className="stat-card__value">{stats?.equipment.operational || 0}</div>
-              <div className="stat-card__label">{t('dashboard.stats.operational')}</div>
+              <div className="stat-card__value">{stats?.completedOrders || 0}</div>
+              <div className="stat-card__label">{t('dashboard.stats.completed')}</div>
             </div>
           </Card>
         </motion.div>
@@ -116,7 +116,7 @@ export const Dashboard: React.FC = () => {
               <Package size={32} />
             </div>
             <div className="stat-card__content">
-              <div className="stat-card__value">{stats?.inventory.lowStock || 0}</div>
+              <div className="stat-card__value">{stats?.lowStockItems || 0}</div>
               <div className="stat-card__label">{t('dashboard.stats.lowStock')}</div>
             </div>
           </Card>

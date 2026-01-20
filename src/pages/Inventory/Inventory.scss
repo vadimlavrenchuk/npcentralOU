@@ -286,6 +286,14 @@
               box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
             }
           }
+
+          &--delete {
+            &:hover {
+              background: rgba(239, 68, 68, 0.2);
+              border-color: $color-danger;
+              box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+            }
+          }
         }
       }
     }
@@ -386,6 +394,88 @@
     display: flex;
     gap: $spacing-3;
     justify-content: flex-end;
+  }
+}
+
+// Add Item Modal
+.add-item-modal {
+  .modal-form {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-4;
+    margin-bottom: $spacing-5;
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: $spacing-2;
+
+      label {
+        font-size: $font-size-sm;
+        font-weight: 600;
+        color: rgba(255, 255, 255, 0.9);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      input, select {
+        padding: $spacing-3;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: $radius-base;
+        color: $color-white;
+        font-size: $font-size-base;
+        transition: all 0.3s ease;
+
+        &:focus {
+          outline: none;
+          border-color: $color-primary;
+          background: rgba(255, 255, 255, 0.08);
+          box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        &::placeholder {
+          color: rgba(255, 255, 255, 0.4);
+        }
+      }
+
+      select {
+        cursor: pointer;
+        
+        option {
+          background: $color-bg-dark;
+          color: $color-white;
+        }
+      }
+
+      input[type="number"] {
+        appearance: textfield;
+
+        &::-webkit-outer-spin-button,
+        &::-webkit-inner-spin-button {
+          -webkit-appearance: none;
+          margin: 0;
+        }
+      }
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: $spacing-4;
+
+      @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+      }
+    }
+  }
+
+  .modal-actions {
+    display: flex;
+    gap: $spacing-3;
+    justify-content: flex-end;
+    padding-top: $spacing-4;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
   }
 }
 
