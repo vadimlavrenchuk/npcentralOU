@@ -185,10 +185,31 @@ Language detection:
 
 ## 🔐 Security
 
-- ✅ `.env` files protected in `.gitignore`
+### Environment Variables Protection
+
+- ✅ `.env` files protected in `.gitignore` (root + backend)
 - ✅ No API keys in repository
-- ✅ `.env.example` template provided
+- ✅ `.env.example` templates with safe placeholders
 - ✅ Type-safe environment variables via `vite-env.d.ts`
+- ✅ GitGuardian monitoring for leaked secrets
+- 🔒 See [backend/SECURITY.md](backend/SECURITY.md) for security guidelines
+
+### Important Security Notes
+
+⚠️ **NEVER commit real credentials!**
+
+1. Always use `.env.example` as template
+2. Copy to `.env` and fill with your actual credentials
+3. Verify `.env` is in `.gitignore` before committing
+4. If credentials are leaked, **rotate them immediately**
+
+### Git Pre-commit Checks
+
+Before every commit, verify:
+```bash
+git status          # Check no .env files
+git diff --cached   # Review staged changes
+```
 
 ## 📝 Development Notes
 
