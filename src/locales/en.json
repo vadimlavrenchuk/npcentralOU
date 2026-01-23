@@ -38,19 +38,23 @@
   "workOrders": {
     "title": "Work Orders",
     "createNew": "New Work Order",
+    "edit": "Edit Work Order",
+    "confirmDelete": "Are you sure you want to delete this work order?",
     "table": {
       "id": "ID",
       "title": "Title",
+      "description": "Description",
       "equipment": "Equipment",
       "priority": "Priority",
       "status": "Status",
       "assignedTo": "Assigned To",
       "dueDate": "Due Date",
+      "estimatedHours": "Est. Hours",
       "actions": "Actions"
     },
     "status": {
       "pending": "Pending",
-      "inProgress": "In Progress",
+      "in_progress": "In Progress",
       "completed": "Completed",
       "cancelled": "Cancelled"
     },
@@ -62,13 +66,28 @@
     },
     "form": {
       "title": "Title",
+      "titlePlaceholder": "Enter work order title",
       "description": "Description",
+      "descriptionPlaceholder": "Enter work order description",
       "equipment": "Select Equipment",
       "priority": "Priority",
+      "status": "Status",
       "assignedTo": "Assign To",
       "dueDate": "Due Date",
+      "estimatedHours": "Estimated Hours",
+      "notes": "Notes",
+      "notesPlaceholder": "Additional notes (optional)",
       "submit": "Create Work Order",
       "cancel": "Cancel"
+    },
+    "parts": {
+      "title": "Required Parts",
+      "search": "Search parts...",
+      "quantity": "Qty",
+      "add": "Add",
+      "partName": "Part",
+      "inStock": "In Stock",
+      "insufficientStock": "Some parts have insufficient stock. Order will be created with \"Awaiting Parts\" status."
     },
     "noData": "No work orders found",
     "error": "Error loading work orders"
@@ -150,6 +169,7 @@
     "confirmDelete": "Are you sure you want to delete this item",
     "view": "View",
     "save": "Save",
+    "create": "Create",
     "cancel": "Cancel",
     "close": "Close",
     "loading": "Loading...",
