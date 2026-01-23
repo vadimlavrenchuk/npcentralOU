@@ -32,6 +32,10 @@
       "lowStock": "Vähissä",
       "outOfStock": "Loppu"
     },
+    "maintenance": {
+      "urgentTitle": "Kiireellinen huolto vaaditaan",
+      "noUrgent": "Kaikki laitteet ovat hyvässä kunnossa"
+    },
     "error": "Virhe tilastojen lataamisessa",
     "loading": "Ladataan..."
   },
@@ -76,6 +80,12 @@
   "equipment": {
     "title": "Laitteet",
     "addNew": "Lisää laite",
+    "name": "Nimi",
+    "type": "Tyyppi",
+    "model": "Malli",
+    "serialNumber": "Sarjanumero",
+    "manufacturer": "Valmistaja",
+    "location": "Sijainti",
     "table": {
       "name": "Nimi",
       "model": "Malli",
@@ -86,8 +96,10 @@
       "actions": "Toiminnot"
     },
     "status": {
+      "label": "Tila",
       "operational": "Toiminnassa",
       "maintenance": "Huollossa",
+      "out-of-service": "Ei käytössä",
       "broken": "Rikki",
       "retired": "Poistettu käytöstä"
     },
@@ -141,6 +153,20 @@
     "noData": "Ei tuotteita",
     "error": "Virhe varaston lataamisessa"
   },
+  "maintenance": {
+    "management": "Huollon hallinta",
+    "updateHours": "Päivitä moottorin tunnit",
+    "currentHours": "Nykyiset moottorin tunnit",
+    "interval": "Huoltoväli",
+    "checklist": "Huollon tarkistuslista",
+    "recordService": "Kirjaa huolto",
+    "completeRequiredTasks": "Täytä kaikki pakolliset tehtävät ennen huollon kirjaamista",
+    "units": {
+      "days": "päivää",
+      "months": "kuukautta",
+      "hours": "tuntia"
+    }
+  },
   "common": {
     "search": "Hae...",
     "filter": "Suodata",
@@ -164,6 +190,8 @@
     "profile": "Profiili",
     "settings": "Asetukset",
     "notifications": "Ilmoitukset",
-    "language": "Kieli"
+    "language": "Kieli",
+    "notes": "Huomautukset",
+    "saving": "Tallennetaan..."
   }
 }

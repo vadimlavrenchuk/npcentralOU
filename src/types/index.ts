@@ -4,6 +4,17 @@
  */
 
 // ============================================================================
+// COMMON TYPES
+// ============================================================================
+
+export interface I18nString {
+  en: string;
+  et?: string;
+  fi?: string;
+  ru?: string;
+}
+
+// ============================================================================
 // ENUMS
 // ============================================================================
 
@@ -79,8 +90,41 @@ export interface Equipment {
   lastMaintenanceDate?: string;
   nextMaintenanceDate?: string;
   notes?: string;
+  // Preventive Maintenance fields
+  maintenanceInterval?: MaintenanceInterval;
+  lastService?: LastService;
+  currentHours?: number;
+  checklistTemplate?: ChecklistTask[];
+  // Virtual fields
+  nextServiceData?: NextServiceData;
+  isUrgent?: boolean;
   createdAt: string;
   updatedAt: string;
+}
+
+export interface MaintenanceInterval {
+  value: number;
+  unit: 'days' | 'months' | 'hours';
+}
+
+export interface LastService {
+  date?: string;
+  hours?: number;
+}
+
+export interface ChecklistTask {
+  task: string;
+  required: boolean;
+  completed?: boolean;
+}
+
+export interface NextServiceData {
+  date: string | null;
+  hours: number | null;
+  daysRemaining: number | null;
+  hoursRemaining: number | null;
+  percentRemaining: number;
+  type: 'calendar' | 'hours' | 'both';
 }
 
 export interface PartUsage {
@@ -106,6 +150,8 @@ export interface WorkOrder {
   dueDate?: string;
   completedAt?: string;
   notes?: string;
+  // PM checklist
+  maintenanceChecklist?: ChecklistTask[];
   createdAt: string;
   updatedAt: string;
 }
@@ -194,6 +240,11 @@ export interface CreateEquipmentDto {
   location: string;
   installDate?: string;
   notes?: string;
+  // PM fields
+  maintenanceInterval?: MaintenanceInterval;
+  lastService?: LastService;
+  currentHours?: number;
+  checklistTemplate?: ChecklistTask[];
 }
 
 export interface UpdateEquipmentDto {
@@ -208,6 +259,11 @@ export interface UpdateEquipmentDto {
   lastMaintenanceDate?: string;
   nextMaintenanceDate?: string;
   notes?: string;
+  // PM fields
+  maintenanceInterval?: MaintenanceInterval;
+  lastService?: LastService;
+  currentHours?: number;
+  checklistTemplate?: ChecklistTask[];
 }
 
 export interface CreateInventoryItemDto {
@@ -340,5 +396,15 @@ export interface DashboardStats {
     completedWorkOrders: number;
     pendingWorkOrders: number;
     upcomingMaintenance: number;
+  };
+  maintenance?: {
+    urgentEquipment: Equipment[];
+    stats: {
+      total: number;
+      urgent: number;
+      dueThisWeek: number;
+      dueThisMonth: number;
+      overdue: number;
+    };
   };
 }

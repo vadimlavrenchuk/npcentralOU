@@ -40,10 +40,7 @@ export const useWorkOrders = (): UseWorkOrdersResult => {
     try {
       setLoading(true);
       setError(null);
-      console.log('Fetching work orders...');
       const response = await workOrdersService.getAll(filters, pagination);
-      console.log('Received response:', response);
-      console.log('Work orders data:', response.data);
       setWorkOrders(response.data);
       setTotal(response.total);
     } catch (err: any) {
