@@ -191,6 +191,7 @@
     "error": "Error loading inventory"
   },
   "maintenance": {
+    "manage": "Manage",
     "management": "Maintenance Management",
     "updateHours": "Update Motor Hours",
     "currentHours": "Current Motor Hours",
@@ -198,6 +199,9 @@
     "checklist": "Maintenance Checklist",
     "recordService": "Record Service",
     "completeRequiredTasks": "Complete all required tasks before recording service",
+    "createWorkOrder": "Create Maintenance Work Order",
+    "workOrderCreated": "Work order successfully created",
+    "workOrderError": "Error creating work order",
     "units": {
       "days": "days",
       "months": "months",

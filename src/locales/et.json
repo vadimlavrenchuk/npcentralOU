@@ -154,6 +154,7 @@
     "error": "Viga lao laadimisel"
   },
   "maintenance": {
+    "manage": "Halda",
     "management": "Hoolduse haldamine",
     "updateHours": "Värskenda mootoritunde",
     "currentHours": "Praegused mootoritunnid",
@@ -161,6 +162,9 @@
     "checklist": "Hoolduse kontrollnimekiri",
     "recordService": "Salvesta hooldus",
     "completeRequiredTasks": "Täitke kõik kohustuslikud ülesanded enne hoolduse salvestamist",
+    "createWorkOrder": "Loo hooldustöökäsk",
+    "workOrderCreated": "Töökäsk edukalt loodud",
+    "workOrderError": "Viga töökäsu loomisel",
     "units": {
       "days": "päeva",
       "months": "kuud",

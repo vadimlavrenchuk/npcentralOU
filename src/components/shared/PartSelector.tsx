@@ -23,9 +23,10 @@ export const PartSelector: React.FC<PartSelectorProps> = ({ selectedParts, onCha
   const [selectedItem, setSelectedItem] = useState<InventoryItem | null>(null);
   const [quantity, setQuantity] = useState<number>(1);
 
+  // Load inventory once on mount
   useEffect(() => {
     fetchInventory();
-  }, [fetchInventory]);
+  }, []); // Empty dependency array - load only once
 
   const filteredInventory = inventory.filter((item) =>
     item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||

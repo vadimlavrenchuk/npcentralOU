@@ -19,7 +19,7 @@ const sampleEquipment = [
     manufacturer: 'HAAS Automation',
     status: 'operational',
     location: 'Workshop A',
-    installDate: new Date('2020-01-15'),
+    installDate: new Date('2023-01-15'),
     
     // Calendar-based maintenance (every 6 months)
     maintenanceInterval: {
@@ -27,10 +27,10 @@ const sampleEquipment = [
       unit: 'months',
     },
     lastService: {
-      date: new Date('2024-01-01'),
-      hours: 1000,
+      date: new Date(Date.now()),
+      hours: 100,
     },
-    currentHours: 1450,
+    currentHours: 150,
     
     checklistTemplate: [
       { task: 'Change hydraulic oil', required: true },
@@ -50,18 +50,18 @@ const sampleEquipment = [
     manufacturer: 'DMG MORI',
     status: 'operational',
     location: 'Workshop B',
-    installDate: new Date('2019-06-20'),
+    installDate: new Date('2023-06-20'),
     
-    // Hours-based maintenance (every 500 hours) - URGENT
+    // Hours-based maintenance (every 500 hours)
     maintenanceInterval: {
       value: 500,
       unit: 'hours',
     },
     lastService: {
-      date: new Date('2023-12-01'),
-      hours: 800,
+      date: new Date(Date.now()),
+      hours: 200,
     },
-    currentHours: 1285, // 15 hours over due!
+    currentHours: 250,
     
     checklistTemplate: [
       { task: 'Replace spindle oil', required: true },
@@ -79,18 +79,18 @@ const sampleEquipment = [
     manufacturer: 'Schuler',
     status: 'operational',
     location: 'Workshop A',
-    installDate: new Date('2021-03-10'),
+    installDate: new Date('2023-03-10'),
     
-    // Monthly maintenance - URGENT (overdue by days)
+    // Monthly maintenance (every 30 days)
     maintenanceInterval: {
       value: 1,
       unit: 'months',
     },
     lastService: {
-      date: new Date('2024-12-15'),
-      hours: 450,
+      date: new Date(Date.now()),
+      hours: 80,
     },
-    currentHours: 485,
+    currentHours: 95,
     
     checklistTemplate: [
       { task: 'Check hydraulic fluid level', required: true },
@@ -98,79 +98,6 @@ const sampleEquipment = [
       { task: 'Test safety systems', required: true },
       { task: 'Lubricate ram', required: true },
     ],
-  },
-  
-  {
-    name: 'Welding Robot RX-400',
-    type: 'Welding Robot',
-    model: 'RX-400',
-    serialNumber: 'WELD-004',
-    manufacturer: 'FANUC',
-    status: 'operational',
-    location: 'Workshop C',
-    installDate: new Date('2022-08-01'),
-    
-    // Hours-based (every 1000 hours) - Still good
-    maintenanceInterval: {
-      value: 1000,
-      unit: 'hours',
-    },
-    lastService: {
-      date: new Date('2024-01-10'),
-      hours: 500,
-    },
-    currentHours: 920,
-    
-    checklistTemplate: [
-      { task: 'Clean welding torch', required: true },
-      { task: 'Check cable connections', required: true },
-      { task: 'Inspect robot arm joints', required: true },
-      { task: 'Update software if needed', required: false },
-      { task: 'Test emergency stop', required: true },
-    ],
-  },
-  
-  {
-    name: 'Lathe L-250',
-    type: 'Manual Lathe',
-    model: 'L-250',
-    serialNumber: 'LATHE-005',
-    manufacturer: 'OPTIMUM',
-    status: 'operational',
-    location: 'Workshop A',
-    installDate: new Date('2018-05-15'),
-    
-    // 3-month maintenance - WARNING (1 week left)
-    maintenanceInterval: {
-      value: 3,
-      unit: 'months',
-    },
-    lastService: {
-      date: new Date('2024-10-25'),
-      hours: 200,
-    },
-    currentHours: 245,
-    
-    checklistTemplate: [
-      { task: 'Change gearbox oil', required: true },
-      { task: 'Adjust tailstock', required: false },
-      { task: 'Check chuck jaws', required: true },
-      { task: 'Clean bed ways', required: true },
-    ],
-  },
-  
-  {
-    name: 'Grinding Machine GR-150',
-    type: 'Surface Grinder',
-    model: 'GR-150',
-    serialNumber: 'GRIND-006',
-    manufacturer: 'BLOHM',
-    status: 'operational',
-    location: 'Workshop B',
-    installDate: new Date('2020-11-20'),
-    
-    // No maintenance schedule yet
-    currentHours: 320,
   },
 ];
 
@@ -192,18 +119,13 @@ export async function seedEquipment() {
     console.log(`✓ Created ${created.length} equipment items`);
     
     // Display urgent equipment
-    // @ts-ignore - static method exists
-    const urgent = await Equipment.getUrgentEquipment(10);
-    console.log(`\n⚠️  Found ${urgent.length} urgent equipment items:`);
-    urgent.forEach((eq: any) => {
-      console.log(`  - ${eq.name}: ${eq.nextServiceData?.percentRemaining.toFixed(0)}% remaining`);
-    });
+    const urgent = await Equipment.find({});
+    console.log(`\n⚠️  Found ${urgent.length} equipment items`);
     
     console.log('\n✅ Equipment seeding complete!');
-    process.exit(0);
   } catch (error) {
     console.error('❌ Error seeding equipment:', error);
-    process.exit(1);
+    throw error;
   }
 }
 
