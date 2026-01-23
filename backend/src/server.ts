@@ -8,6 +8,7 @@ import { errorHandler, notFoundHandler } from './middleware/errorHandler.middlew
 import inventoryRoutes from './routes/inventory.routes';
 import statsRoutes from './routes/stats.routes';
 import workOrderRoutes from './routes/workOrder.routes';
+import equipmentRoutes from './routes/equipment.routes';
 
 // Load environment variables
 dotenv.config();
@@ -46,6 +47,7 @@ app.get('/health', (_req, res) => {
 app.use('/api/inventory', inventoryRoutes);
 app.use('/api/stats', statsRoutes);
 app.use('/api/work-orders', workOrderRoutes);
+app.use('/api/equipment', equipmentRoutes);
 
 // 404 handler - must be after all routes
 app.use(notFoundHandler);
