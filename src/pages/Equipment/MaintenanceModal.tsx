@@ -4,10 +4,12 @@
 
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { X } from 'lucide-react';
+import { FileText } from 'lucide-react';
 import { Button, Modal } from '../../components/shared';
 import { MotorHoursInput } from '../../components/shared/MotorHoursInput';
 import { MaintenanceChecklist } from '../../components/shared/MaintenanceChecklist';
+import { workOrdersService } from '../../api/services';
+import { WorkOrderPriority, WorkOrderStatus } from '../../types';
 import type { Equipment, ChecklistTask } from '../../types';
 import './MaintenanceModal.scss';
 
@@ -32,11 +34,31 @@ export const MaintenanceModal: React.FC<MaintenanceModalProps> = ({
     equipment.checklistTemplate || []
   );
   const [isRecordingService, setIsRecordingService] = useState(false);
+  const [isCreatingWorkOrder, setIsCreatingWorkOrder] = useState(false);
 
   const handleUpdateHours = async (newHours: number) => {
     if (onUpdateHours) {
       await onUpdateHours(equipment.id, newHours);
       setShowHoursInput(false);
+    }
+  };
+
+  const handleCreateWorkOrder = async () => {
+    setIsCreatingWorkOrder(true);
+    try {
+      await workOrdersService.create({
+        title: `Maintenance: ${equipment.name}`,
+        description: `Scheduled maintenance for ${equipment.name} (${equipment.model})`,
+        equipmentId: equipment.id,
+        priority: WorkOrderPriority.HIGH,
+        status: WorkOrderStatus.PENDING,
+      });
+      alert(t('maintenance.workOrderCreated'));
+    } catch (error) {
+      console.error('Failed to create work order:', error);
+      alert(t('maintenance.workOrderError'));
+    } finally {
+      setIsCreatingWorkOrder(false);
     }
   };
 
@@ -100,6 +122,19 @@ export const MaintenanceModal: React.FC<MaintenanceModalProps> = ({
             fullWidth
           >
             {t('maintenance.updateHours')}
+          </Button>
+        </div>
+
+        {/* Quick Work Order Creation */}
+        <div className="work-order-section">
+          <Button
+            variant="primary"
+            onClick={handleCreateWorkOrder}
+            disabled={isCreatingWorkOrder}
+            icon={<FileText size={16} />}
+            fullWidth
+          >
+            {isCreatingWorkOrder ? t('common.loading') : t('maintenance.createWorkOrder')}
           </Button>
         </div>
 

@@ -173,6 +173,7 @@
     "error": "Ошибка загрузки склада"
   },
   "maintenance": {
+    "manage": "Управление",
     "management": "Управление ТО",
     "updateHours": "Обновить моточасы",
     "currentHours": "Текущие моточасы",
@@ -180,6 +181,9 @@
     "checklist": "Чек-лист обслуживания",
     "recordService": "Записать обслуживание",
     "completeRequiredTasks": "Заполните все обязательные задачи перед записью обслуживания",
+    "createWorkOrder": "Создать заказ на ТО",
+    "workOrderCreated": "Заказ на ТО успешно создан",
+    "workOrderError": "Ошибка создания заказа",
     "units": {
       "days": "дней",
       "months": "месяцев",

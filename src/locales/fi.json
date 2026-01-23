@@ -154,6 +154,7 @@
     "error": "Virhe varaston lataamisessa"
   },
   "maintenance": {
+    "manage": "Hallitse",
     "management": "Huollon hallinta",
     "updateHours": "Päivitä moottorin tunnit",
     "currentHours": "Nykyiset moottorin tunnit",
@@ -161,6 +162,9 @@
     "checklist": "Huollon tarkistuslista",
     "recordService": "Kirjaa huolto",
     "completeRequiredTasks": "Täytä kaikki pakolliset tehtävät ennen huollon kirjaamista",
+    "createWorkOrder": "Luo huoltotyötilaus",
+    "workOrderCreated": "Työtilaus luotu onnistuneesti",
+    "workOrderError": "Virhe työtilauksen luomisessa",
     "units": {
       "days": "päivää",
       "months": "kuukautta",

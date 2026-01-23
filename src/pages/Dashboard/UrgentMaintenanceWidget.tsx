@@ -25,7 +25,12 @@ export const UrgentMaintenanceWidget: React.FC<UrgentMaintenanceWidgetProps> = (
       const response = await fetch('http://localhost:5000/api/equipment/urgent?limit=5');
       const data = await response.json();
       if (data.success) {
-        setUrgentEquipment(data.data);
+        // Filter: show only equipment with resource <= 20%
+        const criticalEquipment = data.data.filter((item: Equipment) => {
+          const percentRemaining = item.nextServiceData?.percentRemaining;
+          return percentRemaining !== null && percentRemaining !== undefined && percentRemaining <= 20;
+        });
+        setUrgentEquipment(criticalEquipment);
       }
     } catch (error) {
       console.error('Failed to fetch urgent equipment:', error);
