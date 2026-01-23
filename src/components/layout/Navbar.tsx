@@ -6,7 +6,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Bell, User, LogOut } from 'lucide-react';
 import { Button } from '../shared';
-import LanguageSwitcher from '../shared/LanguageSwitcher';
+import { LanguageSwitcher } from '../shared/LanguageSwitcher';
 import './Navbar.scss';
 
 interface NavbarProps {

@@ -3,6 +3,7 @@
  */
 
 @use '../../styles/variables' as *;
+@use 'sass:color';
 
 .work-orders {
   &__header {
@@ -123,7 +124,7 @@
   &--edit {
     color: $color-primary;
     &:hover {
-      background-color: lighten($color-primary, 45%);
+      background-color: color.adjust($color-primary, $lightness: 45%);
     }
   }
 

@@ -6,6 +6,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import { Card } from '../../components/shared';
+import { UrgentMaintenanceWidget } from './UrgentMaintenanceWidget';
 import { useDashboardStats } from '../../hooks/useDashboardStats';
 import { 
   ClipboardList, 
@@ -134,8 +135,8 @@ export const Dashboard: React.FC = () => {
           <p>{t('dashboard.noActivity')}</p>
         </Card>
 
-        <Card title={t('dashboard.upcomingMaintenance')} className="dashboard__card">
-          <p>{t('dashboard.noMaintenance')}</p>
+        <Card title={t('dashboard.upcomingMaintenance')} className="dashboard__card dashboard__card--maintenance">
+          <UrgentMaintenanceWidget />
         </Card>
       </motion.div>
     </div>

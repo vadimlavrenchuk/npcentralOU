@@ -40,4 +40,31 @@ export const equipmentService = {
   async updateStatus(id: string, status: string): Promise<Equipment> {
     return apiClient.patch<Equipment>(`/equipment/${id}/status`, { status });
   },
+
+  // Preventive Maintenance methods
+  async updateCurrentHours(id: string, hours: number): Promise<Equipment> {
+    return apiClient.patch<Equipment>(`/equipment/${id}/hours`, { hours });
+  },
+
+  async recordService(id: string, serviceHours?: number): Promise<Equipment> {
+    return apiClient.post<Equipment>(`/equipment/${id}/service`, { serviceHours });
+  },
+
+  async getUrgentEquipment(limit: number = 5): Promise<Equipment[]> {
+    const response = await apiClient.get<{ data: Equipment[] }>(`/equipment/urgent`, {
+      params: { limit },
+    });
+    return response.data;
+  },
+
+  async getMaintenanceStats(): Promise<{
+    total: number;
+    urgent: number;
+    dueThisWeek: number;
+    dueThisMonth: number;
+    overdue: number;
+  }> {
+    const response = await apiClient.get<{ data: any }>('/equipment/stats/maintenance');
+    return response.data;
+  },
 };

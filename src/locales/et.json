@@ -32,6 +32,10 @@
       "lowStock": "Väheses koguses",
       "outOfStock": "Otsas"
     },
+    "maintenance": {
+      "urgentTitle": "Kiirelise hooldus nõutav",
+      "noUrgent": "Kõik seadmed on heas korras"
+    },
     "error": "Viga statistika laadimisel",
     "loading": "Laadimine..."
   },
@@ -76,6 +80,12 @@
   "equipment": {
     "title": "Seadmed",
     "addNew": "Lisa seade",
+    "name": "Nimi",
+    "type": "Tüüp",
+    "model": "Mudel",
+    "serialNumber": "Seerianumber",
+    "manufacturer": "Tootja",
+    "location": "Asukoht",
     "table": {
       "name": "Nimi",
       "model": "Mudel",
@@ -86,8 +96,10 @@
       "actions": "Tegevused"
     },
     "status": {
+      "label": "Staatus",
       "operational": "Töös",
       "maintenance": "Hoolduses",
+      "out-of-service": "Ei ole kasutuses",
       "broken": "Katki",
       "retired": "Kasutuselt kõrvaldatud"
     },
@@ -141,6 +153,20 @@
     "noData": "Tooteid pole",
     "error": "Viga lao laadimisel"
   },
+  "maintenance": {
+    "management": "Hoolduse haldamine",
+    "updateHours": "Värskenda mootoritunde",
+    "currentHours": "Praegused mootoritunnid",
+    "interval": "Hooldusintervall",
+    "checklist": "Hoolduse kontrollnimekiri",
+    "recordService": "Salvesta hooldus",
+    "completeRequiredTasks": "Täitke kõik kohustuslikud ülesanded enne hoolduse salvestamist",
+    "units": {
+      "days": "päeva",
+      "months": "kuud",
+      "hours": "tundi"
+    }
+  },
   "common": {
     "search": "Otsi...",
     "filter": "Filtreeri",
@@ -164,6 +190,8 @@
     "profile": "Profiil",
     "settings": "Seaded",
     "notifications": "Teavitused",
-    "language": "Keel"
+    "language": "Keel",
+    "notes": "Märkused",
+    "saving": "Salvestamine..."
   }
 }
