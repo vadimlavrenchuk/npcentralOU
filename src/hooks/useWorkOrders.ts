@@ -40,7 +40,10 @@ export const useWorkOrders = (): UseWorkOrdersResult => {
     try {
       setLoading(true);
       setError(null);
+      console.log('Fetching work orders...');
       const response = await workOrdersService.getAll(filters, pagination);
+      console.log('Received response:', response);
+      console.log('Work orders data:', response.data);
       setWorkOrders(response.data);
       setTotal(response.total);
     } catch (err: any) {
@@ -72,8 +75,10 @@ export const useWorkOrders = (): UseWorkOrdersResult => {
     try {
       setLoading(true);
       setError(null);
+      console.log('Sending create request:', data);
       const newWorkOrder = await workOrdersService.create(data);
-      setWorkOrders((prev) => [newWorkOrder, ...prev]);
+      console.log('Received work order:', newWorkOrder);
+      setWorkOrders((prev) => [newWorkOrder, ...(Array.isArray(prev) ? prev : [])]);
       setTotal((prev) => prev + 1);
       return newWorkOrder;
     } catch (err: any) {
@@ -92,9 +97,20 @@ export const useWorkOrders = (): UseWorkOrdersResult => {
     try {
       setLoading(true);
       setError(null);
+      console.log('Updating work order:', id, data);
       const updated = await workOrdersService.update(id, data);
+      console.log('Updated work order received:', updated);
+      
+      if (!updated) {
+        throw new Error('No data returned from update');
+      }
+      
       setWorkOrders((prev) =>
-        prev.map((wo) => (wo.id === id ? updated : wo))
+        prev.map((wo) => {
+          const woId = wo.id || wo._id;
+          const updatedId = updated.id || updated._id;
+          return woId === id || woId === updatedId ? updated : wo;
+        })
       );
       return updated;
     } catch (err: any) {
@@ -111,7 +127,10 @@ export const useWorkOrders = (): UseWorkOrdersResult => {
       setLoading(true);
       setError(null);
       await workOrdersService.delete(id);
-      setWorkOrders((prev) => prev.filter((wo) => wo.id !== id));
+      setWorkOrders((prev) => prev.filter((wo) => {
+        const woId = wo.id || wo._id;
+        return woId !== id;
+      }));
       setTotal((prev) => prev - 1);
       return true;
     } catch (err: any) {

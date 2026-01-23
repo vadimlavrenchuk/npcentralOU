@@ -83,8 +83,15 @@ export interface Equipment {
   updatedAt: string;
 }
 
+export interface PartUsage {
+  inventoryId: string;
+  quantity: number;
+  name?: string;
+}
+
 export interface WorkOrder {
-  id: string;
+  id?: string;
+  _id?: string;
   title: string;
   description: string;
   equipmentId?: string;
@@ -93,6 +100,7 @@ export interface WorkOrder {
   assignedTo?: User;
   priority: WorkOrderPriority;
   status: WorkOrderStatus;
+  parts: PartUsage[];
   estimatedHours?: number;
   actualHours?: number;
   dueDate?: string;
@@ -155,6 +163,8 @@ export interface CreateWorkOrderDto {
   equipmentId?: string;
   assignedToId?: string;
   priority: WorkOrderPriority;
+  status?: WorkOrderStatus;
+  parts?: PartUsage[];
   estimatedHours?: number;
   dueDate?: string;
   notes?: string;
@@ -167,6 +177,7 @@ export interface UpdateWorkOrderDto {
   assignedToId?: string;
   priority?: WorkOrderPriority;
   status?: WorkOrderStatus;
+  parts?: PartUsage[];
   estimatedHours?: number;
   actualHours?: number;
   dueDate?: string;
