@@ -5,6 +5,9 @@
 import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { MainLayout } from '../components/layout';
+import ProtectedRoute from '../components/ProtectedRoute';
+import RoleBasedRoute from '../components/RoleBasedRoute';
+import Login from '../pages/Login/Login';
 import { 
   Dashboard, 
   WorkOrders, 
@@ -13,31 +16,68 @@ import {
   Reports,
   Employees
 } from '../pages';
+import { UserRole } from '../types/permissions';
 
 export const AppRouter: React.FC = () => {
   return (
     <Routes>
-      <Route element={<MainLayout />}>
-        {/* Главная страница - Dashboard */}
+      {/* Public Route - Login */}
+      <Route path="/login" element={<Login />} />
+      
+      {/* Protected Routes */}
+      <Route element={
+        <ProtectedRoute>
+          <MainLayout />
+        </ProtectedRoute>
+      }>
+        {/* Dashboard - All roles */}
         <Route index element={<Dashboard />} />
         
-        {/* Рабочие заказы */}
-        <Route path="work-orders" element={<WorkOrders />} />
+        {/* Work Orders - Not for Accountant */}
+        <Route 
+          path="work-orders" 
+          element={
+            <RoleBasedRoute allowedRoles={[UserRole.ADMIN, UserRole.CHIEF_MECHANIC, UserRole.MECHANIC]}>
+              <WorkOrders />
+            </RoleBasedRoute>
+          } 
+        />
         
-        {/* Склад */}
+        {/* Inventory - All roles (permissions differ inside) */}
         <Route path="inventory" element={<Inventory />} />
         
-        {/* Оборудование */}
-        <Route path="equipment" element={<Equipment />} />
+        {/* Equipment - Not for Accountant */}
+        <Route 
+          path="equipment" 
+          element={
+            <RoleBasedRoute allowedRoles={[UserRole.ADMIN, UserRole.CHIEF_MECHANIC, UserRole.MECHANIC]}>
+              <Equipment />
+            </RoleBasedRoute>
+          } 
+        />
         
-        {/* Отчеты */}
-        <Route path="reports" element={<Reports />} />
+        {/* Reports - Not for Mechanic */}
+        <Route 
+          path="reports" 
+          element={
+            <RoleBasedRoute allowedRoles={[UserRole.ADMIN, UserRole.CHIEF_MECHANIC, UserRole.ACCOUNTANT]}>
+              <Reports />
+            </RoleBasedRoute>
+          } 
+        />
         
-        {/* Сотрудники/Пользователи */}
-        <Route path="employees" element={<Employees />} />
+        {/* Employees - Admin and Chief Mechanic only */}
+        <Route 
+          path="employees" 
+          element={
+            <RoleBasedRoute allowedRoles={[UserRole.ADMIN, UserRole.CHIEF_MECHANIC]}>
+              <Employees />
+            </RoleBasedRoute>
+          } 
+        />
         <Route path="users" element={<Navigate to="/employees" replace />} />
         
-        {/* 404 - редирект на главную */}
+        {/* 404 - redirect to dashboard */}
         <Route path="*" element={<Navigate to="/" replace />} />
       </Route>
     </Routes>

@@ -15,15 +15,16 @@ import {
   Globe
 } from 'lucide-react';
 import type { SidebarItem, Language } from '../../types';
+import { usePermissions } from '../../hooks/usePermissions';
 import './Sidebar.scss';
 
 const menuItems: SidebarItem[] = [
-  { titleKey: 'nav.dashboard', icon: LayoutDashboard, path: '/' },
-  { titleKey: 'nav.workOrders', icon: ClipboardList, path: '/work-orders' },
-  { titleKey: 'nav.inventory', icon: Package, path: '/inventory' },
-  { titleKey: 'nav.equipment', icon: Wrench, path: '/equipment' },
-  { titleKey: 'nav.reports', icon: BarChart3, path: '/reports' },
-  { titleKey: 'nav.users', icon: Users, path: '/employees' },
+  { titleKey: 'nav.dashboard', icon: LayoutDashboard, path: '/', permission: 'canAccessDashboard' },
+  { titleKey: 'nav.workOrders', icon: ClipboardList, path: '/work-orders', permission: 'canAccessWorkOrders' },
+  { titleKey: 'nav.inventory', icon: Package, path: '/inventory', permission: 'canAccessInventory' },
+  { titleKey: 'nav.equipment', icon: Wrench, path: '/equipment', permission: 'canAccessEquipment' },
+  { titleKey: 'nav.reports', icon: BarChart3, path: '/reports', permission: 'canAccessReports' },
+  { titleKey: 'nav.users', icon: Users, path: '/employees', permission: 'canAccessEmployees' },
 ];
 
 const languages: Language[] = [
@@ -35,6 +36,7 @@ const languages: Language[] = [
 
 export const Sidebar: React.FC = () => {
   const { t, i18n } = useTranslation();
+  const { can } = usePermissions();
   const [isLangOpen, setIsLangOpen] = useState(false);
 
   const handleLanguageChange = (code: string) => {
@@ -44,6 +46,11 @@ export const Sidebar: React.FC = () => {
 
   const currentLanguage = languages.find(lang => lang.code === i18n.language) || languages[2];
   
+  // Filter menu items based on permissions
+  const visibleMenuItems = menuItems.filter(item => 
+    !item.permission || can(item.permission as any)
+  );
+  
   return (
     <aside className="sidebar">
       <div className="sidebar__header">
@@ -52,7 +59,7 @@ export const Sidebar: React.FC = () => {
       </div>
 
       <nav className="sidebar__nav">
-        {menuItems.map((item) => (
+        {visibleMenuItems.map((item) => (
           <NavLink
             key={item.path}
             to={item.path}

@@ -11,6 +11,44 @@
     "reports": "Raportit",
     "users": "Käyttäjät"
   },
+  "reports": {
+    "title": "Raportit ja analytiikka",
+    "viewOnly": "Vain katseluoikeus",
+    "loading": "Ladataan raportteja...",
+    "noData": "Ei saatavilla olevaa dataa",
+    "retry": "Yritä uudelleen",
+    "export": "Vie raportti",
+    "exporting": "Viedään...",
+    "exportError": "Tietojen vienti epäonnistui. Yritä uudelleen.",
+    "dateRange": {
+      "to": "to"
+    },
+    "kpi": {
+      "totalExpenses": "Kokonaiskulut",
+      "itemsUsed": "käytetyt osat",
+      "avgCompletionTime": "Keskimääräinen aika",
+      "ordersCompleted": "tilaukset valmistuivat",
+      "activeIssues": "Aktiiviset ongelmat",
+      "overdue": "myöhässä"
+    },
+    "charts": {
+      "topEquipment": "Top 5 kalleinta laitetta (osien mukaan)",
+      "weeklyBreakdown": "Viikottainen ongelmien erittely",
+      "statusDistribution": "Tilausten tilajakauma",
+      "topIssues": "Tärkeimmät laitteiden ongelmat"
+    },
+    "table": {
+      "equipment": "Laite",
+      "issueCount": "Ongelmien määrä",
+      "totalCost": "Kokonaiskustannus"
+    },
+    "status": {
+      "completed": "Valmis",
+      "pending": "Odottaa",
+      "overdue": "Myöhässä"
+    },
+    "accountantNotice": "Sinulla on vain katseluoikeus raportteihin. Ota yhteyttä järjestelmänvalvojaan muutosten tekemiseksi."
+  },
   "dashboard": {
     "title": "Hallintapaneeli",
     "recentActivity": "Viimeisimmät tapahtumat",

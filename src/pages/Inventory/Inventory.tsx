@@ -6,13 +6,16 @@ import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Plus, Search, PackagePlus, PackageMinus, AlertTriangle, Trash2 } from 'lucide-react';
 import { Button, Card, Modal } from '../../components/shared';
+import { Can } from '../../components/shared/Can';
 import { useInventory } from '../../hooks';
+import { usePermissions } from '../../hooks/usePermissions';
 import type { InventoryItem } from '../../types';
 import './Inventory.scss';
 
 export const Inventory: React.FC = () => {
   const { t, i18n } = useTranslation();
   const { items, loading, error, fetchInventory, adjustQuantity, createItem, deleteItem } = useInventory();
+  const { can, isAccountant } = usePermissions();
   
   const [searchTerm, setSearchTerm] = useState('');
   const [categoryFilter, setCategoryFilter] = useState<string>('all');
@@ -167,13 +170,15 @@ export const Inventory: React.FC = () => {
     <div className="inventory-page">
       <div className="page-header">
         <h1 className="page-title">{t('inventory.title')}</h1>
-        <Button 
-          variant="primary" 
-          icon={<Plus size={20} />}
-          onClick={() => setIsAddModalOpen(true)}
-        >
-          {t('inventory.addNew')}
-        </Button>
+        <Can perform="canAddInventory">
+          <Button 
+            variant="primary" 
+            icon={<Plus size={20} />}
+            onClick={() => setIsAddModalOpen(true)}
+          >
+            {t('inventory.addNew')}
+          </Button>
+        </Can>
       </div>
 
       {error && <div className="page-error">{error}</div>}
@@ -251,27 +256,33 @@ export const Inventory: React.FC = () => {
                     </td>
                     <td className="actions-cell">
                       <div className="action-buttons">
-                        <button
-                          className="action-btn action-btn--add"
-                          onClick={() => handleOpenOperationModal(item, 'add')}
-                          title={t('inventory.operations.receive')}
-                        >
-                          <PackagePlus size={18} />
-                        </button>
-                        <button
-                          className="action-btn action-btn--subtract"
-                          onClick={() => handleOpenOperationModal(item, 'subtract')}
-                          title={t('inventory.operations.issue')}
-                        >
-                          <PackageMinus size={18} />
-                        </button>
-                        <button
-                          className="action-btn action-btn--delete"
-                          onClick={() => handleDeleteItem(item)}
-                          title={t('common.delete')}
-                        >
-                          <Trash2 size={18} />
-                        </button>
+                        <Can perform="canAdjustStock">
+                          <button
+                            className="action-btn action-btn--add"
+                            onClick={() => handleOpenOperationModal(item, 'add')}
+                            title={t('inventory.operations.receive')}
+                          >
+                            <PackagePlus size={18} />
+                          </button>
+                        </Can>
+                        <Can perform="canAdjustStock">
+                          <button
+                            className="action-btn action-btn--subtract"
+                            onClick={() => handleOpenOperationModal(item, 'subtract')}
+                            title={t('inventory.operations.issue')}
+                          >
+                            <PackageMinus size={18} />
+                          </button>
+                        </Can>
+                        <Can perform="canDeleteInventory">
+                          <button
+                            className="action-btn action-btn--delete"
+                            onClick={() => handleDeleteItem(item)}
+                            title={t('common.delete')}
+                          >
+                            <Trash2 size={18} />
+                          </button>
+                        </Can>
                       </div>
                     </td>
                   </tr>

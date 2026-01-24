@@ -11,3 +11,4 @@ export { PartSelector } from './PartSelector';
 export { MaintenanceChecklist } from './MaintenanceChecklist';
 export { MotorHoursInput } from './MotorHoursInput';
 export { LanguageSwitcher } from './LanguageSwitcher';
+export { Can } from './Can';

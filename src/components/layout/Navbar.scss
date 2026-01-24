@@ -55,9 +55,52 @@
     color: $color-text-primary;
   }
 
+  &__user-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid $color-primary;
+  }
+
+  &__user-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
   &__user-name {
     font-size: $font-size-sm;
     font-weight: $font-weight-medium;
+  }
+
+  &__user-role {
+    font-size: 10px;
+    font-weight: $font-weight-semibold;
+    padding: 2px 8px;
+    border-radius: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    
+    &.role-badge--admin {
+      background-color: #dc2626;
+      color: white;
+    }
+    
+    &.role-badge--chief {
+      background-color: #2563eb;
+      color: white;
+    }
+    
+    &.role-badge--accountant {
+      background-color: #16a34a;
+      color: white;
+    }
+    
+    &.role-badge--mechanic {
+      background-color: #ea580c;
+      color: white;
+    }
   }
 
   @media (max-width: $breakpoint-md) {
