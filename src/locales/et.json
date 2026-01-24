@@ -10,8 +10,44 @@
     "equipment": "Seadmed",
     "reports": "Aruanded",
     "users": "Kasutajad"
-  },
-  "dashboard": {
+  },  "reports": {
+    "title": "Aruanded ja analüütika",
+    "viewOnly": "Ainult vaatamiseks",
+    "loading": "Laadin aruandeid...",
+    "noData": "Andmed puuduvad",
+    "retry": "Proovi uuesti",
+    "export": "Ekspordi aruanne",
+    "exporting": "Ekspordin...",
+    "exportError": "Andmete eksportimine ebaõnnestus. Palun proovi uuesti.",
+    "dateRange": {
+      "to": "kuni"
+    },
+    "kpi": {
+      "totalExpenses": "Kogukulu",
+      "itemsUsed": "kasutatud osi",
+      "avgCompletionTime": "Keskmine aeg",
+      "ordersCompleted": "tellimused lõpetatud",
+      "activeIssues": "Aktiivsed probleemid",
+      "overdue": "hilinenud"
+    },
+    "charts": {
+      "topEquipment": "Top 5 kalleimat seadet (osade järgi)",
+      "weeklyBreakdown": "Iganädalane probleemide jaotus",
+      "statusDistribution": "Tellimuste staatuse jaotus",
+      "topIssues": "Peamised seadmete probleemid"
+    },
+    "table": {
+      "equipment": "Seade",
+      "issueCount": "Probleemide arv",
+      "totalCost": "Kogumaksumus"
+    },
+    "status": {
+      "completed": "Valmis",
+      "pending": "Ootel",
+      "overdue": "Hilinenud"
+    },
+    "accountantNotice": "Teil on aruannete vaatamiseks ainult lugemisõigus. Muudatuste tegemiseks võtke ühendust administraatoriga."
+  },  "dashboard": {
     "title": "Juhtpaneel",
     "recentActivity": "Viimane tegevus",
     "upcomingMaintenance": "Eelseisev hooldus",

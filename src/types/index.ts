@@ -54,6 +54,7 @@ export interface SidebarItem {
   titleKey: string;
   icon: React.ComponentType<{ size?: number; className?: string }>;
   path: string;
+  permission?: string;
 }
 
 export interface Language {

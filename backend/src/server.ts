@@ -9,6 +9,8 @@ import inventoryRoutes from './routes/inventory.routes';
 import statsRoutes from './routes/stats.routes';
 import workOrderRoutes from './routes/workOrder.routes';
 import equipmentRoutes from './routes/equipment.routes';
+import userRoutes from './routes/user.routes';
+import reportsRoutes from './routes/reports.routes';
 
 // Load environment variables
 dotenv.config();
@@ -21,7 +23,9 @@ app.use(helmet());
 
 // CORS configuration
 const corsOptions = {
-  origin: process.env.CORS_ORIGIN || 'http://localhost:5173',
+  origin: process.env.NODE_ENV === 'production' 
+    ? process.env.CORS_ORIGIN 
+    : 'http://localhost:5173',
   credentials: true,
   optionsSuccessStatus: 200,
 };
@@ -48,6 +52,8 @@ app.use('/api/inventory', inventoryRoutes);
 app.use('/api/stats', statsRoutes);
 app.use('/api/work-orders', workOrderRoutes);
 app.use('/api/equipment', equipmentRoutes);
+app.use('/api/users', userRoutes);
+app.use('/api/reports', reportsRoutes);
 
 // 404 handler - must be after all routes
 app.use(notFoundHandler);

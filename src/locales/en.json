@@ -11,6 +11,44 @@
     "reports": "Reports",
     "users": "Users"
   },
+  "reports": {
+    "title": "Reports & Analytics",
+    "viewOnly": "View Only",
+    "loading": "Loading reports...",
+    "noData": "No data available",
+    "retry": "Retry",
+    "export": "Export Report",
+    "exporting": "Exporting...",
+    "exportError": "Failed to export data. Please try again.",
+    "dateRange": {
+      "to": "to"
+    },
+    "kpi": {
+      "totalExpenses": "Total Expenses",
+      "itemsUsed": "items used",
+      "avgCompletionTime": "Avg. Completion Time",
+      "ordersCompleted": "orders completed",
+      "activeIssues": "Active Issues",
+      "overdue": "overdue"
+    },
+    "charts": {
+      "topEquipment": "Top 5 Most Expensive Equipment (by Parts)",
+      "weeklyBreakdown": "Weekly Breakdown of Issues",
+      "statusDistribution": "Order Status Distribution",
+      "topIssues": "Top Equipment Issues"
+    },
+    "table": {
+      "equipment": "Equipment",
+      "issueCount": "Issue Count",
+      "totalCost": "Total Cost"
+    },
+    "status": {
+      "completed": "Completed",
+      "pending": "Pending",
+      "overdue": "Overdue"
+    },
+    "accountantNotice": "You have read-only access to reports. Contact an administrator to make changes."
+  },
   "dashboard": {
     "title": "Dashboard",
     "recentActivity": "Recent Activity",
