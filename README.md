@@ -6,10 +6,28 @@ Premium MERN stack application for mechanical workshop management with multiling
 - **Live URL:** https://verifed-est.ee
 - **Login:** admin / admin123
 
-## 📚 Documentation for AI/Deployment
-- **For AI Assistants:** See `AI_CONTEXT.md` - Quick project context
-- **For Deployment:** See `DEPLOYMENT_CONFIG.md` - Full deployment guide
-- **For General Info:** See `DEPLOYMENT.md` - Project overview
+## 📚 Documentation Index
+
+### 🚀 Quick Start
+- **[START_HERE.md](START_HERE.md)** - Complete guide for beginners
+- **[COPY_ME_FOR_AI.txt](COPY_ME_FOR_AI.txt)** - Copy-paste this for new AI sessions
+
+### 🤖 For AI Assistants
+- **[AI_CONTEXT.md](AI_CONTEXT.md)** - Quick project context (2 min read)
+- **[AI_CHEATSHEET.md](AI_CHEATSHEET.md)** - Tips and common scenarios
+- **[HOW_TO_WORK_WITH_AI.md](HOW_TO_WORK_WITH_AI.md)** - Guide for other projects
+
+### 🚢 Deployment
+- **[DEPLOYMENT_CONFIG.md](DEPLOYMENT_CONFIG.md)** - Full deployment guide
+- **[INFRASTRUCTURE_DIAGRAM.md](INFRASTRUCTURE_DIAGRAM.md)** - Visual diagrams
+- **[DEPLOYMENT.md](DEPLOYMENT.md)** - General deployment info
+
+### 💻 Scripts
+```bash
+npm run deploy:frontend  # Deploy frontend only
+npm run deploy:backend   # Deploy backend only
+npm run deploy:all       # Full deployment
+```
 
 ## �🎨 Features
 
