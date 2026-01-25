@@ -10,7 +10,7 @@ import { useAuth } from '../../context/AuthContext';
 import './MainLayout.scss';
 
 export const MainLayout: React.FC = () => {
-  const { currentUser, logout } = useAuth();
+  const { userProfile, logout } = useAuth();
   const navigate = useNavigate();
 
   const handleLogout = async () => {
@@ -27,7 +27,7 @@ export const MainLayout: React.FC = () => {
       <Sidebar />
       
       <div className="main-layout__content">
-        <Navbar user={currentUser} onLogout={handleLogout} />
+        <Navbar user={userProfile} onLogout={handleLogout} />
         
         <main className="main-layout__main">
           <Outlet />

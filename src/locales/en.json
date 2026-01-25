@@ -9,7 +9,8 @@
     "inventory": "Inventory",
     "equipment": "Equipment",
     "reports": "Reports",
-    "users": "Users"
+    "users": "Users",
+    "userManagement": "User Management"
   },
   "reports": {
     "title": "Reports & Analytics",
@@ -20,6 +21,41 @@
     "export": "Export Report",
     "exporting": "Exporting...",
     "exportError": "Failed to export data. Please try again.",
+    "financial": {
+      "title": "Financial Report",
+      "dateFrom": "From",
+      "dateTo": "To",
+      "expensesPeriod": "Expenses for period",
+      "warehouseValue": "Warehouse value",
+      "itemsInStock": "items in stock",
+      "paySuppliers": "To pay suppliers",
+      "itemsToOrder": "items to order",
+      "expensesByCategory": "Expenses by category",
+      "expensesDetails": "Expenses details",
+      "downloadExcel": "Download Excel",
+      "date": "Date",
+      "order": "Order",
+      "itemName": "Item name",
+      "sku": "SKU",
+      "category": "Category",
+      "quantity": "Qty",
+      "price": "Price",
+      "amount": "Amount",
+      "total": "TOTAL",
+      "needToOrder": "Items to order (low stock)",
+      "downloadForPayment": "Download for payment",
+      "supplier": "Supplier",
+      "stock": "Stock",
+      "minimum": "Minimum",
+      "toOrder": "To order",
+      "pricePerUnit": "Price per unit",
+      "toPay": "To pay",
+      "totalToPay": "TOTAL TO PAY",
+      "allStockSufficient": "✓ All items in stock are sufficient",
+      "loading": "Loading...",
+      "errorLoading": "Error loading report",
+      "retry": "Retry"
+    },
     "dateRange": {
       "to": "to"
     },
@@ -207,6 +243,8 @@
       "supplier": "Supplier"
     },
     "category": {
+      "Electronics": "Electronics",
+      "Furniture": "Furniture",
       "Electrics": "Electrics",
       "Mechanics": "Mechanics",
       "Hydraulics": "Hydraulics",

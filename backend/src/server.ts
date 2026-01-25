@@ -4,7 +4,9 @@ import helmet from 'helmet';
 import dotenv from 'dotenv';
 import { connectDB } from './config/db';
 import { languageMiddleware } from './middleware/language.middleware';
+import { authenticateToken } from './middleware/auth.middleware';
 import { errorHandler, notFoundHandler } from './middleware/errorHandler.middleware';
+import authRoutes from './routes/auth.routes';
 import inventoryRoutes from './routes/inventory.routes';
 import statsRoutes from './routes/stats.routes';
 import workOrderRoutes from './routes/workOrder.routes';
@@ -25,7 +27,7 @@ app.use(helmet());
 const corsOptions = {
   origin: process.env.NODE_ENV === 'production' 
     ? process.env.CORS_ORIGIN 
-    : 'http://localhost:5173',
+    : ['http://localhost:5173', 'http://localhost:5174'],
   credentials: true,
   optionsSuccessStatus: 200,
 };
@@ -48,12 +50,16 @@ app.get('/health', (_req, res) => {
 });
 
 // API Routes
-app.use('/api/inventory', inventoryRoutes);
-app.use('/api/stats', statsRoutes);
-app.use('/api/work-orders', workOrderRoutes);
-app.use('/api/equipment', equipmentRoutes);
-app.use('/api/users', userRoutes);
-app.use('/api/reports', reportsRoutes);
+// Auth routes (public)
+app.use('/api/auth', authRoutes);
+
+// Protected routes (require authentication)
+app.use('/api/inventory', authenticateToken, inventoryRoutes);
+app.use('/api/stats', authenticateToken, statsRoutes);
+app.use('/api/work-orders', authenticateToken, workOrderRoutes);
+app.use('/api/equipment', authenticateToken, equipmentRoutes);
+app.use('/api/users', userRoutes); // User routes have their own auth middleware
+app.use('/api/reports', authenticateToken, reportsRoutes);
 
 // 404 handler - must be after all routes
 app.use(notFoundHandler);

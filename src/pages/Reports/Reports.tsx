@@ -24,10 +24,9 @@ import { Button, Card } from '../../components/shared';
 import { Can } from '../../components/shared/Can';
 import { usePermissions } from '../../hooks/usePermissions';
 import { exportMonthlyReport } from '../../utils/csvExport';
-import axios from 'axios';
+import { apiClient } from '../../api/client';
+import { FinancialReport } from './FinancialReport';
 import './Reports.scss';
-
-const API_URL = import.meta.env.VITE_API_URL || '/api';
 
 interface ReportSummary {
   expenses: {
@@ -73,14 +72,11 @@ export const Reports: React.FC = () => {
       setLoading(true);
       setError(null);
       
-      const response = await axios.get(`${API_URL}/reports/summary`, {
-        params: {
-          startDate: dateRange.startDate,
-          endDate: dateRange.endDate
-        }
-      });
+      const data = await apiClient.get<ReportSummary>(
+        `/reports/summary?startDate=${dateRange.startDate}&endDate=${dateRange.endDate}`
+      );
       
-      setSummary(response.data);
+      setSummary(data);
     } catch (err: any) {
       console.error('Error fetching report data:', err);
       setError(err.message || 'Failed to load report data');
@@ -97,17 +93,14 @@ export const Reports: React.FC = () => {
     try {
       setExporting(true);
       
-      const response = await axios.get(`${API_URL}/reports/export`, {
-        params: {
-          startDate: dateRange.startDate,
-          endDate: dateRange.endDate
-        }
-      });
+      const data = await apiClient.get<any>(
+        `/reports/export?startDate=${dateRange.startDate}&endDate=${dateRange.endDate}`
+      );
       
       const month = new Date(dateRange.startDate).toLocaleDateString('en-US', { month: 'long' });
       const year = new Date(dateRange.startDate).getFullYear();
       
-      exportMonthlyReport(response.data, month, year);
+      exportMonthlyReport(data, month, year);
     } catch (err: any) {
       console.error('Error exporting data:', err);
       alert(t('reports.exportError'));
@@ -115,6 +108,11 @@ export const Reports: React.FC = () => {
       setExporting(false);
     }
   };
+
+  // Accountants see financial report instead of technical report
+  if (isAccountant) {
+    return <FinancialReport />;
+  }
 
   if (loading) {
     return <div className="page-loading">{t('reports.loading')}</div>;

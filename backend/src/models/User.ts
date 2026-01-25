@@ -8,23 +8,28 @@ export enum UserRole {
 }
 
 export interface IUser extends Document {
-  email: string;
+  username: string;
+  password: string;
   name: string;
   role: UserRole;
-  firebaseUid?: string;
-  photoURL?: string;
+  isActive: boolean;
   createdAt: Date;
   updatedAt: Date;
 }
 
 const UserSchema: Schema = new Schema(
   {
-    email: {
+    username: {
       type: String,
       required: true,
       unique: true,
       lowercase: true,
       trim: true
+    },
+    password: {
+      type: String,
+      required: true,
+      select: false // Don't return password by default
     },
     name: {
       type: String,
@@ -37,13 +42,10 @@ const UserSchema: Schema = new Schema(
       default: UserRole.MECHANIC,
       required: true
     },
-    firebaseUid: {
-      type: String,
-      unique: true,
-      sparse: true
-    },
-    photoURL: {
-      type: String
+    isActive: {
+      type: Boolean,
+      default: true,
+      required: true
     }
   },
   {
@@ -51,12 +53,6 @@ const UserSchema: Schema = new Schema(
   }
 );
 
-// Automatically assign admin role to specific email
-UserSchema.pre('save', function(next) {
-  if (this.email === 'vadimlavrenchuk@yahoo.com' && this.isNew) {
-    this.role = UserRole.ADMIN;
-  }
-  next();
-});
+// Remove the automatic admin assignment pre-save hook
 
 export default mongoose.model<IUser>('User', UserSchema);

@@ -1,32 +1,17 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import type { ReactNode } from 'react';
-import type { User } from 'firebase/auth';
-import {
-  signInWithEmailAndPassword,
-  signOut,
-  onAuthStateChanged,
-  createUserWithEmailAndPassword,
-  GoogleAuthProvider,
-  signInWithPopup,
-  updateProfile
-} from 'firebase/auth';
-import { auth } from '../config/firebaseConfig';
 import type { UserProfile, Permissions } from '../types/permissions';
-import { UserRole } from '../types/permissions';
 import { getPermissions } from '../utils/permissions';
 import axios from 'axios';
 
-const API_URL = import.meta.env.VITE_API_URL || '/api';
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
 interface AuthContextType {
-  currentUser: User | null;
   userProfile: UserProfile | null;
   permissions: Permissions | null;
   loading: boolean;
-  login: (email: string, password: string) => Promise<void>;
-  signup: (email: string, password: string, displayName?: string) => Promise<void>;
+  login: (username: string, password: string) => Promise<void>;
   logout: () => Promise<void>;
-  loginWithGoogle: () => Promise<void>;
   refreshUserProfile: () => Promise<void>;
 }
 
@@ -45,89 +30,95 @@ interface AuthProviderProps {
 }
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
-  const [currentUser, setCurrentUser] = useState<User | null>(null);
   const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
   const [permissions, setPermissions] = useState<Permissions | null>(null);
   const [loading, setLoading] = useState(true);
 
-  const fetchUserProfile = async (user: User) => {
+  const fetchUserProfile = async () => {
     try {
-      const response = await axios.post(`${API_URL}/users`, {
-        email: user.email,
-        name: user.displayName || user.email?.split('@')[0],
-        firebaseUid: user.uid,
-        photoURL: user.photoURL
+      const token = localStorage.getItem('auth_token');
+      if (!token) {
+        setLoading(false);
+        return;
+      }
+
+      const response = await axios.get(`${API_URL}/auth/me`, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
       });
       
       const profile = response.data;
-      setUserProfile(profile);
+      setUserProfile({
+        username: profile.username,
+        name: profile.name,
+        role: profile.role
+      });
       setPermissions(getPermissions(profile.role));
     } catch (error) {
       console.error('Error fetching user profile:', error);
-      // Set default mechanic permissions if profile fetch fails
-      setUserProfile({
-        email: user.email || '',
-        name: user.displayName || 'User',
-        role: UserRole.MECHANIC
-      });
-      setPermissions(getPermissions(UserRole.MECHANIC));
+      // Clear invalid token
+      localStorage.removeItem('auth_token');
+      setUserProfile(null);
+      setPermissions(null);
+    } finally {
+      setLoading(false);
     }
   };
 
   const refreshUserProfile = async () => {
-    if (currentUser) {
-      await fetchUserProfile(currentUser);
-    }
+    await fetchUserProfile();
   };
 
-  const login = async (email: string, password: string) => {
-    await signInWithEmailAndPassword(auth, email, password);
-  };
-
-  const signup = async (email: string, password: string, displayName?: string) => {
-    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-    if (displayName && userCredential.user) {
-      await updateProfile(userCredential.user, { displayName });
-    }
+  const login = async (username: string, password: string) => {
+    const response = await axios.post(`${API_URL}/auth/login`, {
+      username,
+      password
+    });
+    
+    const { token, user } = response.data;
+    
+    // Save token
+    localStorage.setItem('auth_token', token);
+    
+    // Set user profile
+    setUserProfile({
+      username: user.username,
+      name: user.name,
+      role: user.role
+    });
+    setPermissions(getPermissions(user.role));
   };
 
   const logout = async () => {
-    await signOut(auth);
-    setUserProfile(null);
-    setPermissions(null);
-  };
-
-  const loginWithGoogle = async () => {
-    const provider = new GoogleAuthProvider();
-    await signInWithPopup(auth, provider);
+    try {
+      const token = localStorage.getItem('auth_token');
+      if (token) {
+        await axios.post(`${API_URL}/auth/logout`, {}, {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        });
+      }
+    } catch (error) {
+      console.error('Logout error:', error);
+    } finally {
+      localStorage.removeItem('auth_token');
+      setUserProfile(null);
+      setPermissions(null);
+    }
   };
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, async (user) => {
-      setCurrentUser(user);
-      
-      if (user) {
-        await fetchUserProfile(user);
-      } else {
-        setUserProfile(null);
-        setPermissions(null);
-      }
-      
-      setLoading(false);
-    });
-
-    return unsubscribe;
+    fetchUserProfile();
   }, []);
 
   const value: AuthContextType = {
-    currentUser,
     userProfile,
     permissions,
     loading,
     login,
-    signup,
     logout,
-    loginWithGoogle,
     refreshUserProfile
   };
 

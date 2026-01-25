@@ -1,13 +1,10 @@
-/**
- * AppRouter - главный роутер приложения
- */
-
 import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { MainLayout } from '../components/layout';
 import ProtectedRoute from '../components/ProtectedRoute';
 import RoleBasedRoute from '../components/RoleBasedRoute';
 import Login from '../pages/Login/Login';
+import UserManagement from '../pages/Employees/UserManagement';
 import { 
   Dashboard, 
   WorkOrders, 
@@ -72,6 +69,16 @@ export const AppRouter: React.FC = () => {
           element={
             <RoleBasedRoute allowedRoles={[UserRole.ADMIN, UserRole.CHIEF_MECHANIC]}>
               <Employees />
+            </RoleBasedRoute>
+          } 
+        />
+        
+        {/* User Management - Admin only */}
+        <Route 
+          path="user-management" 
+          element={
+            <RoleBasedRoute allowedRoles={[UserRole.ADMIN]}>
+              <UserManagement />
             </RoleBasedRoute>
           } 
         />

@@ -9,7 +9,8 @@
     "inventory": "Ladu",
     "equipment": "Seadmed",
     "reports": "Aruanded",
-    "users": "Kasutajad"
+    "users": "Kasutajad",
+    "userManagement": "Kasutajate haldus"
   },  "reports": {
     "title": "Aruanded ja analüütika",
     "viewOnly": "Ainult vaatamiseks",
@@ -19,6 +20,41 @@
     "export": "Ekspordi aruanne",
     "exporting": "Ekspordin...",
     "exportError": "Andmete eksportimine ebaõnnestus. Palun proovi uuesti.",
+    "financial": {
+      "title": "Finantsaruanne",
+      "dateFrom": "Alates",
+      "dateTo": "Kuni",
+      "expensesPeriod": "Kulud perioodi eest",
+      "warehouseValue": "Lao väärtus",
+      "itemsInStock": "toodet laos",
+      "paySuppliers": "Maksta tarnijatele",
+      "itemsToOrder": "toodet tellida",
+      "expensesByCategory": "Kulud kategooriate kaupa",
+      "expensesDetails": "Kulude detailid",
+      "downloadExcel": "Lae alla Excel",
+      "date": "Kuupäev",
+      "order": "Tellimus",
+      "itemName": "Toote nimi",
+      "sku": "Artikkel",
+      "category": "Kategooria",
+      "quantity": "Kogus",
+      "price": "Hind",
+      "amount": "Summa",
+      "total": "KOKKU",
+      "needToOrder": "Tellida vajalik (madal laoseis)",
+      "downloadForPayment": "Lae alla makseks",
+      "supplier": "Tarnija",
+      "stock": "Laoseis",
+      "minimum": "Miinimum",
+      "toOrder": "Tellida",
+      "pricePerUnit": "Ühikuhind",
+      "toPay": "Maksta",
+      "totalToPay": "KOKKU MAKSTA",
+      "allStockSufficient": "✓ Kõik tooted laos on piisavas koguses",
+      "loading": "Laadimine...",
+      "errorLoading": "Viga aruande laadimisel",
+      "retry": "Proovi uuesti"
+    },
     "dateRange": {
       "to": "kuni"
     },
@@ -168,6 +204,8 @@
       "supplier": "Tarnija"
     },
     "category": {
+      "Electronics": "Elektroonika",
+      "Furniture": "Mööbel",
       "Electrics": "Elekter",
       "Mechanics": "Mehhaanika",
       "Hydraulics": "Hüdraulika",

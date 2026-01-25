@@ -7,7 +7,7 @@ import type { AxiosInstance, AxiosRequestConfig, AxiosError } from 'axios';
 import type { ApiResponse, ApiError } from '../types';
 
 // Production API configuration
-const API_BASE_URL = import.meta.env.VITE_API_URL || '/api';
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
 class ApiClient {
   private client: AxiosInstance;

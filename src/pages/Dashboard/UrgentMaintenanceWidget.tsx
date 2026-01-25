@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { AlertTriangle, Calendar, Clock } from 'lucide-react';
 import type { WorkOrder } from '../../types';
 import { eventBus, EVENTS } from '../../utils/eventBus';
+import { apiClient } from '../../api/client';
 import './UrgentMaintenanceWidget.scss';
 
 interface UrgentMaintenanceWidgetProps {
@@ -38,8 +39,9 @@ export const UrgentMaintenanceWidget: React.FC<UrgentMaintenanceWidgetProps> = (
 
   const fetchUrgentOrders = async () => {
     try {
-      const response = await fetch('/api/work-orders?status=pending&limit=10');
-      const data = await response.json();
+      const data = await apiClient.get<{ data: WorkOrder[]; total: number }>(
+        '/work-orders?status=pending&limit=10'
+      );
       if (data.data) {
         // Filter critical and high priority orders, sort by priority
         const urgent = data.data

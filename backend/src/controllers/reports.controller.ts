@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { WorkOrder } from '../models/WorkOrder';
+import Inventory from '../models/Inventory';
 
 interface MonthlyExpenses {
   month: string;
@@ -236,5 +237,112 @@ export const getExportData = async (req: Request, res: Response) => {
   } catch (error) {
     console.error('Error generating export data:', error);
     return res.status(500).json({ message: 'Error generating export data', error });
+  }
+};
+
+// Get financial report for accountants
+export const getFinancialReport = async (req: Request, res: Response) => {
+  try {
+    const { startDate, endDate } = req.query;
+    
+    const start = startDate 
+      ? new Date(startDate as string) 
+      : new Date(new Date().getFullYear(), new Date().getMonth(), 1);
+    
+    const end = endDate 
+      ? new Date(endDate as string) 
+      : new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0, 23, 59, 59);
+
+    // Get all work orders in period with parts used
+    const workOrders = await WorkOrder.find({
+      createdAt: { $gte: start, $lte: end }
+    }).populate('parts.inventoryId');
+
+    // Calculate parts consumption (расход)
+    const partsUsed: any[] = [];
+    const totalExpenses = { total: 0, byCategory: {} as any };
+
+    workOrders.forEach((order: any) => {
+      if (order.parts && Array.isArray(order.parts)) {
+        order.parts.forEach((part: any) => {
+          const inventory = part.inventoryId;
+          if (inventory) {
+            const unitPrice = inventory.unitPrice || 0;
+            const totalCost = (part.quantity || 0) * unitPrice;
+            
+            partsUsed.push({
+              orderNumber: order.orderNumber,
+              partName: inventory.name?.ru || inventory.name?.en || 'Unknown',
+              sku: inventory.sku,
+              quantity: part.quantity,
+              unitPrice: unitPrice,
+              totalCost: Math.round(totalCost * 100) / 100,
+              category: inventory.category,
+              usedDate: order.createdAt
+            });
+
+            totalExpenses.total += totalCost;
+            
+            const category = inventory.category || 'Other';
+            if (!totalExpenses.byCategory[category]) {
+              totalExpenses.byCategory[category] = 0;
+            }
+            totalExpenses.byCategory[category] += totalCost;
+          }
+        });
+      }
+    });
+
+    // Get current inventory status (текущие остатки)
+    const allInventory = await Inventory.find({});
+    const lowStockItems = allInventory.filter(item => item.quantity <= item.minQuantity);
+    
+    const inventoryValue = allInventory.reduce((sum, item) => {
+      return sum + (item.quantity * item.unitPrice);
+    }, 0);
+
+    // Items that need to be ordered (что нужно заказать)
+    const itemsToOrder = lowStockItems.map(item => ({
+      sku: item.sku,
+      name: item.name?.ru || item.name?.en || 'Unknown',
+      currentQuantity: item.quantity,
+      minQuantity: item.minQuantity,
+      needToOrder: Math.max(item.minQuantity * 2 - item.quantity, 0),
+      unitPrice: item.unitPrice,
+      estimatedCost: Math.round(Math.max(item.minQuantity * 2 - item.quantity, 0) * item.unitPrice * 100) / 100,
+      supplier: item.supplier || 'N/A'
+    }));
+
+    const totalOrderCost = itemsToOrder.reduce((sum, item) => sum + item.estimatedCost, 0);
+
+    const report = {
+      period: {
+        start: start.toLocaleDateString('ru-RU'),
+        end: end.toLocaleDateString('ru-RU')
+      },
+      expenses: {
+        total: Math.round(totalExpenses.total * 100) / 100,
+        byCategory: Object.entries(totalExpenses.byCategory).map(([category, amount]: [string, any]) => ({
+          category,
+          amount: Math.round(amount * 100) / 100
+        })),
+        details: partsUsed.sort((a, b) => b.totalCost - a.totalCost)
+      },
+      inventory: {
+        totalValue: Math.round(inventoryValue * 100) / 100,
+        totalItems: allInventory.length,
+        lowStockCount: lowStockItems.length
+      },
+      ordersNeeded: {
+        items: itemsToOrder.sort((a, b) => b.estimatedCost - a.estimatedCost),
+        totalCost: Math.round(totalOrderCost * 100) / 100,
+        itemCount: itemsToOrder.length
+      }
+    };
+
+    return res.json(report);
+  } catch (error) {
+    console.error('Error generating financial report:', error);
+    return res.status(500).json({ message: 'Error generating financial report', error });
   }
 };
