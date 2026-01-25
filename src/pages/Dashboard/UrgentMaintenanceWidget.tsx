@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
-import { AlertTriangle, Calendar, Clock, Gauge } from 'lucide-react';
-import type { Equipment } from '../../types';
+import { AlertTriangle, Calendar, Clock } from 'lucide-react';
+import type { WorkOrder } from '../../types';
+import { eventBus, EVENTS } from '../../utils/eventBus';
 import './UrgentMaintenanceWidget.scss';
 
 interface UrgentMaintenanceWidgetProps {
@@ -13,58 +14,81 @@ export const UrgentMaintenanceWidget: React.FC<UrgentMaintenanceWidgetProps> = (
   className = '',
 }) => {
   const { t } = useTranslation();
-  const [urgentEquipment, setUrgentEquipment] = useState<Equipment[]>([]);
+  const [urgentOrders, setUrgentOrders] = useState<WorkOrder[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetchUrgentEquipment();
+    fetchUrgentOrders();
+    
+    // Listen for work order changes
+    const handleDataChange = () => {
+      fetchUrgentOrders();
+    };
+    
+    eventBus.on(EVENTS.WORK_ORDER_CREATED, handleDataChange);
+    eventBus.on(EVENTS.WORK_ORDER_UPDATED, handleDataChange);
+    eventBus.on(EVENTS.WORK_ORDER_DELETED, handleDataChange);
+    
+    return () => {
+      eventBus.off(EVENTS.WORK_ORDER_CREATED, handleDataChange);
+      eventBus.off(EVENTS.WORK_ORDER_UPDATED, handleDataChange);
+      eventBus.off(EVENTS.WORK_ORDER_DELETED, handleDataChange);
+    };
   }, []);
 
-  const fetchUrgentEquipment = async () => {
+  const fetchUrgentOrders = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/equipment/urgent?limit=5');
+      const response = await fetch('/api/work-orders?status=pending&limit=10');
       const data = await response.json();
-      if (data.success) {
-        // Filter: show only equipment with resource <= 20%
-        const criticalEquipment = data.data.filter((item: Equipment) => {
-          const percentRemaining = item.nextServiceData?.percentRemaining;
-          return percentRemaining !== null && percentRemaining !== undefined && percentRemaining <= 20;
-        });
-        setUrgentEquipment(criticalEquipment);
+      if (data.data) {
+        // Filter critical and high priority orders, sort by priority
+        const urgent = data.data
+          .filter((order: WorkOrder) => 
+            order.priority === 'critical' || order.priority === 'high'
+          )
+          .slice(0, 5);
+        setUrgentOrders(urgent);
       }
     } catch (error) {
-      console.error('Failed to fetch urgent equipment:', error);
+      console.error('Failed to fetch urgent work orders:', error);
     } finally {
       setLoading(false);
     }
   };
 
-  const getProgressColor = (percentRemaining: number): string => {
-    if (percentRemaining < 10) return '#ef4444'; // red
-    if (percentRemaining < 25) return '#f97316'; // orange
-    if (percentRemaining < 50) return '#eab308'; // yellow
-    return '#22c55e'; // green
+  const getPriorityColor = (priority: string): string => {
+    switch (priority) {
+      case 'critical': return '#ef4444'; // red
+      case 'high': return '#f97316'; // orange
+      case 'medium': return '#eab308'; // yellow
+      default: return '#22c55e'; // green
+    }
   };
 
-  const formatTimeRemaining = (equipment: Equipment): string => {
-    const nextService = equipment.nextServiceData;
-    if (!nextService) return 'N/A';
-
-    if (nextService.daysRemaining !== null) {
-      if (nextService.daysRemaining < 0) {
-        return `Overdue by ${Math.abs(nextService.daysRemaining)} days`;
-      }
-      return `${nextService.daysRemaining} days`;
+  const formatDueDate = (dueDate?: string): string => {
+    if (!dueDate) return t('common.notSet') || 'Not set';
+    
+    const due = new Date(dueDate);
+    const now = new Date();
+    const diffTime = due.getTime() - now.getTime();
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    
+    if (diffDays < 0) {
+      return `${t('common.overdue') || 'Overdue'} ${Math.abs(diffDays)}d`;
     }
+    if (diffDays === 0) return t('common.today') || 'Today';
+    if (diffDays === 1) return t('common.tomorrow') || 'Tomorrow';
+    return `${diffDays}d`;
+  };
 
-    if (nextService.hoursRemaining !== null) {
-      if (nextService.hoursRemaining < 0) {
-        return `Overdue by ${Math.abs(nextService.hoursRemaining).toFixed(1)} hours`;
-      }
-      return `${nextService.hoursRemaining.toFixed(1)} hours`;
-    }
-
-    return 'N/A';
+  const getPriorityLabel = (priority: string): string => {
+    const labels: Record<string, string> = {
+      critical: t('workOrders.priority.critical') || 'Critical',
+      high: t('workOrders.priority.high') || 'High',
+      medium: t('workOrders.priority.medium') || 'Medium',
+      low: t('workOrders.priority.low') || 'Low',
+    };
+    return labels[priority] || priority;
   };
 
   if (loading) {
@@ -77,12 +101,12 @@ export const UrgentMaintenanceWidget: React.FC<UrgentMaintenanceWidgetProps> = (
     );
   }
 
-  if (urgentEquipment.length === 0) {
+  if (urgentOrders.length === 0) {
     return (
       <div className={`urgent-maintenance ${className}`}>
         <div className="urgent-maintenance__empty">
           <AlertTriangle size={48} />
-          <p>{t('dashboard.maintenance.noUrgent')}</p>
+          <p>{t('dashboard.maintenance.noUrgent') || 'Все оборудование в хорошем состоянии'}</p>
         </div>
       </div>
     );
@@ -93,66 +117,56 @@ export const UrgentMaintenanceWidget: React.FC<UrgentMaintenanceWidgetProps> = (
       <div className="urgent-maintenance__header">
         <AlertTriangle size={24} className="urgent-maintenance__icon" />
         <h3 className="urgent-maintenance__title">
-          {t('dashboard.maintenance.urgentTitle')}
+          {t('dashboard.maintenance.urgentTitle') || 'Срочные заказы'}
         </h3>
-        <span className="urgent-maintenance__badge">{urgentEquipment.length}</span>
+        <span className="urgent-maintenance__badge">{urgentOrders.length}</span>
       </div>
 
       <ul className="urgent-maintenance__list">
-        {urgentEquipment.map((equipment, index) => (
-          <motion.li
-            key={equipment.id}
-            className="urgent-maintenance__item"
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: index * 0.1 }}
-          >
-            <div className="urgent-maintenance__item-header">
-              <div className="urgent-maintenance__item-info">
-                <h4 className="urgent-maintenance__item-name">{equipment.name}</h4>
-                <p className="urgent-maintenance__item-meta">
-                  {equipment.type} • {equipment.location}
-                </p>
-              </div>
-              <div className="urgent-maintenance__item-time">
-                {equipment.nextServiceData?.type === 'hours' ? (
-                  <Gauge size={16} />
-                ) : (
-                  <Calendar size={16} />
-                )}
-                <span>{formatTimeRemaining(equipment)}</span>
-              </div>
-            </div>
-
-            {equipment.nextServiceData && (
-              <div className="urgent-maintenance__progress">
-                <div className="urgent-maintenance__progress-bar">
-                  <motion.div
-                    className="urgent-maintenance__progress-fill"
-                    style={{
-                      backgroundColor: getProgressColor(
-                        equipment.nextServiceData.percentRemaining
-                      ),
-                    }}
-                    initial={{ width: 0 }}
-                    animate={{ width: `${equipment.nextServiceData.percentRemaining}%` }}
-                    transition={{ duration: 0.8, delay: index * 0.1 + 0.3 }}
-                  />
+        {urgentOrders.map((order, index) => {
+          const equipmentName = typeof order.equipmentId === 'object' && order.equipmentId !== null
+            ? (order.equipmentId as any).name
+            : '';
+          
+          return (
+            <motion.li
+              key={order.id}
+              className="urgent-maintenance__item"
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: index * 0.1 }}
+            >
+              <div className="urgent-maintenance__item-header">
+                <div className="urgent-maintenance__item-info">
+                  <h4 className="urgent-maintenance__item-name">{order.title}</h4>
+                  <p className="urgent-maintenance__item-meta">
+                    {equipmentName || order.description}
+                  </p>
                 </div>
-                <span className="urgent-maintenance__progress-text">
-                  {equipment.nextServiceData.percentRemaining.toFixed(0)}% remaining
-                </span>
+                <div className="urgent-maintenance__item-time">
+                  <Calendar size={16} />
+                  <span>{formatDueDate(order.dueDate)}</span>
+                </div>
               </div>
-            )}
 
-            {equipment.currentHours !== undefined && (
-              <div className="urgent-maintenance__hours">
-                <Clock size={14} />
-                <span>Current: {equipment.currentHours.toFixed(1)}h</span>
+              <div className="urgent-maintenance__progress">
+                <div 
+                  className="urgent-maintenance__priority-badge"
+                  style={{ backgroundColor: getPriorityColor(order.priority) }}
+                >
+                  {getPriorityLabel(order.priority)}
+                </div>
+                
+                {order.estimatedHours && (
+                  <div className="urgent-maintenance__hours">
+                    <Clock size={14} />
+                    <span>{order.estimatedHours}h</span>
+                  </div>
+                )}
               </div>
-            )}
-          </motion.li>
-        ))}
+            </motion.li>
+          );
+        })}
       </ul>
     </div>
   );

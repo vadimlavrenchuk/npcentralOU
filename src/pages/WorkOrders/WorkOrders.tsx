@@ -200,7 +200,7 @@ export const WorkOrders: React.FC = () => {
                         </button>
                         <button 
                           className="action-button action-button--delete"
-                          onClick={() => handleDelete(orderId)}
+                          onClick={() => orderId && handleDelete(orderId)}
                           title={t('common.delete') || 'Delete'}
                         >
                           <Trash2 size={16} />
