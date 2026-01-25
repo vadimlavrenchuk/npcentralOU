@@ -2,7 +2,16 @@
 
 Premium MERN stack application for mechanical workshop management with multilingual support.
 
-## 🎨 Features
+## � Production
+- **Live URL:** https://verifed-est.ee
+- **Login:** admin / admin123
+
+## 📚 Documentation for AI/Deployment
+- **For AI Assistants:** See `AI_CONTEXT.md` - Quick project context
+- **For Deployment:** See `DEPLOYMENT_CONFIG.md` - Full deployment guide
+- **For General Info:** See `DEPLOYMENT.md` - Project overview
+
+## �🎨 Features
 
 - ✨ **Premium Glassmorphism UI** with framer-motion animations
 - 🌍 **4-Language Support**: Finnish, Estonian, English, Russian (i18next)
