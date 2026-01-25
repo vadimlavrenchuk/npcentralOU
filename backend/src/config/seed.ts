@@ -1,6 +1,8 @@
 import mongoose from 'mongoose';
+import bcrypt from 'bcryptjs';
 import dotenv from 'dotenv';
 import Inventory from '../models/Inventory';
+import User, { UserRole } from '../models/User';
 import { connectDB } from '../config/db';
 
 // Load environment variables
@@ -181,10 +183,31 @@ const seedDatabase = async (): Promise<void> => {
     await connectDB();
 
     // Clear existing data
-    console.log('🗑️  Clearing existing inventory data...');
+    console.log('🗑️  Clearing existing data...');
     await Inventory.deleteMany({});
+    await User.deleteMany({});
 
-    // Insert sample data
+    // Drop old indexes from User collection (removes old email_1 index)
+    try {
+      await User.collection.dropIndexes();
+      console.log('🔧 Dropped old indexes from users collection');
+    } catch (err) {
+      console.log('ℹ️  No indexes to drop or already clean');
+    }
+
+    // Create default admin user
+    console.log('👤 Creating default admin user...');
+    const hashedPassword = await bcrypt.hash('admin123', 10);
+    await User.create({
+      username: 'admin',
+      password: hashedPassword,
+      name: 'Administrator',
+      role: UserRole.ADMIN,
+      isActive: true
+    });
+    console.log('✅ Default admin created: username="admin", password="admin123"');
+
+    // Insert sample inventory data
     console.log('📦 Inserting sample inventory data...');
     await Inventory.insertMany(sampleData);
 
@@ -197,6 +220,9 @@ const seedDatabase = async (): Promise<void> => {
     // Close connection
     await mongoose.connection.close();
     console.log('\n✅ Database seeding completed');
+    console.log('\n🔐 Login credentials:');
+    console.log('   Username: admin');
+    console.log('   Password: admin123');
     process.exit(0);
   } catch (error) {
     console.error('❌ Error seeding database:', error);

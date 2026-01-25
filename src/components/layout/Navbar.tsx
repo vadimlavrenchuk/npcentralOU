@@ -8,11 +8,11 @@ import { Bell, User, LogOut } from 'lucide-react';
 import { Button } from '../shared';
 import { LanguageSwitcher } from '../shared/LanguageSwitcher';
 import { useAuth } from '../../context/AuthContext';
+import type { UserProfile } from '../../types/permissions';
 import './Navbar.scss';
-import type { User as FirebaseUser } from 'firebase/auth';
 
 interface NavbarProps {
-  user?: FirebaseUser | null;
+  user?: UserProfile | null;
   userName?: string;
   pageTitle?: string;
   onLogout?: () => void;
@@ -26,8 +26,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 }) => {
   const { t } = useTranslation();
   const { userProfile } = useAuth();
-  const displayName = user?.displayName || userName || t('common.user');
-  const photoURL = user?.photoURL;
+  const displayName = user?.name || userName || t('common.user');
   
   const getRoleBadgeClass = (role?: string) => {
     switch (role) {
@@ -63,15 +62,7 @@ export const Navbar: React.FC<NavbarProps> = ({
         </Button>
 
         <div className="navbar__user">
-          {photoURL ? (
-            <img 
-              src={photoURL} 
-              alt={displayName} 
-              className="navbar__user-avatar"
-            />
-          ) : (
-            <User size={20} />
-          )}
+          <User size={20} />
           <div className="navbar__user-info">
             <span className="navbar__user-name">{displayName}</span>
             {userProfile?.role && (

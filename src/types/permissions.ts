@@ -9,11 +9,10 @@ export type UserRole = typeof UserRole[keyof typeof UserRole];
 
 export interface UserProfile {
   _id?: string;
-  email: string;
+  username?: string;
   name: string;
   role: UserRole;
-  firebaseUid?: string;
-  photoURL?: string;
+  isActive?: boolean;
   createdAt?: Date;
   updatedAt?: Date;
 }
@@ -59,4 +58,5 @@ export interface Permissions {
   canEditEmployees: boolean;
   canDeleteEmployees: boolean;
   canManageRoles: boolean;
+  canManageUsers: boolean; // Admin only - full user CRUD
 }

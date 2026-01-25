@@ -9,7 +9,8 @@
     "inventory": "Склад",
     "equipment": "Оборудование",
     "reports": "Отчёты",
-    "users": "Сотрудники"
+    "users": "Сотрудники",
+    "userManagement": "Управление пользователями"
   },
   "reports": {
     "title": "Отчёты и аналитика",
@@ -20,6 +21,41 @@
     "export": "Экспорт отчёта",
     "exporting": "Экспорт...",
     "exportError": "Не удалось экспортировать данные. Попробуйте еще раз.",
+    "financial": {
+      "title": "Финансовый отчет",
+      "dateFrom": "С",
+      "dateTo": "По",
+      "expensesPeriod": "Расход за период",
+      "warehouseValue": "Стоимость склада",
+      "itemsInStock": "позиций на складе",
+      "paySuppliers": "К оплате поставщикам",
+      "itemsToOrder": "позиций к заказу",
+      "expensesByCategory": "Расходы по категориям",
+      "expensesDetails": "Детализация расходов",
+      "downloadExcel": "Скачать Excel",
+      "date": "Дата",
+      "order": "Заказ",
+      "itemName": "Наименование",
+      "sku": "Артикул",
+      "category": "Категория",
+      "quantity": "Кол-во",
+      "price": "Цена",
+      "amount": "Сумма",
+      "total": "ИТОГО",
+      "needToOrder": "Что нужно заказать (низкие остатки)",
+      "downloadForPayment": "Скачать для оплаты",
+      "supplier": "Поставщик",
+      "stock": "Остаток",
+      "minimum": "Минимум",
+      "toOrder": "Заказать",
+      "pricePerUnit": "Цена за ед.",
+      "toPay": "К оплате",
+      "totalToPay": "ИТОГО К ОПЛАТЕ",
+      "allStockSufficient": "✓ Все позиции на складе в достаточном количестве",
+      "loading": "Загрузка...",
+      "errorLoading": "Ошибка загрузки отчета",
+      "retry": "Повторить"
+    },
     "dateRange": {
       "to": "до"
     },
@@ -189,6 +225,8 @@
       "supplier": "Поставщик"
     },
     "category": {
+      "Electronics": "Электроника",
+      "Furniture": "Мебель",
       "Electrics": "Электрика",
       "Mechanics": "Механика",
       "Hydraulics": "Гидравлика",

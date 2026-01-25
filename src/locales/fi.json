@@ -9,7 +9,8 @@
     "inventory": "Varasto",
     "equipment": "Laitteet",
     "reports": "Raportit",
-    "users": "Käyttäjät"
+    "users": "Käyttäjät",
+    "userManagement": "Käyttäjien hallinta"
   },
   "reports": {
     "title": "Raportit ja analytiikka",
@@ -20,6 +21,41 @@
     "export": "Vie raportti",
     "exporting": "Viedään...",
     "exportError": "Tietojen vienti epäonnistui. Yritä uudelleen.",
+    "financial": {
+      "title": "Talousraportti",
+      "dateFrom": "Alkaen",
+      "dateTo": "Päättyen",
+      "expensesPeriod": "Kulut kaudelta",
+      "warehouseValue": "Varaston arvo",
+      "itemsInStock": "tuotetta varastossa",
+      "paySuppliers": "Maksettava toimittajille",
+      "itemsToOrder": "tuotetta tilattava",
+      "expensesByCategory": "Kulut kategorioittain",
+      "expensesDetails": "Kulujen yksityiskohdat",
+      "downloadExcel": "Lataa Excel",
+      "date": "Päivämäärä",
+      "order": "Tilaus",
+      "itemName": "Tuotteen nimi",
+      "sku": "Tuotenumero",
+      "category": "Kategoria",
+      "quantity": "Määrä",
+      "price": "Hinta",
+      "amount": "Summa",
+      "total": "YHTEENSÄ",
+      "needToOrder": "Tilattava (alhainen varasto)",
+      "downloadForPayment": "Lataa maksua varten",
+      "supplier": "Toimittaja",
+      "stock": "Varasto",
+      "minimum": "Minimi",
+      "toOrder": "Tilattava",
+      "pricePerUnit": "Yksikköhinta",
+      "toPay": "Maksettava",
+      "totalToPay": "YHTEENSÄ MAKSETTAVA",
+      "allStockSufficient": "✓ Kaikki tuotteet varastossa riittävästi",
+      "loading": "Ladataan...",
+      "errorLoading": "Virhe raportin lataamisessa",
+      "retry": "Yritä uudelleen"
+    },
     "dateRange": {
       "to": "to"
     },
@@ -170,6 +206,8 @@
       "supplier": "Toimittaja"
     },
     "category": {
+      "Electronics": "Elektroniikka",
+      "Furniture": "Huonekalut",
       "Electrics": "Sähkötekniikka",
       "Mechanics": "Mekaniikka",
       "Hydraulics": "Hydrauliikka",

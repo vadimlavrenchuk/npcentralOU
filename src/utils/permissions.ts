@@ -45,6 +45,7 @@ export const getPermissions = (role: UserRole): Permissions => {
         canEditEmployees: true,
         canDeleteEmployees: true,
         canManageRoles: true,
+        canManageUsers: true, // Only admin can fully manage users
       };
 
     case UserRole.CHIEF_MECHANIC:
@@ -89,6 +90,7 @@ export const getPermissions = (role: UserRole): Permissions => {
         canEditEmployees: true,
         canDeleteEmployees: true,
         canManageRoles: false, // Cannot change roles
+        canManageUsers: false, // Cannot fully manage users
       };
 
     case UserRole.ACCOUNTANT:
@@ -96,7 +98,7 @@ export const getPermissions = (role: UserRole): Permissions => {
         // Navigation - Limited
         canAccessDashboard: true,
         canAccessWorkOrders: false,
-        canAccessInventory: true, // View only
+        canAccessInventory: true,
         canAccessEquipment: false,
         canAccessReports: true,
         canAccessEmployees: false,
@@ -108,12 +110,12 @@ export const getPermissions = (role: UserRole): Permissions => {
         canDeleteWorkOrders: false,
         canAssignWorkOrders: false,
         
-        // Inventory - View only
+        // Inventory - Full access for accounting
         canViewInventory: true,
-        canAddInventory: false,
-        canEditInventory: false,
-        canDeleteInventory: false,
-        canAdjustStock: false,
+        canAddInventory: true,
+        canEditInventory: true,
+        canDeleteInventory: true,
+        canAdjustStock: true,
         
         // Equipment - No access
         canViewEquipment: false,
@@ -122,7 +124,7 @@ export const getPermissions = (role: UserRole): Permissions => {
         canDeleteEquipment: false,
         canCreateChecklists: false,
         
-        // Reports - View only
+        // Reports - View and export
         canViewFinancialReports: true,
         canViewEfficiencyReports: false,
         canExportReports: true,
@@ -133,6 +135,7 @@ export const getPermissions = (role: UserRole): Permissions => {
         canEditEmployees: false,
         canDeleteEmployees: false,
         canManageRoles: false,
+        canManageUsers: false,
       };
 
     case UserRole.MECHANIC:
@@ -177,6 +180,7 @@ export const getPermissions = (role: UserRole): Permissions => {
         canEditEmployees: false,
         canDeleteEmployees: false,
         canManageRoles: false,
+        canManageUsers: false,
       };
 
     default:

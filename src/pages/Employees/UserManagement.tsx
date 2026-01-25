@@ -1,0 +1,276 @@
+import React, { useState, useEffect } from 'react';
+import { UserRole } from '../../types/permissions';
+import { apiClient } from '../../api/client';
+import './UserManagement.scss';
+
+interface User {
+  _id: string;
+  username: string;
+  name: string;
+  role: UserRole;
+  isActive: boolean;
+  createdAt: string;
+}
+
+interface NewUserForm {
+  username: string;
+  password: string;
+  name: string;
+  role: UserRole;
+}
+
+const UserManagement: React.FC = () => {
+  const [users, setUsers] = useState<User[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
+  const [showCreateModal, setShowCreateModal] = useState(false);
+  const [newUser, setNewUser] = useState<NewUserForm>({
+    username: '',
+    password: '',
+    name: '',
+    role: UserRole.MECHANIC
+  });
+
+  useEffect(() => {
+    fetchUsers();
+  }, []);
+
+  const fetchUsers = async () => {
+    try {
+      setLoading(true);
+      const response = await apiClient.get<User[]>('/users');
+      setUsers(response);
+      setError('');
+    } catch (err: any) {
+      setError(err.response?.data?.message || 'Ошибка загрузки пользователей');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleCreateUser = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    try {
+      await apiClient.post('/users', newUser);
+      setShowCreateModal(false);
+      setNewUser({
+        username: '',
+        password: '',
+        name: '',
+        role: UserRole.MECHANIC
+      });
+      fetchUsers();
+    } catch (err: any) {
+      setError(err.response?.data?.message || 'Ошибка создания пользователя');
+    }
+  };
+
+  const handleToggleStatus = async (userId: string) => {
+    try {
+      await apiClient.patch(`/users/${userId}/toggle-status`);
+      fetchUsers();
+    } catch (err: any) {
+      setError(err.response?.data?.message || 'Ошибка изменения статуса');
+    }
+  };
+
+  const handleChangeRole = async (userId: string, newRole: UserRole) => {
+    try {
+      await apiClient.patch(`/users/${userId}/role`, { role: newRole });
+      fetchUsers();
+    } catch (err: any) {
+      setError(err.response?.data?.message || 'Ошибка изменения роли');
+    }
+  };
+
+  const handleDeleteUser = async (userId: string, username: string) => {
+    if (!confirm(`Вы уверены, что хотите удалить пользователя "${username}"?`)) {
+      return;
+    }
+
+    try {
+      await apiClient.delete(`/users/${userId}`);
+      fetchUsers();
+    } catch (err: any) {
+      setError(err.response?.data?.message || 'Ошибка удаления пользователя');
+    }
+  };
+
+  const getRoleLabel = (role: UserRole): string => {
+    const labels: Record<UserRole, string> = {
+      [UserRole.ADMIN]: 'Администратор',
+      [UserRole.CHIEF_MECHANIC]: 'Главный механик',
+      [UserRole.ACCOUNTANT]: 'Бухгалтер',
+      [UserRole.MECHANIC]: 'Механик'
+    };
+    return labels[role];
+  };
+
+  if (loading) {
+    return <div className="user-management-loading">Загрузка...</div>;
+  }
+
+  return (
+    <div className="user-management">
+      <div className="user-management-header">
+        <h1>Управление сотрудниками</h1>
+        <button 
+          className="btn-primary"
+          onClick={() => setShowCreateModal(true)}
+        >
+          + Создать пользователя
+        </button>
+      </div>
+
+      {error && (
+        <div className="alert alert-error">
+          {error}
+          <button onClick={() => setError('')}>×</button>
+        </div>
+      )}
+
+      <div className="users-table-container">
+        <table className="users-table">
+          <thead>
+            <tr>
+              <th>Логин</th>
+              <th>Имя</th>
+              <th>Роль</th>
+              <th>Статус</th>
+              <th>Дата создания</th>
+              <th>Действия</th>
+            </tr>
+          </thead>
+          <tbody>
+            {users.map((user) => (
+              <tr key={user._id}>
+                <td>{user.username}</td>
+                <td>{user.name}</td>
+                <td>
+                  <select
+                    value={user.role}
+                    onChange={(e) => handleChangeRole(user._id, e.target.value as UserRole)}
+                    className="role-select"
+                  >
+                    <option value={UserRole.ADMIN}>Администратор</option>
+                    <option value={UserRole.CHIEF_MECHANIC}>Главный механик</option>
+                    <option value={UserRole.ACCOUNTANT}>Бухгалтер</option>
+                    <option value={UserRole.MECHANIC}>Механик</option>
+                  </select>
+                </td>
+                <td>
+                  <span className={`status-badge ${user.isActive ? 'active' : 'inactive'}`}>
+                    {user.isActive ? 'Активен' : 'Заблокирован'}
+                  </span>
+                </td>
+                <td>{new Date(user.createdAt).toLocaleDateString('ru-RU')}</td>
+                <td className="actions-cell">
+                  <button
+                    className="btn-toggle"
+                    onClick={() => handleToggleStatus(user._id)}
+                    title={user.isActive ? 'Заблокировать' : 'Разблокировать'}
+                  >
+                    {user.isActive ? '🔒' : '🔓'}
+                  </button>
+                  <button
+                    className="btn-delete"
+                    onClick={() => handleDeleteUser(user._id, user.username)}
+                    title="Удалить"
+                  >
+                    🗑️
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      {showCreateModal && (
+        <div className="modal-overlay" onClick={() => setShowCreateModal(false)}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <div className="modal-header">
+              <h2>Создать нового пользователя</h2>
+              <button 
+                className="modal-close"
+                onClick={() => setShowCreateModal(false)}
+              >
+                ×
+              </button>
+            </div>
+            
+            <form onSubmit={handleCreateUser} className="user-form">
+              <div className="form-group">
+                <label htmlFor="username">Логин *</label>
+                <input
+                  id="username"
+                  type="text"
+                  value={newUser.username}
+                  onChange={(e) => setNewUser({ ...newUser, username: e.target.value })}
+                  required
+                  placeholder="username"
+                />
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="password">Пароль *</label>
+                <input
+                  id="password"
+                  type="password"
+                  value={newUser.password}
+                  onChange={(e) => setNewUser({ ...newUser, password: e.target.value })}
+                  required
+                  minLength={6}
+                  placeholder="Минимум 6 символов"
+                />
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="name">Полное имя *</label>
+                <input
+                  id="name"
+                  type="text"
+                  value={newUser.name}
+                  onChange={(e) => setNewUser({ ...newUser, name: e.target.value })}
+                  required
+                  placeholder="Иван Иванов"
+                />
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="role">Роль *</label>
+                <select
+                  id="role"
+                  value={newUser.role}
+                  onChange={(e) => setNewUser({ ...newUser, role: e.target.value as UserRole })}
+                  required
+                >
+                  <option value={UserRole.MECHANIC}>Механик</option>
+                  <option value={UserRole.ACCOUNTANT}>Бухгалтер</option>
+                  <option value={UserRole.CHIEF_MECHANIC}>Главный механик</option>
+                  <option value={UserRole.ADMIN}>Администратор</option>
+                </select>
+              </div>
+
+              <div className="modal-actions">
+                <button 
+                  type="button" 
+                  className="btn-secondary"
+                  onClick={() => setShowCreateModal(false)}
+                >
+                  Отмена
+                </button>
+                <button type="submit" className="btn-primary">
+                  Создать
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default UserManagement;

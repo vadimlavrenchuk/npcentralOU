@@ -25,6 +25,7 @@ const menuItems: SidebarItem[] = [
   { titleKey: 'nav.equipment', icon: Wrench, path: '/equipment', permission: 'canAccessEquipment' },
   { titleKey: 'nav.reports', icon: BarChart3, path: '/reports', permission: 'canAccessReports' },
   { titleKey: 'nav.users', icon: Users, path: '/employees', permission: 'canAccessEmployees' },
+  { titleKey: 'nav.userManagement', icon: Users, path: '/user-management', permission: 'canManageUsers' },
 ];
 
 const languages: Language[] = [

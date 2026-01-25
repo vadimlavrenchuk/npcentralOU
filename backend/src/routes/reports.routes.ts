@@ -1,5 +1,5 @@
 import express from 'express';
-import { getReportSummary, getExportData } from '../controllers/reports.controller';
+import { getReportSummary, getExportData, getFinancialReport } from '../controllers/reports.controller';
 
 const router = express.Router();
 
@@ -8,5 +8,8 @@ router.get('/summary', getReportSummary);
 
 // Get export data
 router.get('/export', getExportData);
+
+// Get financial report for accountants
+router.get('/financial', getFinancialReport);
 
 export default router;

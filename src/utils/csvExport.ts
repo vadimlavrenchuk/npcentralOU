@@ -137,3 +137,10 @@ export const exportMonthlyReport = (
   
   downloadCSV(formattedData, filename, headers);
 };
+
+/**
+ * Generic CSV export function
+ */
+export const exportToCSV = (data: ExportData[], filename: string): void => {
+  downloadCSV(data, filename);
+};
