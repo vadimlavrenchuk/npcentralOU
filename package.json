@@ -3,11 +3,15 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "description": "MechanicPro - Workshop Management System | Production: https://verifed-est.ee | Docs: AI_CONTEXT.md",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "deploy:frontend": "powershell -ExecutionPolicy Bypass -File .\\deploy-frontend.ps1",
+    "deploy:backend": "powershell -ExecutionPolicy Bypass -File .\\deploy-backend.ps1",
+    "deploy:all": "powershell -ExecutionPolicy Bypass -File .\\deploy-all.ps1"
   },
   "dependencies": {
     "axios": "^1.13.2",
