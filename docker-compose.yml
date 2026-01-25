@@ -1,0 +1,21 @@
+version: '3.8'
+services:
+  mechanic-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: mechanic-pro-demo
+    restart: always
+    ports:
+      - "5005:5000"
+    env_file:
+      - .env
+    environment:
+      - NODE_ENV=production
+      - PORT=5000
+      - MONGODB_URI=${MONGO_URI}
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"

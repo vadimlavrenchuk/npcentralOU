@@ -128,7 +128,18 @@
     margin-top: var(--spacing-sm);
     display: flex;
     align-items: center;
-    gap: var(--spacing-sm);
+    gap: var(--spacing-md);
+    justify-content: space-between;
+  }
+
+  &__priority-badge {
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--border-radius-sm);
+    color: white;
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-bold);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
   }
 
   &__progress-bar {
@@ -156,10 +167,7 @@
     display: flex;
     align-items: center;
     gap: var(--spacing-xs);
-    margin-top: var(--spacing-sm);
-    padding-top: var(--spacing-sm);
-    border-top: 1px solid var(--color-border);
-    font-size: var(--font-size-sm);
+    font-size: var(--font-size-xs);
     color: var(--color-text-secondary);
 
     svg {

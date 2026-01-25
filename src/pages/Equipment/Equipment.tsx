@@ -49,8 +49,8 @@ export const Equipment: React.FC = () => {
       // Refresh equipment list
       await fetchEquipment();
       // Update selected equipment
-      if (selectedEquipment && selectedEquipment._id === equipmentId) {
-        const updated = equipment.find(e => e._id === equipmentId);
+      if (selectedEquipment && selectedEquipment.id === equipmentId) {
+        const updated = equipment.find(e => e.id === equipmentId);
         if (updated) {
           setSelectedEquipment(updated);
         }
@@ -111,7 +111,7 @@ export const Equipment: React.FC = () => {
                   {item.maintenanceInterval && (
                     <Button
                       variant="ghost"
-                      size="small"
+                      size="sm"
                       icon={<Wrench size={16} />}
                       onClick={(e) => {
                         e.stopPropagation();

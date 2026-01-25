@@ -4,6 +4,7 @@
 
 import { useState, useCallback } from 'react';
 import { workOrdersService } from '../api';
+import { eventBus, EVENTS } from '../utils/eventBus';
 import type {
   WorkOrder,
   CreateWorkOrderDto,
@@ -77,6 +78,7 @@ export const useWorkOrders = (): UseWorkOrdersResult => {
       console.log('Received work order:', newWorkOrder);
       setWorkOrders((prev) => [newWorkOrder, ...(Array.isArray(prev) ? prev : [])]);
       setTotal((prev) => prev + 1);
+      eventBus.emit(EVENTS.WORK_ORDER_CREATED, newWorkOrder);
       return newWorkOrder;
     } catch (err: any) {
       setError(err.message || 'Ошибка создания заказа');
@@ -109,6 +111,7 @@ export const useWorkOrders = (): UseWorkOrdersResult => {
           return woId === id || woId === updatedId ? updated : wo;
         })
       );
+      eventBus.emit(EVENTS.WORK_ORDER_UPDATED, updated);
       return updated;
     } catch (err: any) {
       setError(err.message || 'Ошибка обновления заказа');
@@ -129,6 +132,7 @@ export const useWorkOrders = (): UseWorkOrdersResult => {
         return woId !== id;
       }));
       setTotal((prev) => prev - 1);
+      eventBus.emit(EVENTS.WORK_ORDER_DELETED, id);
       return true;
     } catch (err: any) {
       setError(err.message || 'Ошибка удаления заказа');
