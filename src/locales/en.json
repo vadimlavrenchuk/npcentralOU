@@ -314,6 +314,35 @@
     "notes": "Notes",
     "saving": "Saving..."
   },
+  "users": {
+    "title": "User Management",
+    "createUser": "Create User",
+    "createNewUser": "Create New User",
+    "username": "Username",
+    "password": "Password",
+    "name": "Name",
+    "fullName": "Full Name",
+    "fullNamePlaceholder": "John Doe",
+    "role": "Role",
+    "status": "Status",
+    "createdAt": "Created",
+    "actions": "Actions",
+    "active": "Active",
+    "blocked": "Blocked",
+    "block": "Block",
+    "unblock": "Unblock",
+    "delete": "Delete",
+    "cancel": "Cancel",
+    "create": "Create",
+    "loading": "Loading...",
+    "minChars": "Minimum 6 characters",
+    "roles": {
+      "admin": "Administrator",
+      "chief_mechanic": "Chief Mechanic",
+      "accountant": "Accountant",
+      "mechanic": "Mechanic"
+    }
+  },
   "schedule": {
     "title": "Work Schedule",
     "employee": "Employee",

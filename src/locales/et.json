@@ -273,6 +273,35 @@
     "notes": "Märkused",
     "saving": "Salvestamine..."
   },
+  "users": {
+    "title": "Kasutajate haldus",
+    "createUser": "Loo kasutaja",
+    "createNewUser": "Loo uus kasutaja",
+    "username": "Kasutajanimi",
+    "password": "Parool",
+    "name": "Nimi",
+    "fullName": "Täisnimi",
+    "fullNamePlaceholder": "Juhan Juurikas",
+    "role": "Roll",
+    "status": "Staatus",
+    "createdAt": "Loodud",
+    "actions": "Tegevused",
+    "active": "Aktiivne",
+    "blocked": "Blokeeritud",
+    "block": "Blokeeri",
+    "unblock": "Eemalda blokeering",
+    "delete": "Kustuta",
+    "cancel": "Tühista",
+    "create": "Loo",
+    "loading": "Laadimine...",
+    "minChars": "Vähemalt 6 tähemärki",
+    "roles": {
+      "admin": "Administraator",
+      "chief_mechanic": "Peamehaanik",
+      "accountant": "Raamatupidaja",
+      "mechanic": "Mehaanik"
+    }
+  },
   "schedule": {
     "title": "Töögraafik",
     "employee": "Töötaja",

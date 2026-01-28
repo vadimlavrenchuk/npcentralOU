@@ -294,6 +294,35 @@
     "notes": "Примечания",
     "saving": "Сохранение..."
   },
+  "users": {
+    "title": "Управление сотрудниками",
+    "createUser": "Создать пользователя",
+    "createNewUser": "Создать нового пользователя",
+    "username": "Логин",
+    "password": "Пароль",
+    "name": "Имя",
+    "fullName": "Полное имя",
+    "fullNamePlaceholder": "Иван Иванов",
+    "role": "Роль",
+    "status": "Статус",
+    "createdAt": "Дата создания",
+    "actions": "Действия",
+    "active": "Активен",
+    "blocked": "Заблокирован",
+    "block": "Заблокировать",
+    "unblock": "Разблокировать",
+    "delete": "Удалить",
+    "cancel": "Отмена",
+    "create": "Создать",
+    "loading": "Загрузка...",
+    "minChars": "Минимум 6 символов",
+    "roles": {
+      "admin": "Администратор",
+      "chief_mechanic": "Главный механик",
+      "accountant": "Бухгалтер",
+      "mechanic": "Механик"
+    }
+  },
   "schedule": {
     "title": "График работы",
     "employee": "Сотрудник",
