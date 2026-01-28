@@ -27,7 +27,10 @@ export const authenticateToken = async (
     const authHeader = req.headers.authorization;
     const token = authHeader && authHeader.split(' ')[1];
 
+    console.log('🔐 Auth check for:', req.method, req.path, '| Token:', token ? 'present' : 'missing');
+
     if (!token) {
+      console.log('❌ No token provided');
       res.status(401).json({ message: 'Отсутствует токен авторизации' });
       return;
     }
@@ -42,11 +45,13 @@ export const authenticateToken = async (
     // Check if user still exists and is active
     const user = await User.findById(decoded.id);
     if (!user) {
+      console.log('❌ User not found:', decoded.username);
       res.status(401).json({ message: 'Пользователь не найден' });
       return;
     }
 
     if (!user.isActive) {
+      console.log('❌ User inactive:', decoded.username);
       res.status(403).json({ message: 'Аккаунт заблокирован' });
       return;
     }
@@ -58,8 +63,10 @@ export const authenticateToken = async (
       role: decoded.role
     };
 
+    console.log('✅ Auth success:', decoded.username, '|', decoded.role);
     next();
   } catch (error) {
+    console.log('❌ Auth error:', error instanceof jwt.JsonWebTokenError ? error.message : 'Unknown');
     if (error instanceof jwt.JsonWebTokenError) {
       res.status(403).json({ message: 'Недействительный токен' });
       return;

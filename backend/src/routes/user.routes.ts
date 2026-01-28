@@ -11,25 +11,17 @@ import { authenticateToken, requireAdmin } from '../middleware/auth.middleware';
 
 const router = express.Router();
 
-// All routes require authentication and admin role
-router.use(authenticateToken, requireAdmin);
+// All routes require authentication
+router.use(authenticateToken);
 
-// Get all users
+// Get all users - доступно всем (для dropdown в Schedule)
 router.get('/', getAllUsers);
 
-// Create new user
-router.post('/', createUser);
-
-// Update user
-router.patch('/:id', updateUser);
-
-// Update user role
-router.patch('/:id/role', updateUserRole);
-
-// Toggle user active status
-router.patch('/:id/toggle-status', toggleUserStatus);
-
-// Delete user
-router.delete('/:id', deleteUser);
+// Create, update, delete - только для admin
+router.post('/', requireAdmin, createUser);
+router.patch('/:id', requireAdmin, updateUser);
+router.patch('/:id/role', requireAdmin, updateUserRole);
+router.patch('/:id/toggle-status', requireAdmin, toggleUserStatus);
+router.delete('/:id', requireAdmin, deleteUser);
 
 export default router;

@@ -8,7 +8,8 @@
     "start": "node dist/server.js",
     "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
     "prod": "npm run build && npm start",
-    "seed": "ts-node-dev src/config/seed.ts"
+    "seed": "ts-node-dev src/config/seed.ts",
+    "seed:schedule": "ts-node-dev src/config/seedSchedule.ts"
   },
   "keywords": [
     "express",

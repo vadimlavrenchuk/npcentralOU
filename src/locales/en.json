@@ -10,6 +10,7 @@
     "equipment": "Equipment",
     "reports": "Reports",
     "users": "Users",
+    "schedule": "Schedule",
     "userManagement": "User Management"
   },
   "reports": {
@@ -312,5 +313,40 @@
     "language": "Language",
     "notes": "Notes",
     "saving": "Saving..."
+  },
+  "schedule": {
+    "title": "Work Schedule",
+    "employee": "Employee",
+    "allRoles": "All roles",
+    "prev": "Prev",
+    "next": "Next",
+    "assignShift": "Assign Shift",
+    "cancel": "Cancel",
+    "save": "Save",
+    "entryType": "Entry Type",
+    "shiftTime": "Shift Time",
+    "note": "Note",
+    "downloadReport": "Download Report (Excel)",
+    "totalHours": "Total Hours",
+    "overtime": "Overtime",
+    "weekendHours": "Weekend Hours",
+    "holidayHours": "Holiday Hours (x2)",
+    "addEntry": "Add Entry",
+    "editEntry": "Edit Entry",
+    "confirmDelete": "Delete this entry?",
+    "user": "Employee",
+    "selectUser": "Select employee",
+    "startDate": "Start Date",
+    "endDate": "End Date",
+    "shiftHours": "Shift Hours",
+    "notes": "Notes",
+    "prevMonth": "Previous Month",
+    "nextMonth": "Next Month",
+    "type": {
+      "label": "Entry Type",
+      "shift": "Shift",
+      "vacation": "Vacation",
+      "sick_leave": "Sick Leave"
+    }
   }
 }

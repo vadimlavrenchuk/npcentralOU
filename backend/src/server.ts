@@ -13,6 +13,7 @@ import workOrderRoutes from './routes/workOrder.routes';
 import equipmentRoutes from './routes/equipment.routes';
 import userRoutes from './routes/user.routes';
 import reportsRoutes from './routes/reports.routes';
+import scheduleRoutes from './routes/schedule.routes';
 
 // Load environment variables
 dotenv.config();
@@ -60,6 +61,7 @@ app.use('/api/work-orders', authenticateToken, workOrderRoutes);
 app.use('/api/equipment', authenticateToken, equipmentRoutes);
 app.use('/api/users', userRoutes); // User routes have their own auth middleware
 app.use('/api/reports', authenticateToken, reportsRoutes);
+app.use('/api/schedules', scheduleRoutes); // Schedule routes have their own auth middleware
 
 // 404 handler - must be after all routes
 app.use(notFoundHandler);

@@ -13,6 +13,7 @@ export const getPermissions = (role: UserRole): Permissions => {
         canAccessReports: true,
         canAccessEmployees: true,
         canAccessSettings: true,
+        canAccessSchedule: true,
         
         // Work Orders - Full access
         canCreateWorkOrders: true,
@@ -46,6 +47,10 @@ export const getPermissions = (role: UserRole): Permissions => {
         canDeleteEmployees: true,
         canManageRoles: true,
         canManageUsers: true, // Only admin can fully manage users
+        
+        // Schedule - Full access
+        canViewSchedule: true,
+        canEditSchedule: true, // Only admin can edit
       };
 
     case UserRole.CHIEF_MECHANIC:
@@ -58,6 +63,7 @@ export const getPermissions = (role: UserRole): Permissions => {
         canAccessReports: true,
         canAccessEmployees: true,
         canAccessSettings: false,
+        canAccessSchedule: true,
         
         // Work Orders - Full access
         canCreateWorkOrders: true,
@@ -91,6 +97,10 @@ export const getPermissions = (role: UserRole): Permissions => {
         canDeleteEmployees: true,
         canManageRoles: false, // Cannot change roles
         canManageUsers: false, // Cannot fully manage users
+        
+        // Schedule - Read only
+        canViewSchedule: true,
+        canEditSchedule: false,
       };
 
     case UserRole.ACCOUNTANT:
@@ -103,6 +113,7 @@ export const getPermissions = (role: UserRole): Permissions => {
         canAccessReports: true,
         canAccessEmployees: false,
         canAccessSettings: false,
+        canAccessSchedule: true,
         
         // Work Orders - No access
         canCreateWorkOrders: false,
@@ -136,6 +147,10 @@ export const getPermissions = (role: UserRole): Permissions => {
         canDeleteEmployees: false,
         canManageRoles: false,
         canManageUsers: false,
+        
+        // Schedule - Read only
+        canViewSchedule: true,
+        canEditSchedule: false,
       };
 
     case UserRole.MECHANIC:
@@ -148,6 +163,7 @@ export const getPermissions = (role: UserRole): Permissions => {
         canAccessReports: false,
         canAccessEmployees: false,
         canAccessSettings: false,
+        canAccessSchedule: true,
         
         // Work Orders - Create and view own
         canCreateWorkOrders: true,
@@ -181,6 +197,10 @@ export const getPermissions = (role: UserRole): Permissions => {
         canDeleteEmployees: false,
         canManageRoles: false,
         canManageUsers: false,
+        
+        // Schedule - Read only
+        canViewSchedule: true,
+        canEditSchedule: false,
       };
 
     default:

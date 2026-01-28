@@ -11,7 +11,7 @@ import {
   Equipment, 
   Inventory,
   Reports,
-  Employees
+  Schedule
 } from '../pages';
 import { UserRole } from '../types/permissions';
 
@@ -63,15 +63,8 @@ export const AppRouter: React.FC = () => {
           } 
         />
         
-        {/* Employees - Admin and Chief Mechanic only */}
-        <Route 
-          path="employees" 
-          element={
-            <RoleBasedRoute allowedRoles={[UserRole.ADMIN, UserRole.CHIEF_MECHANIC]}>
-              <Employees />
-            </RoleBasedRoute>
-          } 
-        />
+        {/* Schedule - All roles (read-only for non-admins) */}
+        <Route path="schedule" element={<Schedule />} />
         
         {/* User Management - Admin only */}
         <Route 
@@ -82,7 +75,7 @@ export const AppRouter: React.FC = () => {
             </RoleBasedRoute>
           } 
         />
-        <Route path="users" element={<Navigate to="/employees" replace />} />
+        <Route path="users" element={<Navigate to="/user-management" replace />} />
         
         {/* 404 - redirect to dashboard */}
         <Route path="*" element={<Navigate to="/" replace />} />

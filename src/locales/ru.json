@@ -10,6 +10,7 @@
     "equipment": "Оборудование",
     "reports": "Отчёты",
     "users": "Сотрудники",
+    "schedule": "График",
     "userManagement": "Управление пользователями"
   },
   "reports": {
@@ -292,5 +293,40 @@
     "language": "Язык",
     "notes": "Примечания",
     "saving": "Сохранение..."
+  },
+  "schedule": {
+    "title": "График работы",
+    "employee": "Сотрудник",
+    "allRoles": "Все роли",
+    "prev": "Пред.",
+    "next": "След.",
+    "assignShift": "Назначить смену",
+    "cancel": "Отмена",
+    "save": "Сохранить",
+    "entryType": "Тип записи",
+    "shiftTime": "Время смены",
+    "note": "Примечание",
+    "downloadReport": "Скачать отчет (Excel)",
+    "totalHours": "Всего часов",
+    "overtime": "Сверхурочные",
+    "weekendHours": "Выходные",
+    "holidayHours": "Праздники (x2)",
+    "addEntry": "Добавить запись",
+    "editEntry": "Редактировать запись",
+    "confirmDelete": "Удалить эту запись?",
+    "user": "Сотрудник",
+    "selectUser": "Выберите сотрудника",
+    "startDate": "Дата начала",
+    "endDate": "Дата окончания",
+    "shiftHours": "Время смены",
+    "notes": "Примечания",
+    "prevMonth": "Предыдущий месяц",
+    "nextMonth": "Следующий месяц",
+    "type": {
+      "label": "Тип записи",
+      "shift": "Смена",
+      "vacation": "Отпуск",
+      "sick_leave": "Больничный"
+    }
   }
 }

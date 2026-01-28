@@ -13,6 +13,8 @@ export interface IUser extends Document {
   name: string;
   role: UserRole;
   isActive: boolean;
+  phoneNumber?: string;
+  emergencyContact?: string;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -46,6 +48,14 @@ const UserSchema: Schema = new Schema(
       type: Boolean,
       default: true,
       required: true
+    },
+    phoneNumber: {
+      type: String,
+      trim: true
+    },
+    emergencyContact: {
+      type: String,
+      trim: true
     }
   },
   {
