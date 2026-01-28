@@ -275,6 +275,35 @@
     "notes": "Huomautukset",
     "saving": "Tallennetaan..."
   },
+  "users": {
+    "title": "Käyttäjien hallinta",
+    "createUser": "Luo käyttäjä",
+    "createNewUser": "Luo uusi käyttäjä",
+    "username": "Käyttäjätunnus",
+    "password": "Salasana",
+    "name": "Nimi",
+    "fullName": "Koko nimi",
+    "fullNamePlaceholder": "Matti Meikäläinen",
+    "role": "Rooli",
+    "status": "Tila",
+    "createdAt": "Luotu",
+    "actions": "Toiminnot",
+    "active": "Aktiivinen",
+    "blocked": "Estetty",
+    "block": "Estä",
+    "unblock": "Poista esto",
+    "delete": "Poista",
+    "cancel": "Peruuta",
+    "create": "Luo",
+    "loading": "Ladataan...",
+    "minChars": "Vähintään 6 merkkiä",
+    "roles": {
+      "admin": "Järjestelmänvalvoja",
+      "chief_mechanic": "Päämekaanikko",
+      "accountant": "Kirjanpitäjä",
+      "mechanic": "Mekaanikko"
+    }
+  },
   "schedule": {
     "title": "Työaikataulu",
     "addEntry": "Lisää merkintä",

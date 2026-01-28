@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { UserRole } from '../../types/permissions';
 import { apiClient } from '../../api/client';
 import './UserManagement.scss';
@@ -20,6 +21,7 @@ interface NewUserForm {
 }
 
 const UserManagement: React.FC = () => {
+  const { t } = useTranslation();
   const [users, setUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -99,27 +101,27 @@ const UserManagement: React.FC = () => {
 
   const getRoleLabel = (role: UserRole): string => {
     const labels: Record<UserRole, string> = {
-      [UserRole.ADMIN]: 'Администратор',
-      [UserRole.CHIEF_MECHANIC]: 'Главный механик',
-      [UserRole.ACCOUNTANT]: 'Бухгалтер',
-      [UserRole.MECHANIC]: 'Механик'
+      [UserRole.ADMIN]: t('users.roles.admin') || 'Администратор',
+      [UserRole.CHIEF_MECHANIC]: t('users.roles.chief_mechanic') || 'Главный механик',
+      [UserRole.ACCOUNTANT]: t('users.roles.accountant') || 'Бухгалтер',
+      [UserRole.MECHANIC]: t('users.roles.mechanic') || 'Механик'
     };
     return labels[role];
   };
 
   if (loading) {
-    return <div className="user-management-loading">Загрузка...</div>;
+    return <div className="user-management-loading">{t('users.loading') || 'Загрузка...'}</div>;
   }
 
   return (
     <div className="user-management">
       <div className="user-management-header">
-        <h1>Управление сотрудниками</h1>
+        <h1>{t('users.title') || 'Управление сотрудниками'}</h1>
         <button 
           className="btn-primary"
           onClick={() => setShowCreateModal(true)}
         >
-          + Создать пользователя
+          + {t('users.createUser') || 'Создать пользователя'}
         </button>
       </div>
 
@@ -134,12 +136,12 @@ const UserManagement: React.FC = () => {
         <table className="users-table">
           <thead>
             <tr>
-              <th>Логин</th>
-              <th>Имя</th>
-              <th>Роль</th>
-              <th>Статус</th>
-              <th>Дата создания</th>
-              <th>Действия</th>
+              <th>{t('users.username') || 'Логин'}</th>
+              <th>{t('users.name') || 'Имя'}</th>
+              <th>{t('users.role') || 'Роль'}</th>
+              <th>{t('users.status') || 'Статус'}</th>
+              <th>{t('users.createdAt') || 'Дата создания'}</th>
+              <th>{t('users.actions') || 'Действия'}</th>
             </tr>
           </thead>
           <tbody>
@@ -153,15 +155,15 @@ const UserManagement: React.FC = () => {
                     onChange={(e) => handleChangeRole(user._id, e.target.value as UserRole)}
                     className="role-select"
                   >
-                    <option value={UserRole.ADMIN}>Администратор</option>
-                    <option value={UserRole.CHIEF_MECHANIC}>Главный механик</option>
-                    <option value={UserRole.ACCOUNTANT}>Бухгалтер</option>
-                    <option value={UserRole.MECHANIC}>Механик</option>
+                    <option value={UserRole.ADMIN}>{t('users.roles.admin') || 'Администратор'}</option>
+                    <option value={UserRole.CHIEF_MECHANIC}>{t('users.roles.chief_mechanic') || 'Главный механик'}</option>
+                    <option value={UserRole.ACCOUNTANT}>{t('users.roles.accountant') || 'Бухгалтер'}</option>
+                    <option value={UserRole.MECHANIC}>{t('users.roles.mechanic') || 'Механик'}</option>
                   </select>
                 </td>
                 <td>
                   <span className={`status-badge ${user.isActive ? 'active' : 'inactive'}`}>
-                    {user.isActive ? 'Активен' : 'Заблокирован'}
+                    {user.isActive ? t('users.active') || 'Активен' : t('users.blocked') || 'Заблокирован'}
                   </span>
                 </td>
                 <td>{new Date(user.createdAt).toLocaleDateString('ru-RU')}</td>
@@ -169,14 +171,14 @@ const UserManagement: React.FC = () => {
                   <button
                     className="btn-toggle"
                     onClick={() => handleToggleStatus(user._id)}
-                    title={user.isActive ? 'Заблокировать' : 'Разблокировать'}
+                    title={user.isActive ? t('users.block') || 'Заблокировать' : t('users.unblock') || 'Разблокировать'}
                   >
                     {user.isActive ? '🔒' : '🔓'}
                   </button>
                   <button
                     className="btn-delete"
                     onClick={() => handleDeleteUser(user._id, user.username)}
-                    title="Удалить"
+                    title={t('users.delete') || 'Удалить'}
                   >
                     🗑️
                   </button>
@@ -191,7 +193,7 @@ const UserManagement: React.FC = () => {
         <div className="modal-overlay" onClick={() => setShowCreateModal(false)}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
             <div className="modal-header">
-              <h2>Создать нового пользователя</h2>
+              <h2>{t('users.createNewUser') || 'Создать нового пользователя'}</h2>
               <button 
                 className="modal-close"
                 onClick={() => setShowCreateModal(false)}
@@ -202,7 +204,7 @@ const UserManagement: React.FC = () => {
             
             <form onSubmit={handleCreateUser} className="user-form">
               <div className="form-group">
-                <label htmlFor="username">Логин *</label>
+                <label htmlFor="username">{t('users.username') || 'Логин'} *</label>
                 <input
                   id="username"
                   type="text"
@@ -214,7 +216,7 @@ const UserManagement: React.FC = () => {
               </div>
 
               <div className="form-group">
-                <label htmlFor="password">Пароль *</label>
+                <label htmlFor="password">{t('users.password') || 'Пароль'} *</label>
                 <input
                   id="password"
                   type="password"
@@ -222,34 +224,34 @@ const UserManagement: React.FC = () => {
                   onChange={(e) => setNewUser({ ...newUser, password: e.target.value })}
                   required
                   minLength={6}
-                  placeholder="Минимум 6 символов"
+                  placeholder={t('users.minChars') || 'Минимум 6 символов'}
                 />
               </div>
 
               <div className="form-group">
-                <label htmlFor="name">Полное имя *</label>
+                <label htmlFor="name">{t('users.fullName') || 'Полное имя'} *</label>
                 <input
                   id="name"
                   type="text"
                   value={newUser.name}
                   onChange={(e) => setNewUser({ ...newUser, name: e.target.value })}
                   required
-                  placeholder="Иван Иванов"
+                  placeholder={t('users.fullNamePlaceholder') || 'Иван Иванов'}
                 />
               </div>
 
               <div className="form-group">
-                <label htmlFor="role">Роль *</label>
+                <label htmlFor="role">{t('users.role') || 'Роль'} *</label>
                 <select
                   id="role"
                   value={newUser.role}
                   onChange={(e) => setNewUser({ ...newUser, role: e.target.value as UserRole })}
                   required
                 >
-                  <option value={UserRole.MECHANIC}>Механик</option>
-                  <option value={UserRole.ACCOUNTANT}>Бухгалтер</option>
-                  <option value={UserRole.CHIEF_MECHANIC}>Главный механик</option>
-                  <option value={UserRole.ADMIN}>Администратор</option>
+                  <option value={UserRole.MECHANIC}>{t('users.roles.mechanic') || 'Механик'}</option>
+                  <option value={UserRole.ACCOUNTANT}>{t('users.roles.accountant') || 'Бухгалтер'}</option>
+                  <option value={UserRole.CHIEF_MECHANIC}>{t('users.roles.chief_mechanic') || 'Главный механик'}</option>
+                  <option value={UserRole.ADMIN}>{t('users.roles.admin') || 'Администратор'}</option>
                 </select>
               </div>
 
@@ -259,10 +261,10 @@ const UserManagement: React.FC = () => {
                   className="btn-secondary"
                   onClick={() => setShowCreateModal(false)}
                 >
-                  Отмена
+                  {t('users.cancel') || 'Отмена'}
                 </button>
                 <button type="submit" className="btn-primary">
-                  Создать
+                  {t('users.create') || 'Создать'}
                 </button>
               </div>
             </form>
