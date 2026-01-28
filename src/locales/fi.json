@@ -10,6 +10,7 @@
     "equipment": "Laitteet",
     "reports": "Raportit",
     "users": "Käyttäjät",
+    "schedule": "Aikataulu",
     "userManagement": "Käyttäjien hallinta"
   },
   "reports": {
@@ -273,5 +274,40 @@
     "language": "Kieli",
     "notes": "Huomautukset",
     "saving": "Tallennetaan..."
+  },
+  "schedule": {
+    "title": "Työaikataulu",
+    "addEntry": "Lisää merkintä",
+    "editEntry": "Muokkaa merkintää",
+    "confirmDelete": "Poista tämä merkintä?",
+    "user": "Työntekijä",
+    "selectUser": "Valitse työntekijä",
+    "employee": "Työntekijä",
+    "allRoles": "Kaikki roolit",
+    "prev": "Edellinen",
+    "next": "Seuraava",
+    "assignShift": "Määritä vuoro",
+    "cancel": "Peruuta",
+    "save": "Tallenna",
+    "entryType": "Merkinnän tyyppi",
+    "shiftTime": "Vuoroaika",
+    "startDate": "Aloituspäivä",
+    "endDate": "Päättymispäivä",
+    "shiftHours": "Vuoroajat",
+    "notes": "Huomautukset",
+    "note": "Huomautus",
+    "prevMonth": "Edellinen kuukausi",
+    "nextMonth": "Seuraava kuukausi",
+    "downloadReport": "Lataa raportti (Excel)",
+    "totalHours": "Tunnit yhteensä",
+    "overtime": "Ylityö",
+    "weekendHours": "Viikonlopputunnit",
+    "holidayHours": "Pyhien tunnit (x2)",
+    "type": {
+      "label": "Merkinnän tyyppi",
+      "shift": "Vuoro",
+      "vacation": "Loma",
+      "sick_leave": "Sairausloma"
+    }
   }
 }

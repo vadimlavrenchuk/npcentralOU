@@ -10,6 +10,7 @@
     "equipment": "Seadmed",
     "reports": "Aruanded",
     "users": "Kasutajad",
+    "schedule": "Graafik",
     "userManagement": "Kasutajate haldus"
   },  "reports": {
     "title": "Aruanded ja analüütika",
@@ -271,5 +272,40 @@
     "language": "Keel",
     "notes": "Märkused",
     "saving": "Salvestamine..."
+  },
+  "schedule": {
+    "title": "Töögraafik",
+    "employee": "Töötaja",
+    "allRoles": "Kõik rollid",
+    "prev": "Eelmine",
+    "next": "Järgmine",
+    "assignShift": "Määra vahetus",
+    "cancel": "Tühista",
+    "save": "Salvesta",
+    "entryType": "Kande tüüp",
+    "shiftTime": "Vahetuse aeg",
+    "note": "Märkus",
+    "downloadReport": "Laadi aruanne (Excel)",
+    "totalHours": "Tunnid kokku",
+    "overtime": "Ületöö",
+    "weekendHours": "Nädalavahetuse tunnid",
+    "holidayHours": "Pühade tunnid (x2)",
+    "addEntry": "Lisa kanne",
+    "editEntry": "Muuda kannet",
+    "confirmDelete": "Kustutada see kanne?",
+    "user": "Töötaja",
+    "selectUser": "Vali töötaja",
+    "startDate": "Alguskuupäev",
+    "endDate": "Lõppkuupäev",
+    "shiftHours": "Vahetuse tunnid",
+    "notes": "Märkused",
+    "prevMonth": "Eelmine kuu",
+    "nextMonth": "Järgmine kuu",
+    "type": {
+      "label": "Kande tüüp",
+      "shift": "Vahetus",
+      "vacation": "Puhkus",
+      "sick_leave": "Haigusleht"
+    }
   }
 }

@@ -26,6 +26,7 @@ export interface Permissions {
   canAccessReports: boolean;
   canAccessEmployees: boolean;
   canAccessSettings: boolean;
+  canAccessSchedule: boolean;
   
   // Work Orders
   canCreateWorkOrders: boolean;
@@ -59,4 +60,8 @@ export interface Permissions {
   canDeleteEmployees: boolean;
   canManageRoles: boolean;
   canManageUsers: boolean; // Admin only - full user CRUD
+  
+  // Schedule
+  canViewSchedule: boolean;
+  canEditSchedule: boolean; // Admin only
 }

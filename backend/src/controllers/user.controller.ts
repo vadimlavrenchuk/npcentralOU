@@ -3,9 +3,11 @@ import bcrypt from 'bcryptjs';
 import User, { UserRole } from '../models/User';
 
 // Get all users (Admin only)
-export const getAllUsers = async (_req: Request, res: Response): Promise<void> => {
+export const getAllUsers = async (req: Request, res: Response): Promise<void> => {
   try {
+    console.log('📋 GET /api/users - User:', req.user?.username, 'Role:', req.user?.role);
     const users = await User.find().sort({ createdAt: -1 });
+    console.log('✅ Found', users.length, 'users');
     res.json(users);
   } catch (error) {
     console.error('Error fetching users:', error);

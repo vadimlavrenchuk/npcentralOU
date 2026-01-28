@@ -12,7 +12,8 @@ import {
   Wrench, 
   BarChart3,
   Users,
-  Globe
+  Globe,
+  Calendar
 } from 'lucide-react';
 import type { SidebarItem, Language } from '../../types';
 import { usePermissions } from '../../hooks/usePermissions';
@@ -24,7 +25,7 @@ const menuItems: SidebarItem[] = [
   { titleKey: 'nav.inventory', icon: Package, path: '/inventory', permission: 'canAccessInventory' },
   { titleKey: 'nav.equipment', icon: Wrench, path: '/equipment', permission: 'canAccessEquipment' },
   { titleKey: 'nav.reports', icon: BarChart3, path: '/reports', permission: 'canAccessReports' },
-  { titleKey: 'nav.users', icon: Users, path: '/employees', permission: 'canAccessEmployees' },
+  { titleKey: 'nav.schedule', icon: Calendar, path: '/schedule', permission: 'canAccessSchedule' },
   { titleKey: 'nav.userManagement', icon: Users, path: '/user-management', permission: 'canManageUsers' },
 ];
 
