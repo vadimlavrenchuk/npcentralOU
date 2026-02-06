@@ -14,8 +14,8 @@ Write-Host "✅ Резервная копия создана: $backupName" -Fore
 
 # Список паролей для удаления
 $passwords = @(
-    "REDACTED_PASSWORD"
-    "REDACTED_PASSWORD"
+    "REDACTED_PASSWORD_1"
+    "REDACTED_PASSWORD_2"
 )
 
 Write-Host "`n🧹 Очистка истории Git..." -ForegroundColor Cyan
@@ -50,7 +50,7 @@ git gc --prune=now --aggressive
 
 Write-Host "`n✅ История Git очищена!" -ForegroundColor Green
 Write-Host "`n⚠️  ВАЖНО: Теперь нужно:" -ForegroundColor Yellow
-Write-Host "1. Проверить, что все работает: git log --all -p -S 'REDACTED_PASSWORD'" -ForegroundColor White
+Write-Host "1. Проверить, что все работает: git log --all -p -S 'PASSWORD'" -ForegroundColor White
 Write-Host "2. Force push в remote: git push origin --force --all" -ForegroundColor White
 Write-Host "3. Force push тегов: git push origin --force --tags" -ForegroundColor White
 Write-Host "`n   ⚠️  Это удалит старую историю на GitHub!" -ForegroundColor Red

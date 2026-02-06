@@ -17,8 +17,8 @@ if ($status) {
 # Создаем файл с паролями для замены
 $passwordFile = "passwords-to-remove.txt"
 @"
-REDACTED_PASSWORD
-REDACTED_PASSWORD
+REDACTED_PASSWORD_1
+REDACTED_PASSWORD_2
 "@ | Set-Content $passwordFile
 
 Write-Host "📝 Создан файл с паролями: $passwordFile" -ForegroundColor Green
@@ -91,8 +91,8 @@ try {
                 try {
                     `$content = Get-Content `$_.FullName -Raw -Encoding UTF8 -ErrorAction Stop
                     `$modified = `$content
-                    `$modified = `$modified -replace 'REDACTED_PASSWORD', 'REDACTED_PASSWORD'
-                    `$modified = `$modified -replace 'REDACTED_PASSWORD', 'REDACTED_PASSWORD'
+                    `$modified = `$modified -replace 'PASSWORD_PATTERN_1', 'REDACTED_PASSWORD'
+                    `$modified = `$modified -replace 'PASSWORD_PATTERN_2', 'REDACTED_PASSWORD'
                     if (`$content -ne `$modified) {
                         [System.IO.File]::WriteAllText(`$_.FullName, `$modified, [System.Text.UTF8Encoding](`$false))
                     }
