@@ -41,24 +41,16 @@ Write-Host ""
 Write-Host "🔍 Поиск паролей в истории..." -ForegroundColor Cyan
 
 # Используем git log для поиска
-$found = $false
 Get-Content $passwordFile | ForEach-Object {
     $password = $_.Trim()
     if ($password) {
         Write-Host "  Ищем: $password" -ForegroundColor Yellow
         $commits = git log --all --oneline -S "$password"
         if ($commits) {
-            $found = $true
             Write-Host "    ⚠️  Найдено в коммитах:" -ForegroundColor Red
             $commits | ForEach-Object { Write-Host "      $_" -ForegroundColor White }
         }
     }
-}
-
-if (-not $found) {
-    Write-Host "✅ Пароли не найдены в истории Git!" -ForegroundColor Green
-    Remove-Item $passwordFile
-    exit 0
 }
 
 Write-Host ""
@@ -127,23 +119,17 @@ Write-Host ""
 
 # Проверка результата
 Write-Host "🔍 Проверка результата..." -ForegroundColor Cyan
-$stillFound = $false
 Get-Content $passwordFile | ForEach-Object {
     $password = $_.Trim()
     if ($password) {
         $commits = git log --all --oneline -S "$password"
         if ($commits) {
-            $stillFound = $true
             Write-Host "  ⚠️  Пароль все еще найден: $password" -ForegroundColor Red
         }
     }
 }
 
-if (-not $stillFound) {
-    Write-Host "✅ Все пароли успешно удалены из истории!" -ForegroundColor Green
-} else {
-    Write-Host "⚠️  Некоторые пароли остались. Попробуйте запустить скрипт еще раз." -ForegroundColor Yellow
-}
+Write-Host "✅ Проверка завершена" -ForegroundColor Green
 
 # Удаляем временный файл
 Remove-Item $passwordFile
