@@ -30,7 +30,7 @@
 
 ```
 Username: vadimlavrenchuk
-Password: REDACTED_PASSWORD  ← DO NOT USE ANYMORE!
+Password: [REDACTED - WAS COMPROMISED]
 Database: MechanicPro
 Cluster: mechanicpro.wjylube.mongodb.net
 ```
