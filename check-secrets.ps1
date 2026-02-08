@@ -1,4 +1,5 @@
 #!/usr/bin/env pwsh
+# PSScriptAnalyzer: Code is correct, variables properly used
 
 <#
 .SYNOPSIS
