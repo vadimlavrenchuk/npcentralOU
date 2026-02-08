@@ -129,7 +129,6 @@ foreach ($file in $allFiles) {
     $checkedFiles++
     
     try {
-        $content = Get-Content $file -Raw -ErrorAction Stop
         $lines = Get-Content $file -ErrorAction Stop
 
         for ($i = 0; $i -lt $lines.Count; $i++) {
@@ -137,8 +136,8 @@ foreach ($file in $allFiles) {
             
             foreach ($p in $patterns) {
                 if ($line -match $p.Pattern) {
-                    $matches = [regex]::Matches($line, $p.Pattern)
-                    foreach ($match in $matches) {
+                    $regexMatches = [regex]::Matches($line, $p.Pattern)
+                    foreach ($match in $regexMatches) {
                         $foundSecrets += [PSCustomObject]@{
                             File = $file
                             Line = $i + 1
