@@ -130,6 +130,14 @@ try {
       lines.forEach((line, index) => {
         const matches = line.match(pattern);
         if (matches) {
+          // Skip documentation examples
+          if (line.includes('example') || line.includes('template') || 
+              line.includes('YOUR_') || line.includes('НОВЫЙ_') ||
+              line.includes('NEW_') || line.includes('OLD_') ||
+              line.match(/mongodb\+srv:\/\/(username|user|admin):(password|НОВЫЙ|NEW|OLD|YOUR|REDACTED)/i)) {
+            return;
+          }
+          
           matches.forEach(match => {
             foundSecrets.push({
               file,
