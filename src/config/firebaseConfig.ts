@@ -3,14 +3,15 @@ import { getAuth } from 'firebase/auth';
 import { getAnalytics } from 'firebase/analytics';
 
 // Firebase configuration for MechanicPro project
+// Using environment variables for security
 const firebaseConfig = {
-  apiKey: "AIzaSyCA0J_NCIf4ze7VjU41rEWW3s9Tsu6eQN8",
-  authDomain: "mechanicpro-17959.firebaseapp.com",
-  projectId: "mechanicpro-17959",
-  storageBucket: "mechanicpro-17959.firebasestorage.app",
-  messagingSenderId: "269820078221",
-  appId: "1:269820078221:web:606e77b2ce98e7e6121ac4",
-  measurementId: "G-XV43QPHCSE"
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
+  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID
 };
 
 // Initialize Firebase
