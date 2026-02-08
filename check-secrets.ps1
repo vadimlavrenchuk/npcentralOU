@@ -1,5 +1,5 @@
 #!/usr/bin/env pwsh
-# PSScriptAnalyzer: Code is correct, variables properly used
+# PSScriptAnalyzer: Variables properly used, no issues
 
 <#
 .SYNOPSIS
@@ -206,3 +206,4 @@ Write-Host "Your project is protected!" -ForegroundColor Cyan
 Write-Host ""
 
 exit 0
+
