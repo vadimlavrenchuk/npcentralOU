@@ -184,6 +184,7 @@
     "addNew": "Lisa toode",
     "addItem": "Lisa uus toode",
     "allCategories": "Kõik kategooriad",
+    "exportToExcel": "Ekspordi Excelisse",
     "table": {
       "name": "Nimi",
       "sku": "SKU",
@@ -295,6 +296,11 @@
     "create": "Loo",
     "loading": "Laadimine...",
     "minChars": "Vähemalt 6 tähemärki",
+    "edit": "Muuda",
+    "editUser": "Muuda kasutajat",
+    "save": "Salvesta",
+    "passwordOptional": "Jäta tühjaks, et mitte muuta",
+    "passwordHint": "Sisesta uus parool ainult siis, kui soovid seda muuta",
     "roles": {
       "admin": "Administraator",
       "chief_mechanic": "Peamehaanik",

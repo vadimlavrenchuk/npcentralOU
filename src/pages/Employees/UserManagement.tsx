@@ -20,18 +20,28 @@ interface NewUserForm {
   role: UserRole;
 }
 
+interface EditUserForm {
+  _id: string;
+  username: string;
+  password: string;
+  name: string;
+  role: UserRole;
+}
+
 const UserManagement: React.FC = () => {
   const { t } = useTranslation();
   const [users, setUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [showCreateModal, setShowCreateModal] = useState(false);
+  const [showEditModal, setShowEditModal] = useState(false);
   const [newUser, setNewUser] = useState<NewUserForm>({
     username: '',
     password: '',
     name: '',
     role: UserRole.MECHANIC
   });
+  const [editUser, setEditUser] = useState<EditUserForm | null>(null);
 
   useEffect(() => {
     fetchUsers();
@@ -65,6 +75,43 @@ const UserManagement: React.FC = () => {
       fetchUsers();
     } catch (err: any) {
       setError(err.response?.data?.message || 'Ошибка создания пользователя');
+    }
+  };
+
+  const handleOpenEditModal = (user: User) => {
+    setEditUser({
+      _id: user._id,
+      username: user.username,
+      password: '', // не показываем текущий пароль
+      name: user.name,
+      role: user.role
+    });
+    setShowEditModal(true);
+  };
+
+  const handleUpdateUser = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!editUser) return;
+
+    try {
+      const updateData: any = {
+        username: editUser.username,
+        name: editUser.name,
+        role: editUser.role
+      };
+
+      // Добавляем пароль только если он был введен
+      if (editUser.password) {
+        updateData.password = editUser.password;
+      }
+
+      await apiClient.patch(`/users/${editUser._id}`, updateData);
+      setShowEditModal(false);
+      setEditUser(null);
+      fetchUsers();
+    } catch (err: any) {
+      setError(err.response?.data?.message || 'Ошибка обновления пользователя');
     }
   };
 
@@ -169,6 +216,13 @@ const UserManagement: React.FC = () => {
                 <td>{new Date(user.createdAt).toLocaleDateString('ru-RU')}</td>
                 <td className="actions-cell">
                   <button
+                    className="btn-edit"
+                    onClick={() => handleOpenEditModal(user)}
+                    title={t('users.edit') || 'Редактировать'}
+                  >
+                    ✏️
+                  </button>
+                  <button
                     className="btn-toggle"
                     onClick={() => handleToggleStatus(user._id)}
                     title={user.isActive ? t('users.block') || 'Заблокировать' : t('users.unblock') || 'Разблокировать'}
@@ -265,6 +319,89 @@ const UserManagement: React.FC = () => {
                 </button>
                 <button type="submit" className="btn-primary">
                   {t('users.create') || 'Создать'}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {showEditModal && editUser && (
+        <div className="modal-overlay" onClick={() => setShowEditModal(false)}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <div className="modal-header">
+              <h2>{t('users.editUser') || 'Редактировать пользователя'}</h2>
+              <button 
+                className="modal-close"
+                onClick={() => setShowEditModal(false)}
+              >
+                ×
+              </button>
+            </div>
+            
+            <form onSubmit={handleUpdateUser} className="user-form">
+              <div className="form-group">
+                <label htmlFor="edit-username">{t('users.username') || 'Логин'} *</label>
+                <input
+                  id="edit-username"
+                  type="text"
+                  value={editUser.username}
+                  onChange={(e) => setEditUser({ ...editUser, username: e.target.value })}
+                  required
+                  placeholder="username"
+                />
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="edit-password">{t('users.password') || 'Пароль'}</label>
+                <input
+                  id="edit-password"
+                  type="password"
+                  value={editUser.password}
+                  onChange={(e) => setEditUser({ ...editUser, password: e.target.value })}
+                  minLength={6}
+                  placeholder={t('users.passwordOptional') || 'Оставьте пустым, чтобы не менять'}
+                />
+                <small>{t('users.passwordHint') || 'Введите новый пароль только если хотите его изменить'}</small>
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="edit-name">{t('users.fullName') || 'Полное имя'} *</label>
+                <input
+                  id="edit-name"
+                  type="text"
+                  value={editUser.name}
+                  onChange={(e) => setEditUser({ ...editUser, name: e.target.value })}
+                  required
+                  placeholder={t('users.fullNamePlaceholder') || 'Иван Иванов'}
+                />
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="edit-role">{t('users.role') || 'Роль'} *</label>
+                <select
+                  id="edit-role"
+                  value={editUser.role}
+                  onChange={(e) => setEditUser({ ...editUser, role: e.target.value as UserRole })}
+                  required
+                >
+                  <option value={UserRole.MECHANIC}>{t('users.roles.mechanic') || 'Механик'}</option>
+                  <option value={UserRole.ACCOUNTANT}>{t('users.roles.accountant') || 'Бухгалтер'}</option>
+                  <option value={UserRole.CHIEF_MECHANIC}>{t('users.roles.chief_mechanic') || 'Главный механик'}</option>
+                  <option value={UserRole.ADMIN}>{t('users.roles.admin') || 'Администратор'}</option>
+                </select>
+              </div>
+
+              <div className="modal-actions">
+                <button 
+                  type="button" 
+                  className="btn-secondary"
+                  onClick={() => setShowEditModal(false)}
+                >
+                  {t('users.cancel') || 'Отмена'}
+                </button>
+                <button type="submit" className="btn-primary">
+                  {t('users.save') || 'Сохранить'}
                 </button>
               </div>
             </form>

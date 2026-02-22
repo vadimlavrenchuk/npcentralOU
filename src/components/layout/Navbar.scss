@@ -19,6 +19,17 @@
 
   &__left {
     flex: 1;
+    display: flex;
+    align-items: center;
+    gap: $spacing-3;
+  }
+
+  &__menu-btn {
+    display: none;
+
+    @media (max-width: 1024px) {
+      display: flex;
+    }
   }
 
   &__page-title {
@@ -103,8 +114,9 @@
     }
   }
 
-  @media (max-width: $breakpoint-md) {
+  @media (max-width: 768px) {
     padding: 0 $spacing-4;
+    height: 60px;
 
     &__page-title {
       font-size: $font-size-lg;
@@ -112,6 +124,22 @@
 
     &__user-name {
       display: none;
+    }
+
+    &__user-role {
+      display: none;
+    }
+
+    &__right {
+      gap: $spacing-2;
+    }
+  }
+
+  @media (max-width: 480px) {
+    padding: 0 $spacing-3;
+
+    &__page-title {
+      font-size: $font-size-base;
     }
   }
 }

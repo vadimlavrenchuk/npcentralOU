@@ -433,3 +433,136 @@
     }
   }
 }
+
+// Mobile Responsive
+@media (max-width: 1024px) {
+  .schedule-matrix {
+    padding: 1rem;
+
+    &__header {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 1rem;
+    }
+
+    &__controls {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0.75rem;
+    }
+
+    &__filter-select {
+      width: 100%;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .schedule-matrix {
+    padding: 0.75rem;
+
+    &__title {
+      font-size: 1.5rem;
+    }
+
+    &__month-name {
+      font-size: 1rem;
+      min-width: 120px;
+    }
+
+    &__table {
+      font-size: 0.75rem;
+    }
+
+    &__employee-header,
+    &__employee-cell {
+      min-width: 150px;
+      max-width: 150px;
+      width: 150px;
+      padding: 0.5rem !important;
+      font-size: 0.8rem;
+    }
+
+    &__summary-cell {
+      min-width: 70px;
+      width: 70px;
+      font-size: 0.8rem;
+      padding: 0.5rem 0.25rem !important;
+
+      &--total {
+        right: 210px;
+      }
+
+      &--overtime {
+        right: 140px;
+      }
+
+      &--weekend {
+        right: 70px;
+      }
+
+      &--holiday {
+        right: 0;
+      }
+    }
+
+    th, td {
+      padding: 0.25rem;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .schedule-matrix {
+    padding: 0.5rem;
+
+    &__title {
+      font-size: 1.25rem;
+    }
+
+    &__month-nav {
+      gap: 0.5rem;
+    }
+
+    &__month-name {
+      font-size: 0.9rem;
+      min-width: 100px;
+    }
+
+    &__table {
+      font-size: 0.7rem;
+    }
+
+    &__employee-header,
+    &__employee-cell {
+      min-width: 120px;
+      max-width: 120px;
+      width: 120px;
+      padding: 0.4rem !important;
+      font-size: 0.75rem;
+    }
+
+    &__summary-cell {
+      min-width: 60px;
+      width: 60px;
+      font-size: 0.7rem;
+      padding: 0.4rem 0.2rem !important;
+
+      &--total {
+        right: 180px;
+      }
+
+      &--overtime {
+        right: 120px;
+      }
+
+      &--weekend {
+        right: 60px;
+      }
+
+      &--holiday {
+        right: 0;
+      }
+    }
+  }
+}

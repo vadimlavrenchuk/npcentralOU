@@ -22,8 +22,11 @@ export const getAllSchedules = async (req: Request, res: Response): Promise<void
       .populate('userId', 'name role')
       .populate('createdBy', 'name')
       .sort({ startDate: 1 });
+    
+    // Фильтруем записи с удалёнными пользователями
+    const validSchedules = schedules.filter(schedule => schedule.userId !== null);
       
-    res.json(schedules);
+    res.json(validSchedules);
   } catch (error) {
     console.error('Error fetching schedules:', error);
     res.status(500).json({ message: 'Ошибка получения графика', error });
@@ -109,5 +112,33 @@ export const deleteSchedule = async (req: Request, res: Response): Promise<void>
   } catch (error) {
     console.error('Error deleting schedule:', error);
     res.status(500).json({ message: 'Ошибка удаления записи графика', error });
+  }
+};
+
+// Clean up orphaned schedule entries (entries with deleted users)
+export const cleanupOrphanedSchedules = async (req: Request, res: Response): Promise<void> => {
+  try {
+    // Находим все записи графика
+    const allSchedules = await Schedule.find().populate('userId');
+    
+    // Фильтруем записи с null userId (удалённые пользователи)
+    const orphanedSchedules = allSchedules.filter(schedule => schedule.userId === null);
+    
+    if (orphanedSchedules.length === 0) {
+      res.json({ message: 'Осиротевших записей не найдено', deletedCount: 0 });
+      return;
+    }
+    
+    // Удаляем записи с несуществующими пользователями
+    const orphanedIds = orphanedSchedules.map(s => s._id);
+    const result = await Schedule.deleteMany({ _id: { $in: orphanedIds } });
+    
+    res.json({ 
+      message: `Удалено ${result.deletedCount} осиротевших записей графика`, 
+      deletedCount: result.deletedCount 
+    });
+  } catch (error) {
+    console.error('Error cleaning up orphaned schedules:', error);
+    res.status(500).json({ message: 'Ошибка очистки осиротевших записей', error });
   }
 };

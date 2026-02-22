@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { usePermissions } from '../../hooks/usePermissions';
 import { Button } from '../../components/shared/Button';
 import { Modal } from '../../components/shared/Modal';
+import { exportToExcel } from '../../utils/excelExport';
 import './Schedule.scss';
 
 enum ScheduleType {
@@ -62,7 +63,7 @@ const Schedule: React.FC = () => {
     notes: ''
   });
 
-  const canEdit = can('canManageUsers');
+  const canEdit = can('canEditSchedule'); // Проверяем право на редактирование графика
 
   useEffect(() => {
     fetchSchedules();
@@ -90,7 +91,9 @@ const Schedule: React.FC = () => {
       });
       if (response.ok) {
         const data = await response.json();
-        setSchedules(data);
+        // Фильтруем записи с удалёнными пользователями
+        const validSchedules = data.filter((schedule: ScheduleEntry) => schedule.userId !== null);
+        setSchedules(validSchedules);
       }
     } catch (error) {
       console.error('Error fetching schedules:', error);
@@ -193,7 +196,8 @@ const Schedule: React.FC = () => {
 
   const getScheduleForUserAndDate = (userId: string, date: Date) => {
     return schedules.find(schedule => {
-      if (schedule.userId._id !== userId) return false;
+      // Пропускаем записи с удалёнными пользователями
+      if (!schedule.userId || schedule.userId._id !== userId) return false;
       const start = new Date(schedule.startDate);
       const end = new Date(schedule.endDate);
       start.setHours(0, 0, 0, 0);
@@ -303,45 +307,36 @@ const Schedule: React.FC = () => {
   };
 
   // Экспорт в Excel (CSV формат)
-  const exportToExcel = () => {
+  const exportScheduleToExcel = () => {
     const days = getDaysInMonth();
-    let csvContent = 'data:text/csv;charset=utf-8,';
     
-    // Заголовок
-    const headers = [
-      t('schedule.employee') || 'Employee',
-      ...days.map(d => d.toLocaleDateString(i18n.language, { day: '2-digit', month: '2-digit' })),
-      'Total Hours',
-      'Overtime',
-      'Weekend Hours',
-      'Holiday Hours (x2)'
-    ];
-    csvContent += headers.join(',') + '\n';
-    
-    // Данные по сотрудникам
-    filteredUsers.forEach(user => {
-      const row = [user.name];
+    // Подготовка данных для экспорта
+    const excelData = filteredUsers.map(user => {
+      const row: any = {
+        [t('schedule.employee') || 'Employee']: user.name
+      };
       
+      // Добавляем данные по каждому дню
       days.forEach(date => {
+        const dateKey = date.toLocaleDateString(i18n.language, { day: '2-digit', month: '2-digit' });
         const schedule = getScheduleForUserAndDate(user._id, date);
         const content = getCellContent(schedule);
-        row.push(content ? content.text : '');
+        row[dateKey] = content ? content.text : '';
       });
       
+      // Добавляем статистику
       const hours = calculateUserHours(user._id);
-      row.push(hours.totalHours, hours.overtime, hours.weekendHours, hours.holidayHours);
+      row[t('schedule.totalHours') || 'Total Hours'] = hours.totalHours;
+      row[t('schedule.overtime') || 'Overtime'] = hours.overtime;
+      row[t('schedule.weekendHours') || 'Weekend Hours'] = hours.weekendHours;
+      row[t('schedule.holidayHours') || 'Holiday Hours (x2)'] = hours.holidayHours;
       
-      csvContent += row.map(cell => `"${cell}"`).join(',') + '\n';
+      return row;
     });
     
-    const encodedUri = encodeURI(csvContent);
-    const link = document.createElement('a');
-    link.setAttribute('href', encodedUri);
+    // Экспорт в Excel
     const monthName = currentMonth.toLocaleDateString(i18n.language, { month: 'long', year: 'numeric' });
-    link.setAttribute('download', `schedule_${monthName}.csv`);
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    exportToExcel(excelData, `schedule_${monthName}.xlsx`);
   };
 
   const changeMonth = (offset: number) => {
@@ -387,7 +382,7 @@ const Schedule: React.FC = () => {
             </select>
           </div>
 
-          <Button variant="primary" onClick={exportToExcel} className="schedule-matrix__export-btn">
+          <Button variant="primary" onClick={exportScheduleToExcel} className="schedule-matrix__export-btn">
             <Download size={16} />
             {t('schedule.downloadReport') || 'Скачать отчет (Excel)'}
           </Button>

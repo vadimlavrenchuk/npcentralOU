@@ -69,12 +69,22 @@ export const createUser = async (req: Request, res: Response): Promise<void> => 
 export const updateUser = async (req: Request, res: Response): Promise<void> => {
   try {
     const { id } = req.params;
-    const { name, role, password } = req.body;
+    const { username, name, role, password } = req.body;
 
     const user = await User.findById(id);
     if (!user) {
       res.status(404).json({ message: 'Пользователь не найден' });
       return;
+    }
+
+    // Check if new username is unique (if username is being changed)
+    if (username && username.toLowerCase() !== user.username) {
+      const existingUser = await User.findOne({ username: username.toLowerCase() });
+      if (existingUser) {
+        res.status(400).json({ message: 'Пользователь с таким логином уже существует' });
+        return;
+      }
+      user.username = username.toLowerCase();
     }
 
     // Update fields

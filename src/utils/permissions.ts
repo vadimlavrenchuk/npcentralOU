@@ -55,14 +55,14 @@ export const getPermissions = (role: UserRole): Permissions => {
 
     case UserRole.CHIEF_MECHANIC:
       return {
-        // Navigation - All except settings
+        // Navigation - Full access like Admin
         canAccessDashboard: true,
         canAccessWorkOrders: true,
         canAccessInventory: true,
         canAccessEquipment: true,
         canAccessReports: true,
         canAccessEmployees: true,
-        canAccessSettings: false,
+        canAccessSettings: true,
         canAccessSchedule: true,
         
         // Work Orders - Full access
@@ -85,35 +85,35 @@ export const getPermissions = (role: UserRole): Permissions => {
         canDeleteEquipment: true,
         canCreateChecklists: true,
         
-        // Reports - Financial + Efficiency
+        // Reports - Full access
         canViewFinancialReports: true,
         canViewEfficiencyReports: true,
         canExportReports: true,
         
-        // Employees - Full access
+        // Employees - Full access like Admin
         canViewEmployees: true,
         canAddEmployees: true,
         canEditEmployees: true,
         canDeleteEmployees: true,
-        canManageRoles: false, // Cannot change roles
-        canManageUsers: false, // Cannot fully manage users
+        canManageRoles: true,
+        canManageUsers: true, // Same as Admin
         
-        // Schedule - Read only
+        // Schedule - Full access like Admin
         canViewSchedule: true,
-        canEditSchedule: false,
+        canEditSchedule: true, // Same as Admin
       };
 
     case UserRole.ACCOUNTANT:
       return {
-        // Navigation - Limited
+        // Navigation - Limited: Dashboard, Inventory (view), Reports, Schedule (view)
         canAccessDashboard: true,
-        canAccessWorkOrders: false,
-        canAccessInventory: true,
-        canAccessEquipment: false,
-        canAccessReports: true,
-        canAccessEmployees: false,
+        canAccessWorkOrders: false, // НЕ видит заказы на работы
+        canAccessInventory: true, // Только просмотр
+        canAccessEquipment: false, // НЕ видит оборудование
+        canAccessReports: true, // Может запрашивать отчеты
+        canAccessEmployees: false, // НЕ видит управление сотрудниками
         canAccessSettings: false,
-        canAccessSchedule: true,
+        canAccessSchedule: true, // Может просматривать график
         
         // Work Orders - No access
         canCreateWorkOrders: false,
@@ -121,12 +121,12 @@ export const getPermissions = (role: UserRole): Permissions => {
         canDeleteWorkOrders: false,
         canAssignWorkOrders: false,
         
-        // Inventory - Full access for accounting
+        // Inventory - VIEW ONLY (не может редактировать!)
         canViewInventory: true,
-        canAddInventory: true,
-        canEditInventory: true,
-        canDeleteInventory: true,
-        canAdjustStock: true,
+        canAddInventory: false, // НЕ может добавлять
+        canEditInventory: false, // НЕ может редактировать
+        canDeleteInventory: false, // НЕ может удалять
+        canAdjustStock: false, // НЕ может корректировать остатки
         
         // Equipment - No access
         canViewEquipment: false,
@@ -135,9 +135,9 @@ export const getPermissions = (role: UserRole): Permissions => {
         canDeleteEquipment: false,
         canCreateChecklists: false,
         
-        // Reports - View and export
+        // Reports - View and export financial reports
         canViewFinancialReports: true,
-        canViewEfficiencyReports: false,
+        canViewEfficiencyReports: true, // Может видеть графики производительности
         canExportReports: true,
         
         // Employees - No access
@@ -148,9 +148,9 @@ export const getPermissions = (role: UserRole): Permissions => {
         canManageRoles: false,
         canManageUsers: false,
         
-        // Schedule - Read only
+        // Schedule - VIEW ONLY (не может редактировать!)
         canViewSchedule: true,
-        canEditSchedule: false,
+        canEditSchedule: false, // НЕ может редактировать график
       };
 
     case UserRole.MECHANIC:

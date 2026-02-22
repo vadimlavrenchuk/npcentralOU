@@ -9,6 +9,7 @@ import { Button, Card } from '../../components/shared';
 import { MaintenanceModal } from './MaintenanceModal';
 import { AddEquipmentModal } from './AddEquipmentModal';
 import { useEquipment } from '../../hooks';
+import { usePermissions } from '../../hooks/usePermissions';
 import { equipmentService } from '../../api/services';
 import type { Equipment as EquipmentType, CreateEquipmentDto } from '../../types';
 import './Equipment.scss';
@@ -16,6 +17,7 @@ import './Equipment.scss';
 export const Equipment: React.FC = () => {
   const { t } = useTranslation();
   const { equipment, loading, error, fetchEquipment, createEquipment } = useEquipment();
+  const { can } = usePermissions();
   const [selectedEquipment, setSelectedEquipment] = useState<EquipmentType | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
@@ -79,9 +81,11 @@ export const Equipment: React.FC = () => {
     <div className="equipment-page">
       <div className="page-header">
         <h1 className="page-title">{t('equipment.title')}</h1>
-        <Button variant="primary" icon={<Plus size={20} />} onClick={handleAddEquipment}>
-          {t('equipment.addNew')}
-        </Button>
+        {can('canAddEquipment') && (
+          <Button variant="primary" icon={<Plus size={20} />} onClick={handleAddEquipment}>
+            {t('equipment.addNew')}
+          </Button>
+        )}
       </div>
 
       {error && <div className="page-error">{error}</div>}

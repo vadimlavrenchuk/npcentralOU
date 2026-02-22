@@ -4,7 +4,7 @@
 
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Bell, User, LogOut } from 'lucide-react';
+import { Bell, User, LogOut, Menu } from 'lucide-react';
 import { Button } from '../shared';
 import { LanguageSwitcher } from '../shared/LanguageSwitcher';
 import { useAuth } from '../../context/AuthContext';
@@ -16,13 +16,15 @@ interface NavbarProps {
   userName?: string;
   pageTitle?: string;
   onLogout?: () => void;
+  onMenuClick?: () => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({ 
   user,
   userName,
   pageTitle,
-  onLogout 
+  onLogout,
+  onMenuClick
 }) => {
   const { t } = useTranslation();
   const { userProfile } = useAuth();
@@ -51,6 +53,16 @@ export const Navbar: React.FC<NavbarProps> = ({
   return (
     <header className="navbar">
       <div className="navbar__left">
+        {onMenuClick && (
+          <Button 
+            variant="ghost" 
+            size="sm" 
+            onClick={onMenuClick}
+            className="navbar__menu-btn"
+          >
+            <Menu size={24} />
+          </Button>
+        )}
         <h2 className="navbar__page-title">{pageTitle || t('dashboard.title')}</h2>
       </div>
 

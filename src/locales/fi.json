@@ -186,6 +186,7 @@
     "addNew": "Lisää tuote",
     "addItem": "Lisää uusi tuote",
     "allCategories": "Kaikki kategoriat",
+    "exportToExcel": "Vie Exceliin",
     "table": {
       "name": "Nimi",
       "sku": "Tuotekoodi",
@@ -297,6 +298,11 @@
     "create": "Luo",
     "loading": "Ladataan...",
     "minChars": "Vähintään 6 merkkiä",
+    "edit": "Muokkaa",
+    "editUser": "Muokkaa käyttäjää",
+    "save": "Tallenna",
+    "passwordOptional": "Jätä tyhjäksi, jos et halua muuttaa",
+    "passwordHint": "Syötä uusi salasana vain, jos haluat muuttaa sitä",
     "roles": {
       "admin": "Järjestelmänvalvoja",
       "chief_mechanic": "Päämekaanikko",

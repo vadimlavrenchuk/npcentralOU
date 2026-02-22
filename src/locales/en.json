@@ -223,6 +223,7 @@
     "addNew": "Add Item",
     "addItem": "Add New Item",
     "allCategories": "All Categories",
+    "exportToExcel": "Export to Excel",
     "table": {
       "name": "Name",
       "sku": "SKU",
@@ -336,6 +337,11 @@
     "create": "Create",
     "loading": "Loading...",
     "minChars": "Minimum 6 characters",
+    "edit": "Edit",
+    "editUser": "Edit User",
+    "save": "Save",
+    "passwordOptional": "Leave empty to keep unchanged",
+    "passwordHint": "Enter new password only if you want to change it",
     "roles": {
       "admin": "Administrator",
       "chief_mechanic": "Chief Mechanic",

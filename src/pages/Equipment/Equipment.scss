@@ -91,3 +91,73 @@
     }
   }
 }
+
+// Mobile Responsive
+@media (max-width: 768px) {
+  .equipment-page {
+    padding: $spacing-4;
+
+    h1 {
+      font-size: 1.5rem;
+      margin-bottom: $spacing-4;
+    }
+
+    .equipment-item {
+      flex-direction: column;
+      align-items: stretch;
+      gap: $spacing-3;
+      padding: $spacing-4;
+
+      .equipment-info {
+        h3 {
+          font-size: 16px;
+        }
+
+        .model {
+          font-size: 13px;
+        }
+
+        .serial {
+          font-size: 12px;
+        }
+      }
+
+      .equipment-status {
+        justify-content: space-between;
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .equipment-page {
+    padding: $spacing-3;
+
+    h1 {
+      font-size: 1.25rem;
+    }
+
+    .equipment-list {
+      gap: $spacing-2;
+    }
+
+    .equipment-item {
+      padding: $spacing-3;
+
+      .equipment-info {
+        h3 {
+          font-size: 15px;
+        }
+      }
+
+      .equipment-status {
+        flex-direction: column;
+        align-items: stretch;
+
+        .status-badge {
+          text-align: center;
+        }
+      }
+    }
+  }
+}

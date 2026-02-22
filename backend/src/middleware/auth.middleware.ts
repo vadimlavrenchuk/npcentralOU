@@ -87,6 +87,19 @@ export const requireAdmin = (
   next();
 };
 
+// Admin + Chief Mechanic have full access
+export const requireAdminOrChiefMechanic = (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): void => {
+  if (req.user?.role !== UserRole.ADMIN && req.user?.role !== UserRole.CHIEF_MECHANIC) {
+    res.status(403).json({ message: 'Требуются права администратора или главного механика' });
+    return;
+  }
+  next();
+};
+
 export const requireRole = (...roles: UserRole[]) => {
   return (req: Request, res: Response, next: NextFunction): void => {
     if (!req.user || !roles.includes(req.user.role)) {

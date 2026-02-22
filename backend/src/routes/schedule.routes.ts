@@ -3,9 +3,10 @@ import {
   getAllSchedules,
   createSchedule,
   updateSchedule,
-  deleteSchedule
+  deleteSchedule,
+  cleanupOrphanedSchedules
 } from '../controllers/schedule.controller';
-import { authenticateToken, requireAdmin } from '../middleware/auth.middleware';
+import { authenticateToken, requireAdminOrChiefMechanic } from '../middleware/auth.middleware';
 
 const router = express.Router();
 
@@ -15,9 +16,12 @@ router.use(authenticateToken);
 // Get all schedules - доступно всем ролям
 router.get('/', getAllSchedules);
 
-// Create, update, delete - только для admin
-router.post('/', requireAdmin, createSchedule);
-router.patch('/:id', requireAdmin, updateSchedule);
-router.delete('/:id', requireAdmin, deleteSchedule);
+// Cleanup orphaned schedules - только для admin и chief mechanic
+router.delete('/cleanup-orphaned', requireAdminOrChiefMechanic, cleanupOrphanedSchedules);
+
+// Create, update, delete - только для admin и chief mechanic
+router.post('/', requireAdminOrChiefMechanic, createSchedule);
+router.patch('/:id', requireAdminOrChiefMechanic, updateSchedule);
+router.delete('/:id', requireAdminOrChiefMechanic, deleteSchedule);
 
 export default router;

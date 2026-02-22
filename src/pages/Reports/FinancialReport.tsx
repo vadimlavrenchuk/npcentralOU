@@ -8,7 +8,7 @@ import { useTranslation } from 'react-i18next';
 import { Download, TrendingDown, Package, ShoppingCart, DollarSign } from 'lucide-react';
 import { Button, Card } from '../../components/shared';
 import { apiClient } from '../../api/client';
-import { exportToCSV } from '../../utils/csvExport';
+import { exportToExcel } from '../../utils/excelExport';
 import './FinancialReport.scss';
 
 interface FinancialReportData {
@@ -89,35 +89,35 @@ export const FinancialReport: React.FC = () => {
   const handleExportExpenses = () => {
     if (!data) return;
     
-    const csvData = data.expenses.details.map(item => ({
+    const excelData = data.expenses.details.map(item => ({
+      [t('reports.financial.date')]: new Date(item.usedDate).toLocaleDateString(i18n.language),
       [t('reports.financial.order')]: item.orderNumber,
       [t('reports.financial.itemName')]: item.partName,
       [t('reports.financial.sku')]: item.sku,
       [t('reports.financial.category')]: item.category,
       [t('reports.financial.quantity')]: item.quantity,
-      [t('reports.financial.price')]: `€${item.unitPrice.toFixed(2)}`,
-      [t('reports.financial.amount')]: `€${item.totalCost.toFixed(2)}`,
-      [t('reports.financial.date')]: new Date(item.usedDate).toLocaleDateString(i18n.language)
+      [t('reports.financial.price')]: item.unitPrice.toFixed(2),
+      [t('reports.financial.amount')]: item.totalCost.toFixed(2)
     }));
     
-    exportToCSV(csvData, `${t('reports.financial.expensesDetails')}_${dateRange.startDate}_${dateRange.endDate}.csv`);
+    exportToExcel(excelData, `${t('reports.financial.expensesDetails')}_${dateRange.startDate}_${dateRange.endDate}.xlsx`);
   };
 
   const handleExportOrders = () => {
     if (!data) return;
     
-    const csvData = data.ordersNeeded.items.map(item => ({
+    const excelData = data.ordersNeeded.items.map(item => ({
       [t('reports.financial.sku')]: item.sku,
       [t('reports.financial.itemName')]: item.name,
+      [t('reports.financial.supplier')]: item.supplier,
       [t('reports.financial.stock')]: item.currentQuantity,
       [t('reports.financial.minimum')]: item.minQuantity,
       [t('reports.financial.toOrder')]: item.needToOrder,
-      [t('reports.financial.pricePerUnit')]: `€${item.unitPrice.toFixed(2)}`,
-      [t('reports.financial.toPay')]: `€${item.estimatedCost.toFixed(2)}`,
-      [t('reports.financial.supplier')]: item.supplier
+      [t('reports.financial.pricePerUnit')]: item.unitPrice.toFixed(2),
+      [t('reports.financial.toPay')]: item.estimatedCost.toFixed(2)
     }));
     
-    exportToCSV(csvData, `${t('reports.financial.needToOrder')}_${new Date().toISOString().split('T')[0]}.csv`);
+    exportToExcel(excelData, `${t('reports.financial.needToOrder')}_${new Date().toISOString().split('T')[0]}.xlsx`);
   };
 
   if (loading) {

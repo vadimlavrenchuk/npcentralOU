@@ -144,3 +144,53 @@
     transform: translate(-50%, -50%) rotate(360deg);
   }
 }
+
+// Mobile Responsive
+@media (max-width: 768px) {
+  .btn {
+    // Увеличиваем размер для touch
+    min-height: 44px;
+
+    &--sm {
+      padding: $spacing-2 $spacing-4;
+      font-size: $font-size-sm;
+    }
+
+    &--md {
+      padding: $spacing-3 $spacing-5;
+    }
+
+    &--lg {
+      padding: $spacing-4 $spacing-6;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .btn {
+    &--sm {
+      padding: $spacing-2 $spacing-3;
+      font-size: $font-size-xs;
+    }
+
+    &--md {
+      padding: $spacing-2 $spacing-4;
+      font-size: $font-size-sm;
+    }
+
+    &--lg {
+      padding: $spacing-3 $spacing-5;
+      font-size: $font-size-base;
+    }
+  }
+}
+
+// Touch devices
+@media (hover: none) and (pointer: coarse) {
+  .btn {
+    &:not(:disabled):hover {
+      transform: none;
+      box-shadow: none;
+    }
+  }
+}

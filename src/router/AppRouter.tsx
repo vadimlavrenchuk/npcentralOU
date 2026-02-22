@@ -66,11 +66,11 @@ export const AppRouter: React.FC = () => {
         {/* Schedule - All roles (read-only for non-admins) */}
         <Route path="schedule" element={<Schedule />} />
         
-        {/* User Management - Admin only */}
+        {/* User Management - Admin and Chief Mechanic only */}
         <Route 
           path="user-management" 
           element={
-            <RoleBasedRoute allowedRoles={[UserRole.ADMIN]}>
+            <RoleBasedRoute allowedRoles={[UserRole.ADMIN, UserRole.CHIEF_MECHANIC]}>
               <UserManagement />
             </RoleBasedRoute>
           } 

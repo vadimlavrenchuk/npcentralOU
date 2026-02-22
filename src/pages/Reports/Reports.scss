@@ -371,3 +371,131 @@
     }
   }
 }
+
+// Mobile Responsive
+@media (max-width: 1024px) {
+  .reports-page {
+    .charts-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .chart-card {
+      &--pie,
+      &--table {
+        grid-column: span 1;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .reports-page {
+    padding: $spacing-4;
+
+    .page-header {
+      flex-direction: column;
+      align-items: stretch;
+
+      .page-title {
+        font-size: $font-size-xl;
+      }
+
+      .header-actions {
+        flex-direction: column;
+        width: 100%;
+
+        button {
+          width: 100%;
+        }
+      }
+
+      .date-range-selector {
+        flex-direction: column;
+        align-items: stretch;
+
+        .date-input {
+          width: 100%;
+        }
+      }
+    }
+
+    .kpi-grid {
+      grid-template-columns: 1fr;
+      gap: $spacing-3;
+    }
+
+    .kpi-card {
+      padding: $spacing-4;
+
+      .kpi-icon {
+        width: 50px;
+        height: 50px;
+      }
+
+      .kpi-value {
+        font-size: $font-size-xl;
+      }
+    }
+
+    .charts-grid {
+      gap: $spacing-3;
+    }
+
+    .chart-card {
+      padding: $spacing-4;
+
+      .chart-title {
+        font-size: $font-size-base;
+      }
+    }
+
+    .recharts-wrapper {
+      .recharts-cartesian-axis-tick {
+        font-size: 10px;
+      }
+
+      .recharts-legend-wrapper {
+        font-size: 12px;
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .reports-page {
+    padding: $spacing-3;
+
+    .page-header {
+      .page-title {
+        font-size: $font-size-lg;
+      }
+
+      .page-subtitle {
+        font-size: $font-size-sm;
+      }
+    }
+
+    .kpi-card {
+      padding: $spacing-3;
+      gap: $spacing-3;
+
+      .kpi-icon {
+        width: 40px;
+        height: 40px;
+      }
+
+      .kpi-value {
+        font-size: $font-size-lg;
+      }
+
+      .kpi-title,
+      .kpi-subtitle {
+        font-size: $font-size-xs;
+      }
+    }
+
+    .chart-card {
+      padding: $spacing-3;
+    }
+  }
+}

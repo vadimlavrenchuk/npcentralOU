@@ -36,7 +36,12 @@ const languages: Language[] = [
   { code: 'ru', name: 'RU', flag: '🇷🇺' },
 ];
 
-export const Sidebar: React.FC = () => {
+interface SidebarProps {
+  isOpen?: boolean;
+  onClose?: () => void;
+}
+
+export const Sidebar: React.FC<SidebarProps> = ({ isOpen = false, onClose }) => {
   const { t, i18n } = useTranslation();
   const { can } = usePermissions();
   const [isLangOpen, setIsLangOpen] = useState(false);
@@ -53,8 +58,14 @@ export const Sidebar: React.FC = () => {
     !item.permission || can(item.permission as any)
   );
   
+  const handleLinkClick = () => {
+    if (onClose) {
+      onClose();
+    }
+  };
+
   return (
-    <aside className="sidebar">
+    <aside className={`sidebar ${isOpen ? 'sidebar--open' : ''}`}>
       <div className="sidebar__header">
         <h1 className="sidebar__title">{t('app.name')}</h1>
         <p className="sidebar__subtitle">{t('app.subtitle')}</p>
@@ -65,6 +76,7 @@ export const Sidebar: React.FC = () => {
           <NavLink
             key={item.path}
             to={item.path}
+            onClick={handleLinkClick}
             className={({ isActive }) =>
               `sidebar__link ${isActive ? 'sidebar__link--active' : ''}`
             }

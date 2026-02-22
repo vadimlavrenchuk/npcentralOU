@@ -72,3 +72,50 @@
     // Content spacing handled by children
   }
 }
+
+// Mobile Responsive
+@media (max-width: 768px) {
+  .card {
+    border-radius: $radius-base;
+
+    &--padding-sm {
+      padding: $spacing-3;
+    }
+
+    &--padding-md {
+      padding: $spacing-4;
+    }
+
+    &--padding-lg {
+      padding: $spacing-6;
+    }
+
+    &__title {
+      font-size: $font-size-lg;
+    }
+
+    &__header {
+      margin-bottom: $spacing-3;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .card {
+    &--padding-sm {
+      padding: $spacing-2;
+    }
+
+    &--padding-md {
+      padding: $spacing-3;
+    }
+
+    &--padding-lg {
+      padding: $spacing-4;
+    }
+
+    &__title {
+      font-size: $font-size-base;
+    }
+  }
+}

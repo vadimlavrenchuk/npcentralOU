@@ -4,12 +4,13 @@
 
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Plus, Search, PackagePlus, PackageMinus, AlertTriangle, Trash2 } from 'lucide-react';
+import { Plus, Search, PackagePlus, PackageMinus, AlertTriangle, Trash2, Download } from 'lucide-react';
 import { Button, Card, Modal } from '../../components/shared';
 import { Can } from '../../components/shared/Can';
 import { useInventory } from '../../hooks';
 import { usePermissions } from '../../hooks/usePermissions';
 import type { InventoryItem } from '../../types';
+import { exportToExcel } from '../../utils/excelExport';
 import './Inventory.scss';
 
 export const Inventory: React.FC = () => {
@@ -110,6 +111,28 @@ export const Inventory: React.FC = () => {
     }
   };
 
+  const handleExportInventory = () => {
+    try {
+      const exportData = filteredItems.map(item => ({
+        [t('inventory.table.sku')]: item.sku,
+        [t('inventory.table.name')]: getLocalizedName(item),
+        [t('inventory.table.category')]: t(`inventory.category.${item.category}`),
+        [t('inventory.table.quantity')]: item.quantity,
+        [t('inventory.table.unit')]: item.unit,
+        [t('inventory.table.minQuantity')]: item.minQuantity,
+        [t('inventory.table.unitPrice')]: item.unitPrice ? `€${item.unitPrice.toFixed(2)}` : '-',
+        [t('inventory.form.location')]: item.location || '-',
+        [t('inventory.form.supplier')]: item.supplier || '-',
+      }));
+      
+      const date = new Date().toLocaleDateString('en-GB').replace(/\//g, '-');
+      exportToExcel(exportData, `inventory_${date}.xlsx`);
+    } catch (err) {
+      console.error('Error exporting inventory:', err);
+      alert(t('reports.exportError') || 'Failed to export data');
+    }
+  };
+
   const handleAddItem = async () => {
     if (!newItem.sku || !newItem.nameEn) {
       alert('SKU and English name are required');
@@ -169,16 +192,26 @@ export const Inventory: React.FC = () => {
   return (
     <div className="inventory-page">
       <div className="page-header">
-        <h1 className="page-title">{t('inventory.title')}</h1>
-        <Can perform="canAddInventory">
+        <h1 className="page-title" style={{ color: '#3b82f6' }}>{t('inventory.title')}</h1>
+        <div style={{ display: 'flex', gap: '10px' }}>
           <Button 
-            variant="primary" 
-            icon={<Plus size={20} />}
-            onClick={() => setIsAddModalOpen(true)}
+            variant="secondary" 
+            icon={<Download size={20} />}
+            onClick={handleExportInventory}
+            disabled={filteredItems.length === 0}
           >
-            {t('inventory.addNew')}
+            {t('inventory.exportToExcel')}
           </Button>
-        </Can>
+          <Can perform="canAddInventory">
+            <Button 
+              variant="primary" 
+              icon={<Plus size={20} />}
+              onClick={() => setIsAddModalOpen(true)}
+            >
+              {t('inventory.addNew')}
+            </Button>
+          </Can>
+        </div>
       </div>
 
       {error && <div className="page-error">{error}</div>}

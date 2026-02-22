@@ -23,7 +23,7 @@ import {
 import { Button, Card } from '../../components/shared';
 import { Can } from '../../components/shared/Can';
 import { usePermissions } from '../../hooks/usePermissions';
-import { exportMonthlyReport } from '../../utils/csvExport';
+import { exportMonthlyReportToExcel } from '../../utils/excelExport';
 import { apiClient } from '../../api/client';
 import { FinancialReport } from './FinancialReport';
 import './Reports.scss';
@@ -100,7 +100,7 @@ export const Reports: React.FC = () => {
       const month = new Date(dateRange.startDate).toLocaleDateString('en-US', { month: 'long' });
       const year = new Date(dateRange.startDate).getFullYear();
       
-      exportMonthlyReport(data, month, year);
+      exportMonthlyReportToExcel(data, month, year);
     } catch (err: any) {
       console.error('Error exporting data:', err);
       alert(t('reports.exportError'));

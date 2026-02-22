@@ -232,3 +232,88 @@ a {
     background: $color-gray-500;
   }
 }
+
+// ============================================================================
+// Mobile Responsive
+// ============================================================================
+
+@media (max-width: 768px) {
+  html {
+    font-size: 14px;
+  }
+
+  body {
+    font-size: $font-size-sm;
+  }
+
+  h1 {
+    font-size: $font-size-2xl;
+  }
+
+  h2 {
+    font-size: $font-size-xl;
+  }
+
+  h3 {
+    font-size: $font-size-lg;
+  }
+
+  h4 {
+    font-size: $font-size-base;
+  }
+
+  .page-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: $spacing-3;
+    margin-bottom: $spacing-4;
+  }
+
+  .page-title {
+    font-size: $font-size-2xl;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+}
+
+@media (max-width: 480px) {
+  html {
+    font-size: 13px;
+  }
+
+  h1 {
+    font-size: $font-size-xl;
+  }
+
+  h2 {
+    font-size: $font-size-lg;
+  }
+
+  .page-title {
+    font-size: $font-size-xl;
+  }
+}
+
+// ============================================================================
+// Touch-friendly Mobile Styles
+// ============================================================================
+
+@media (hover: none) and (pointer: coarse) {
+  // Увеличиваем размер кликабельных элементов для touch
+  button,
+  a,
+  input[type="button"],
+  input[type="submit"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  // Убираем hover эффекты на touch устройствах
+  button:hover,
+  a:hover {
+    transform: none;
+  }
+}
