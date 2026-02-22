@@ -116,7 +116,7 @@ export const deleteSchedule = async (req: Request, res: Response): Promise<void>
 };
 
 // Clean up orphaned schedule entries (entries with deleted users)
-export const cleanupOrphanedSchedules = async (req: Request, res: Response): Promise<void> => {
+export const cleanupOrphanedSchedules = async (_req: Request, res: Response): Promise<void> => {
   try {
     // Находим все записи графика
     const allSchedules = await Schedule.find().populate('userId');
