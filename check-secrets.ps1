@@ -22,7 +22,7 @@ $ErrorActionPreference = "Stop"
 # Паттерны для поиска
 $patterns = @(
     @{
-        Pattern = 'mongodb(\+srv)?://[^:]+:(?!\[REDACTED\]|password|PASSWORD|your_password|example)[^@\s]{3,}@'
+        Pattern = 'mongodb(\+srv)?://[^:]+:(?!\[REDACTED\]|<password>|password|PASSWORD|your_password|example|NEW_PASSWORD|OLD_PASSWORD|REDACTED_PASSWORD|YOUR_NEW_PASSWORD|OLD_COMPROMISED|NEW_SECURE|\$new)[^@\s<>]{3,}@'
         Name = 'MongoDB Connection String с паролем'
         Severity = 'CRITICAL'
     },
@@ -105,8 +105,18 @@ foreach ($file in $allFiles) {
         continue
     }
 
-    # Проверяем расширение
-    $ext = [System.IO.Path]::GetExtension($file)
+    # Проверяем расширение (с защитой от ошибок)
+    try {
+        if (-not ([System.IO.Path]::IsPathRooted($file))) {
+            $file = Join-Path $PSScriptRoot $file
+        }
+        $ext = [System.IO.Path]::GetExtension($file)
+    } catch {
+        # Если ошибка в пути, пропускаем
+        $skippedFiles++
+        continue
+    }
+    
     if ($extensions -notcontains $ext -and $file -notlike '*.env*') {
         continue
     }
