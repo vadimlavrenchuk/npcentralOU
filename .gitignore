@@ -31,7 +31,8 @@ build
 AI_CONTEXT.local
 COPY_ME_FOR_AI.txt
 *.ai-context
-*AI_CONTEXT*
+# But allow example files
+!AI_CONTEXT.example
 
 # Editor directories and files
 .vscode/*
