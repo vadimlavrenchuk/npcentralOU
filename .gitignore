@@ -34,6 +34,15 @@ COPY_ME_FOR_AI.txt
 # But allow example files
 !AI_CONTEXT.example
 
+# Deployment configuration (confidential infrastructure info!)
+DEPLOYMENT.local
+DEPLOYMENT_CONFIG.md
+DEPLOYMENT_SUCCESS.md
+AI_CHEATSHEET.md
+AI_CONTEXT.md
+DEPLOYMENT.md
+*.deployment
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
