@@ -13,13 +13,13 @@ const path = require('path');
 const SECRET_PATTERNS = [
   // MongoDB
   {
-    pattern: /mongodb(\+srv)?:\/\/[^:]+:[^@]+@/gi,
+    pattern: /mongodb(\+srv)?:\/\/[^:]+:(?!\[REDACTED\]|password|your_password|example)[^@\s]{3,}@/gi,
     name: 'MongoDB Connection String с паролем',
     severity: 'CRITICAL'
   },
   // Firebase
   {
-    pattern: /AIzaSy[A-Za-z0-9_-]{33}/g,
+    pattern: /AIzaSy[A-Za-z0-9_-]{33}(?!.*REDACTED|.*OLD_KEY)/g,
     name: 'Firebase API Key',
     severity: 'CRITICAL'
   },

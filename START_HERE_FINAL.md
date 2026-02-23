@@ -59,7 +59,7 @@ npm run check-secrets
 
 **Скомпрометированный:**
 ```
-AIzaSyCA0J_NCIf4ze7VjU41rEWW3s9Tsu6eQN8
+[REDACTED_OLD_KEY]
 ```
 
 **Действия:**

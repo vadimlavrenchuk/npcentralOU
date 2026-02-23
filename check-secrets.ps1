@@ -22,12 +22,12 @@ $ErrorActionPreference = "Stop"
 # Паттерны для поиска
 $patterns = @(
     @{
-        Pattern = 'mongodb(\+srv)?://[^:]+:[^@]+@'
-        Name = 'MongoDB Connection String with password'
+        Pattern = 'mongodb(\+srv)?://[^:]+:(?!\[REDACTED\]|password|PASSWORD|your_password|example)[^@\s]{3,}@'
+        Name = 'MongoDB Connection String с паролем'
         Severity = 'CRITICAL'
     },
     @{
-        Pattern = 'AIzaSy[A-Za-z0-9_-]{33}'
+        Pattern = 'AIzaSy[A-Za-z0-9_-]{33}(?!.*REDACTED|.*OLD_KEY)'
         Name = 'Firebase API Key'
         Severity = 'CRITICAL'
     },

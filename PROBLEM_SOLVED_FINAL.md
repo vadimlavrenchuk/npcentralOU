@@ -49,7 +49,7 @@ git commit -m "my changes"
 
 #### 1. Firebase API ключ
 ```
-Старый: AIzaSyCA0J_NCIf4ze7VjU41rEWW3s9Tsu6eQN8
+Старый: [REDACTED_OLD_KEY]
 ```
 
 **Действия:**

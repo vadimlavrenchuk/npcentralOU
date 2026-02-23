@@ -57,7 +57,7 @@
 
 **Скомпрометированный ключ:**
 ```
-AIzaSyCA0J_NCIf4ze7VjU41rEWW3s9Tsu6eQN8
+[REDACTED_OLD_KEY]
 ```
 
 **Что делать:**
@@ -151,14 +151,7 @@ const config = {
 ```bash
 # .env (НЕ коммитится!)
 VITE_FIREBASE_API_KEY=real_key_here
-MONGODB_URI=mongodb+srv://user:real_password@...
-```
-
-### ❌ НЕПРАВИЛЬНО:
-
-```typescript
-// ❌ НИКОГДА ТАК:
-const apiKey = "AIzaSyCA0J_NCIf4ze7VjU41rEWW3s9Tsu6eQN8";
+MONGODB_URI=mongodb+srv://user:[REDACTED]@cluster.mongodb.net"[REDACTED_OLD_KEY]";
 const db = "mongodb+srv://user:password123@cluster";
 ```
 
@@ -170,7 +163,7 @@ FIREBASE_API_KEY=your_api_key_here
 MONGODB_URI=mongodb+srv://username:password@cluster
 
 # ❌ НЕ:
-FIREBASE_API_KEY=AIzaSyCA0J_NCIf4ze7VjU41rEWW3s9Tsu6eQN8
+FIREBASE_API_KEY=[REDACTED_OLD_KEY]
 ```
 
 ---

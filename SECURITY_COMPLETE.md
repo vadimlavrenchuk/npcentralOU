@@ -88,39 +88,11 @@ VITE_FIREBASE_API_KEY=AIzaSy...
 ```typescript
 // ❌ НИКОГДА ТАК НЕ ДЕЛАЙТЕ!
 const firebaseConfig = {
-  apiKey: "AIzaSyCA0J_NCIf4ze7VjU41rEWW3s9Tsu6eQN8",  // ❌
+  apiKey: "[REDACTED_OLD_KEY]",  // ❌
 };
 
 // ❌ НЕ ПИШИТЕ СЕКРЕТЫ В .md ФАЙЛАХ!
-MONGODB_URI=mongodb+srv://user:REAL_PASSWORD@...  // ❌
-```
-
-### 📝 Для документации используйте заглушки:
-
-```markdown
-# ✅ Правильно в документации:
-MONGODB_URI=mongodb+srv://username:YOUR_PASSWORD_HERE@cluster.net
-
-# ✅ Или так:
-FIREBASE_API_KEY=your_firebase_api_key_here
-```
-
----
-
-## 🔧 РУЧНАЯ ПРОВЕРКА (когда нужно)
-
-### Проверить весь проект:
-
-```powershell
-# Полная проверка всех файлов
-.\check-secrets.ps1
-```
-
-### Проверить конкретный файл:
-
-```powershell
-# Поиск MongoDB
-Select-String -Path "путь\к\файлу.ts" -Pattern "mongodb\+srv://[^:]+:[^@]+@"
+MONGODB_URI=mongodb+srv://user:[REDACTED]@cluster.mongodb.net"путь\к\файлу.ts" -Pattern "mongodb\+srv://[^:]+:[^@]+@"
 
 # Поиск Firebase ключей
 Select-String -Path "путь\к\файлу.ts" -Pattern "AIzaSy[A-Za-z0-9_-]{33}"
@@ -159,7 +131,7 @@ git update-index --chmod=+x .husky/pre-commit
 
 ```powershell
 # Создайте тестовый файл с секретом
-echo 'const key = "AIzaSyCA0J_NCIf4ze7VjU41rEWW3s9Tsu6eQN8"' > test-secret.ts
+echo 'const key = "[REDACTED_OLD_KEY]"' > test-secret.ts
 git add test-secret.ts
 git commit -m "test"
 # Должен отклонить! Если разрешил - hook не работает
