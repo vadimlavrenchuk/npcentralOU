@@ -27,6 +27,12 @@ build
 .env.development
 .env.staging
 
+# AI context files (internal use only - commercial secret!)
+AI_CONTEXT.local
+COPY_ME_FOR_AI.txt
+*.ai-context
+*AI_CONTEXT*
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
