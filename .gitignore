@@ -43,6 +43,21 @@ AI_CONTEXT.md
 DEPLOYMENT.md
 *.deployment
 
+# Security incident files (internal use only!)
+ЧИТАЙ_МЕНЯ_СНАЧАЛА.md
+СРОЧНО_СМЕНА_ПАРОЛЯ.md
+ПРОБЛЕМА_РЕШЕНА.md
+SECURITY_ACTION_PLAN.md
+SECURITY_INCIDENT_RESPONSE.md
+SECURITY_COMPLETE.md
+SECURITY_FIX_FIREBASE.md
+UPDATE_PRODUCTION_PASSWORD.md
+EMERGENCY_CHECKLIST.md
+clean-git-history*.ps1
+scan-secrets.ps1
+# But allow general security docs in backend
+!backend/SECURITY.md
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
