@@ -1,0 +1,334 @@
+/**
+ * Work Orders Page Styles
+ */
+
+@use '../../styles/variables' as *;
+@use 'sass:color';
+
+.work-orders {
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: $spacing-6;
+  }
+
+  &__title {
+    font-size: $font-size-3xl;
+    font-weight: $font-weight-bold;
+    color: $color-text-primary;
+    margin: 0;
+  }
+
+  &__table-container {
+    overflow-x: auto;
+  }
+
+  &__table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: $font-size-sm;
+
+    thead {
+      background-color: $color-gray-50;
+      border-bottom: 2px solid $color-border-light;
+
+      th {
+        padding: $spacing-3 $spacing-4;
+        text-align: left;
+        font-weight: $font-weight-semibold;
+        color: $color-text-secondary;
+        text-transform: uppercase;
+        font-size: $font-size-xs;
+        letter-spacing: 0.05em;
+      }
+    }
+
+    tbody {
+      tr {
+        border-bottom: 1px solid $color-border-light;
+        transition: all $transition-fast;
+
+        &.priority--critical {
+          background-color: rgba(255, 0, 0, 0.08);
+          border-left: 4px solid #c00;
+        }
+
+        &.priority--high {
+          background-color: rgba(255, 165, 0, 0.08);
+          border-left: 4px solid #d46b08;
+        }
+
+        &.priority--medium {
+          background-color: rgba(9, 88, 217, 0.05);
+          border-left: 4px solid #0958d9;
+        }
+
+        &.priority--low {
+          background-color: rgba(89, 89, 89, 0.03);
+          border-left: 4px solid #d9d9d9;
+        }
+
+        &:hover {
+          opacity: 0.9;
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+      }
+
+      td {
+        padding: $spacing-3 $spacing-4;
+        color: $color-text-primary;
+      }
+    }
+  }
+
+  &__table-title {
+    font-weight: $font-weight-semibold;
+    max-width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &__table-description {
+    max-width: 300px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: $color-text-secondary;
+  }
+
+  &__actions {
+    display: flex;
+    gap: $spacing-2;
+  }
+}
+
+.action-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: $spacing-2;
+  border: none;
+  background-color: $color-gray-100;
+  color: $color-text-secondary;
+  cursor: pointer;
+  border-radius: $radius-sm;
+  transition: all $transition-fast;
+  opacity: 1;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+
+  &--edit {
+    color: $color-primary;
+    &:hover {
+      background-color: color.adjust($color-primary, $lightness: 45%);
+    }
+  }
+
+  &--delete {
+    color: $color-danger;
+    &:hover {
+      background-color: $color-danger-bg;
+    }
+  }
+}
+
+.status {
+  padding: $spacing-1 $spacing-3;
+  border-radius: $radius-sm;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-semibold;
+  text-transform: uppercase;
+  display: inline-block;
+
+  &--pending {
+    background-color: $color-warning-bg;
+    color: $color-warning-text;
+  }
+
+  &--in_progress {
+    background-color: $color-info-bg;
+    color: $color-info-text;
+  }
+
+  &--completed {
+    background-color: $color-success-bg;
+    color: $color-success-text;
+  }
+
+  &--cancelled {
+    background-color: $color-gray-200;
+    color: $color-gray-600;
+  }
+}
+
+.empty-state {
+  text-align: center;
+  padding: $spacing-12;
+  color: $color-text-secondary;
+}
+
+// Form Styles
+.work-order-form {
+  .form-group {
+    margin-bottom: $spacing-4;
+
+    label {
+      display: block;
+      margin-bottom: $spacing-2;
+      font-weight: $font-weight-semibold;
+      color: $color-white;
+      font-size: $font-size-sm;
+    }
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: $spacing-4;
+  }
+
+  .form-textarea {
+    width: 100%;
+    padding: $spacing-3;
+    border: 1px solid $color-border-light;
+    border-radius: $radius-base;
+    font-family: inherit;
+    font-size: $font-size-sm;
+    color: $color-text-primary;
+    resize: vertical;
+    transition: border-color $transition-fast;
+
+    &:focus {
+      outline: none;
+      border-color: $color-primary;
+    }
+
+    &::placeholder {
+      color: $color-text-tertiary;
+    }
+  }
+
+  .form-select {
+    width: 100%;
+    padding: $spacing-3;
+    border: 1px solid $color-border-light;
+    border-radius: $radius-base;
+    font-family: inherit;
+    font-size: $font-size-sm;
+    color: $color-text-primary;
+    background-color: white;
+    cursor: pointer;
+    transition: border-color $transition-fast;
+
+    &:focus {
+      outline: none;
+      border-color: $color-primary;
+    }
+  }
+
+  .form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: $spacing-3;
+    margin-top: $spacing-6;
+    padding-top: $spacing-4;
+    border-top: 1px solid $color-border-light;
+  }
+}
+
+// Mobile Responsive
+@media (max-width: 768px) {
+  .work-orders {
+    &__header {
+      flex-direction: column;
+      align-items: stretch;
+      gap: $spacing-3;
+    }
+
+    &__title {
+      font-size: $font-size-2xl;
+    }
+
+    &__table-container {
+      margin: 0 -$spacing-4;
+    }
+
+    &__table {
+      display: block;
+      
+      thead {
+        display: none;
+      }
+
+      tbody {
+        display: block;
+      }
+
+      tr {
+        display: block;
+        margin-bottom: $spacing-4;
+        border: 1px solid $color-border-light;
+        border-radius: $radius-base;
+        padding: $spacing-3;
+        border-left-width: 4px !important;
+      }
+
+      td {
+        display: block;
+        padding: $spacing-2 0;
+        text-align: left;
+        border-bottom: none;
+
+        &::before {
+          content: attr(data-label);
+          font-weight: $font-weight-semibold;
+          color: $color-text-secondary;
+          display: block;
+          margin-bottom: $spacing-1;
+          font-size: $font-size-xs;
+          text-transform: uppercase;
+        }
+
+        &:last-child {
+          padding-bottom: 0;
+        }
+      }
+    }
+
+    &__table-title,
+    &__table-description {
+      max-width: 100%;
+      white-space: normal;
+    }
+  }
+
+  .work-order-form {
+    .form-row {
+      grid-template-columns: 1fr;
+    }
+
+    .form-actions {
+      flex-direction: column;
+
+      button {
+        width: 100%;
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .work-orders {
+    &__title {
+      font-size: $font-size-xl;
+    }
+  }
+
+  .action-button {
+    padding: $spacing-1;
+  }
+}

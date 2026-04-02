@@ -1,0 +1,223 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.part-selector {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid $color-gray-200;
+
+  &__title {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: $color-white;
+  }
+
+  &__add-form {
+    display: flex;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+    align-items: flex-start;
+  }
+
+  &__search {
+    flex: 1;
+    position: relative;
+  }
+
+  &__search-input {
+    position: relative;
+    display: flex;
+    align-items: center;
+
+    svg {
+      position: absolute;
+      left: 0.75rem;
+      color: $color-gray-500;
+      pointer-events: none;
+    }
+
+    input {
+      width: 100%;
+      padding-left: 2.5rem;
+    }
+  }
+
+  &__dropdown {
+    position: absolute;
+    top: calc(100% + 0.25rem);
+    left: 0;
+    right: 0;
+    background: white;
+    border: 1px solid $color-gray-300;
+    border-radius: $radius-base;
+    box-shadow: $shadow-md;
+    max-height: 300px;
+    overflow-y: auto;
+    z-index: 1000;
+  }
+
+  &__dropdown-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+
+    &:hover {
+      background-color: $color-gray-50;
+    }
+
+    &:not(:last-child) {
+      border-bottom: 1px solid $color-gray-100;
+    }
+  }
+
+  &__dropdown-item-main {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  &__dropdown-item-name {
+    font-weight: 500;
+    color: $color-gray-900;
+  }
+
+  &__dropdown-item-sku {
+    font-size: 0.875rem;
+    color: $color-gray-600;
+  }
+
+  &__dropdown-item-stock {
+    .stock-ok {
+      color: $color-success;
+      font-weight: 500;
+    }
+
+    .stock-low {
+      color: $color-warning;
+      font-weight: 500;
+    }
+  }
+
+  &__quantity {
+    width: 100px;
+
+    input {
+      text-align: center;
+    }
+  }
+
+  &__selected {
+    margin-top: 1rem;
+  }
+
+  &__table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+
+    thead {
+      background-color: $color-gray-50;
+
+      th {
+        padding: 0.75rem;
+        text-align: left;
+        font-weight: 600;
+        color: $color-white;
+        border-bottom: 2px solid $color-gray-200;
+      }
+    }
+
+    tbody {
+      tr {
+        border-bottom: 1px solid $color-gray-100;
+        transition: background-color 0.2s;
+
+        &:hover {
+          background-color: $color-gray-50;
+        }
+
+        &.insufficient-stock {
+          background-color: rgba(239, 68, 68, 0.05);
+        }
+      }
+
+      td {
+        padding: 0.75rem;
+        vertical-align: middle;
+        color: $color-white;
+      }
+    }
+  }
+
+  &__quantity-input {
+    max-width: 80px;
+
+    input {
+      text-align: center;
+      padding: 0.375rem;
+    }
+  }
+
+  .stock-sufficient {
+    color: $color-success;
+    font-weight: 500;
+  }
+
+  .stock-insufficient {
+    color: $color-danger;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+
+    .stock-warning-icon {
+      color: $color-warning;
+    }
+  }
+
+  &__warning {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem;
+    margin-top: 1rem;
+    background-color: rgba(245, 158, 11, 0.1);
+    border: 1px solid $color-warning;
+    border-radius: $radius-base;
+    color: #92400e;
+    font-size: 0.875rem;
+
+    svg {
+      flex-shrink: 0;
+      color: $color-warning;
+    }
+  }
+}
+
+.action-button {
+  background: transparent;
+  border: none;
+  padding: 0.375rem;
+  cursor: pointer;
+  border-radius: $radius-sm;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    background: $color-gray-100;
+  }
+
+  &--delete {
+    color: $color-danger;
+
+    &:hover {
+      background: rgba(239, 68, 68, 0.1);
+    }
+  }
+}

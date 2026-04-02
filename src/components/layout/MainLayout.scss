@@ -1,0 +1,51 @@
+/**
+ * MainLayout Styles
+ */
+
+@use '../../styles/variables' as *;
+
+.main-layout {
+  display: flex;
+  min-height: 100vh;
+  background-color: $color-bg-secondary;
+
+  &__content {
+    flex: 1;
+    margin-left: 260px;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+
+    @media (max-width: 1024px) {
+      margin-left: 0;
+    }
+  }
+
+  &__main {
+    flex: 1;
+    padding: $spacing-6;
+
+    @media (max-width: 768px) {
+      padding: $spacing-4;
+    }
+
+    @media (max-width: 480px) {
+      padding: $spacing-3;
+    }
+  }
+
+  &__overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    display: none;
+
+    @media (max-width: 1024px) {
+      display: block;
+    }
+  }
+}

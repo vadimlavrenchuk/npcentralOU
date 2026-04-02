@@ -1,0 +1,145 @@
+/**
+ * Navbar Styles
+ */
+
+@use '../../styles/variables' as *;
+
+.navbar {
+  height: 70px;
+  background-color: $color-white;
+  border-bottom: 1px solid $color-border-light;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 $spacing-6;
+  position: sticky;
+  top: 0;
+  z-index: $z-index-sticky;
+  box-shadow: $shadow-sm;
+
+  &__left {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: $spacing-3;
+  }
+
+  &__menu-btn {
+    display: none;
+
+    @media (max-width: 1024px) {
+      display: flex;
+    }
+  }
+
+  &__page-title {
+    font-size: $font-size-xl;
+    font-weight: $font-weight-semibold;
+    color: $color-text-primary;
+    margin: 0;
+  }
+
+  &__right {
+    display: flex;
+    align-items: center;
+    gap: $spacing-4;
+  }
+
+  &__icon-btn {
+    color: $color-text-secondary;
+
+    &:hover {
+      color: $color-primary;
+      background-color: $color-gray-100;
+      transform: none;
+      box-shadow: none;
+    }
+  }
+
+  &__user {
+    display: flex;
+    align-items: center;
+    gap: $spacing-2;
+    padding: $spacing-2 $spacing-4;
+    background-color: $color-gray-100;
+    border-radius: $radius-base;
+    color: $color-text-primary;
+  }
+
+  &__user-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid $color-primary;
+  }
+
+  &__user-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  &__user-name {
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+  }
+
+  &__user-role {
+    font-size: 10px;
+    font-weight: $font-weight-semibold;
+    padding: 2px 8px;
+    border-radius: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    
+    &.role-badge--admin {
+      background-color: #dc2626;
+      color: white;
+    }
+    
+    &.role-badge--chief {
+      background-color: #2563eb;
+      color: white;
+    }
+    
+    &.role-badge--accountant {
+      background-color: #16a34a;
+      color: white;
+    }
+    
+    &.role-badge--mechanic {
+      background-color: #ea580c;
+      color: white;
+    }
+  }
+
+  @media (max-width: 768px) {
+    padding: 0 $spacing-4;
+    height: 60px;
+
+    &__page-title {
+      font-size: $font-size-lg;
+    }
+
+    &__user-name {
+      display: none;
+    }
+
+    &__user-role {
+      display: none;
+    }
+
+    &__right {
+      gap: $spacing-2;
+    }
+  }
+
+  @media (max-width: 480px) {
+    padding: 0 $spacing-3;
+
+    &__page-title {
+      font-size: $font-size-base;
+    }
+  }
+}

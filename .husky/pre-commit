@@ -1,0 +1,186 @@
+#!/usr/bin/env node
+
+/**
+ * 🔒 Pre-commit hook для предотвращения утечки секретов
+ * Автоматически проверяет все staged файлы перед коммитом
+ */
+
+const { execSync } = require('child_process');
+const fs = require('fs');
+const path = require('path');
+
+// Паттерны для поиска секретов
+const SECRET_PATTERNS = [
+  // MongoDB
+  {
+    pattern: /mongodb(\+srv)?:\/\/[^:]+:(?!\[REDACTED\]|password|your_password|example)[^@\s]{3,}@/gi,
+    name: 'MongoDB Connection String с паролем',
+    severity: 'CRITICAL'
+  },
+  // Firebase
+  {
+    pattern: /AIzaSy[A-Za-z0-9_-]{33}(?!.*REDACTED|.*OLD_KEY)/g,
+    name: 'Firebase API Key',
+    severity: 'CRITICAL'
+  },
+  // JWT Secrets
+  {
+    pattern: /JWT_SECRET\s*=\s*["'](?!your_|test_|example_)[^"'\s]{20,}["']/gi,
+    name: 'JWT Secret',
+    severity: 'HIGH'
+  },
+  // API Keys
+  {
+    pattern: /API_KEY\s*=\s*["'](?!your_|test_|example_)[^"'\s]{20,}["']/gi,
+    name: 'API Key',
+    severity: 'HIGH'
+  },
+  // Generic passwords
+  {
+    pattern: /password\s*[:=]\s*["'](?!your_|test_|example_|password|123|admin)[^"'\s]{8,}["']/gi,
+    name: 'Hardcoded Password',
+    severity: 'HIGH'
+  },
+  // Generic secrets
+  {
+    pattern: /secret\s*[:=]\s*["'](?!your_|test_|example_)[^"'\s]{20,}["']/gi,
+    name: 'Hardcoded Secret',
+    severity: 'HIGH'
+  },
+  // GitHub tokens
+  {
+    pattern: /gh[pousr]_[A-Za-z0-9_]{36,}/g,
+    name: 'GitHub Token',
+    severity: 'CRITICAL'
+  },
+  // AWS
+  {
+    pattern: /AKIA[0-9A-Z]{16}/g,
+    name: 'AWS Access Key',
+    severity: 'CRITICAL'
+  }
+];
+
+// Файлы, которые можно игнорировать
+const IGNORED_FILES = [
+  '.env.example',
+  '.env.template',
+  'package-lock.json',
+  'yarn.lock',
+  'pnpm-lock.yaml'
+];
+
+// Расширения файлов для проверки
+const CHECK_EXTENSIONS = [
+  '.ts', '.tsx', '.js', '.jsx', 
+  '.json', '.md', '.txt', 
+  '.yml', '.yaml', '.env'
+];
+
+console.log('🔍 Проверка staged файлов на наличие секретов...\n');
+
+try {
+  // Получаем список staged файлов
+  const stagedFiles = execSync('git diff --cached --name-only', { encoding: 'utf-8' })
+    .split('\n')
+    .filter(file => file.trim() !== '');
+
+  if (stagedFiles.length === 0) {
+    console.log('✅ Нет staged файлов для проверки');
+    process.exit(0);
+  }
+
+  let foundSecrets = [];
+  let checkedCount = 0;
+
+  for (const file of stagedFiles) {
+    const filePath = path.resolve(file);
+    
+    // Пропускаем несуществующие файлы (удаленные)
+    if (!fs.existsSync(filePath)) continue;
+    
+    // Пропускаем игнорируемые файлы
+    const fileName = path.basename(file);
+    if (IGNORED_FILES.includes(fileName)) continue;
+    
+    // Проверяем только нужные расширения
+    const ext = path.extname(file);
+    if (!CHECK_EXTENSIONS.includes(ext)) continue;
+
+    // Проверяем, что это не .env файл (их нельзя коммитить вообще!)
+    if (fileName === '.env') {
+      foundSecrets.push({
+        file,
+        line: 1,
+        match: '.env file',
+        pattern: '.env файл НЕ должен быть в Git!',
+        severity: 'CRITICAL'
+      });
+      continue;
+    }
+
+    checkedCount++;
+
+    // Читаем содержимое файла
+    const content = fs.readFileSync(filePath, 'utf-8');
+    const lines = content.split('\n');
+
+    // Проверяем каждый паттерн
+    for (const { pattern, name, severity } of SECRET_PATTERNS) {
+      lines.forEach((line, index) => {
+        const matches = line.match(pattern);
+        if (matches) {
+          // Skip documentation examples
+          if (line.includes('example') || line.includes('template') || 
+              line.includes('YOUR_') || line.includes('НОВЫЙ_') ||
+              line.includes('NEW_') || line.includes('OLD_') ||
+              line.match(/mongodb\+srv:\/\/(username|user|admin):(password|НОВЫЙ|NEW|OLD|YOUR|REDACTED)/i)) {
+            return;
+          }
+          
+          matches.forEach(match => {
+            foundSecrets.push({
+              file,
+              line: index + 1,
+              match,
+              pattern: name,
+              severity
+            });
+          });
+        }
+      });
+    }
+  }
+
+  console.log(`✅ Проверено файлов: ${checkedCount}\n`);
+
+  if (foundSecrets.length > 0) {
+    console.log('❌ ❌ ❌  НАЙДЕНЫ СЕКРЕТЫ! КОММИТ ОТКЛОНЕН!  ❌ ❌ ❌\n');
+    console.log('═'.repeat(60));
+    
+    foundSecrets.forEach(({ file, line, match, pattern, severity }) => {
+      console.log(`\n🚨 ${severity}: ${pattern}`);
+      console.log(`   Файл: ${file}:${line}`);
+      console.log(`   Найдено: ${match.substring(0, 50)}${match.length > 50 ? '...' : ''}`);
+    });
+
+    console.log('\n' + '═'.repeat(60));
+    console.log('\n📋 ЧТО ДЕЛАТЬ:\n');
+    console.log('1. Удалите секреты из файлов');
+    console.log('2. Переместите их в .env файл');
+    console.log('3. Используйте process.env.VARIABLE_NAME в коде');
+    console.log('4. Убедитесь что .env в .gitignore');
+    console.log('\n💡 Для .env файлов: создайте .env.example с примерами\n');
+    
+    process.exit(1);
+  }
+
+  console.log('✅ Секретов не обнаружено! Коммит разрешен.\n');
+  process.exit(0);
+
+} catch (error) {
+  console.error('❌ Ошибка при проверке:', error.message);
+  // В случае ошибки разрешаем коммит, но предупреждаем
+  console.log('⚠️  Проверка не удалась, но коммит разрешен');
+  process.exit(0);
+}

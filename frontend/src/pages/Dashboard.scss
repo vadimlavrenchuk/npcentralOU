@@ -1,0 +1,96 @@
+/**
+ * Dashboard Styles
+ */
+
+@use '../styles/variables' as *;
+
+.dashboard {
+  &__title {
+    font-size: $font-size-3xl;
+    font-weight: $font-weight-bold;
+    color: $color-text-primary;
+    margin-bottom: $spacing-6;
+  }
+
+  &__stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: $spacing-4;
+    margin-bottom: $spacing-6;
+  }
+
+  &__content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: $spacing-6;
+  }
+
+  &__card {
+    height: 100%;
+  }
+}
+
+.stat-card {
+  display: flex;
+  align-items: center;
+  gap: $spacing-4;
+  padding: $spacing-5 !important;
+
+  &__icon {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    border-radius: $radius-lg;
+    color: $color-white;
+  }
+
+  &__content {
+    flex: 1;
+  }
+
+  &__value {
+    font-size: $font-size-3xl;
+    font-weight: $font-weight-bold;
+    color: $color-text-primary;
+    margin-bottom: $spacing-1;
+  }
+
+  &__label {
+    font-size: $font-size-sm;
+    color: $color-text-secondary;
+    font-weight: $font-weight-medium;
+  }
+
+  &--primary &__icon {
+    background-color: $color-primary;
+  }
+
+  &--success &__icon {
+    background-color: $color-success;
+  }
+
+  &--warning &__icon {
+    background-color: $color-warning;
+  }
+
+  &--danger &__icon {
+    background-color: $color-danger;
+  }
+}
+
+.page-loading,
+.page-error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  font-size: $font-size-lg;
+  color: $color-text-secondary;
+}
+
+.page-error {
+  color: $color-danger;
+}

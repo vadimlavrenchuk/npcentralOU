@@ -1,0 +1,99 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Dependencies
+node_modules
+package-lock.json
+
+# Build outputs
+dist
+dist-ssr
+build
+*.local
+
+# Environment variables
+.env
+.env.*
+.env.local
+.env.*.local
+*.env
+.env.production
+.env.development
+.env.staging
+
+# AI context files (internal use only - commercial secret!)
+AI_CONTEXT.local
+COPY_ME_FOR_AI.txt
+*.ai-context
+# But allow example files
+!AI_CONTEXT.example
+
+# Deployment configuration (confidential infrastructure info!)
+DEPLOYMENT.local
+DEPLOYMENT_CONFIG.md
+DEPLOYMENT_SUCCESS.md
+AI_CHEATSHEET.md
+AI_CONTEXT.md
+DEPLOYMENT.md
+*.deployment
+
+# Security incident files (internal use only!)
+ЧИТАЙ_МЕНЯ_СНАЧАЛА.md
+СРОЧНО_СМЕНА_ПАРОЛЯ.md
+ПРОБЛЕМА_РЕШЕНА.md
+ЗАЩИТА_ОТ_УТЕЧЕК.md
+SECURITY_ACTION_PLAN.md
+SECURITY_INCIDENT_RESPONSE.md
+SECURITY_COMPLETE.md
+SECURITY_FIX_FIREBASE.md
+UPDATE_PRODUCTION_PASSWORD.md
+EMERGENCY_CHECKLIST.md
+clean-git-history*.ps1
+scan-secrets.ps1
+# But allow general security docs in backend
+!backend/SECURITY.md
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# OS files
+Thumbs.db
+.DS_Store
+
+# Backend specific
+backend/node_modules
+backend/dist
+backend/.env
+backend/reset-admin.js
+**/reset-admin.js
+
+# Frontend specific
+frontend/node_modules
+frontend/dist
+frontend/.env
+
+# Database
+*.sqlite
+*.db
+
+# Local API test payloads (never commit credentials)
+login-test.json
+
+# Temp files
+*.tmp
+*.temp
+.cache
