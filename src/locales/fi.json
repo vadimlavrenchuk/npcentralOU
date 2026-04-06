@@ -344,5 +344,75 @@
       "vacation": "Loma",
       "sick_leave": "Sairausloma"
     }
+  },
+  "analytics": {
+    "title": "AI-tuotantolokin analyysi",
+    "subtitle": "Lataa tiedosto tai liitä teksti — analyysi palvelimella (Claude + Nord Pool EE).",
+    "nav": "Analytiikka",
+    "energyLabel": "Spot (EE)",
+    "energyUnit": "€/kWh",
+    "energyFallback": "varalla",
+    "energySource": "Nord Pool (Elering)",
+    "upload": {
+      "step1": "Tekstin erottaminen",
+      "step2": "Analyysi",
+      "step3": "Tulokset",
+      "extractingFile": "Tiedosto",
+      "orPasteText": "tai liitä teksti",
+      "dragActive": "Pudota tiedosto tähän",
+      "dropzoneTitle": "Vedä tiedosto tai valitse klikkaamalla",
+      "dropzoneHint": "PDF, DOCX, TXT, kuvat (OCR) · max 20 MB"
+    },
+    "form": {
+      "placeholder": "Liitä tuotantolokin teksti…",
+      "submit": "Analysoi",
+      "submitting": "Analysoidaan…",
+      "example": "Esimerkki",
+      "demo": "Demo"
+    },
+    "status": { "ready": "Valmis", "events": "Tapahtumat", "saved": "Tallennettu" },
+    "error": { "prefix": "Virhe", "rawLabel": "Mallin vastaus" },
+    "financial": {
+      "totalCost": "Kokonaiskustannus",
+      "totalCostDesc": "Työ + sähkö + ilma",
+      "profitLeak": "Vuoto",
+      "profitLeakDesc": "Ylimääräinen säätöaika",
+      "profitLeakNone": "Normissa",
+      "aiTitle": "AI-yhteenveto"
+    },
+    "eventTypes": {
+      "setup": "Säätö",
+      "work": "Tuotanto",
+      "downtime": "Seisokki",
+      "failure": "Vika"
+    },
+    "eventCard": {
+      "start": "Alku", "end": "Loppu", "duration": "Kesto", "wear": "Kuluma",
+      "energy": "Energia", "air": "Ilma", "cost": "Kustannus", "profitLeak": "Vuoto",
+      "laborOverhead": "Työ+OH", "energyCost": "Sähkö", "airCost": "Ilma"
+    },
+    "chart": { "title": "Aika tyypeittäin", "total": "Yhteensä" },
+    "actionPlan": { "title": "Toimintasuunnitelma", "subtitle": "Kolme askelta" },
+    "export": {
+      "pdf": "Vie PDF", "pdfDesc": "Raportti", "excel": "Vie Excel", "excelDesc": "Tapahtumat",
+      "reportTitle": "Lokianalyysi", "generatedOn": "Luotu", "machinesLabel": "Koneet",
+      "gdprFooter": "Henkilötiedot poistettu (GDPR)", "sheetEvents": "Tapahtumat", "sheetSummary": "Yhteenveto",
+      "gdprNote": "Teksti anonymisoitu ennen käsittelyä.",
+      "columns": {
+        "machine": "Kone", "type": "Tyyppi", "start": "Alku", "end": "Loppu", "durationH": "h",
+        "energy": "kWh", "air": "m³", "wear": "%", "cost": "€", "laborCost": "Työ €",
+        "energyCost": "Sähkö €", "airCost": "Ilma €", "profitLeak": "Vuoto €", "notes": "Huomiot"
+      }
+    },
+    "gdpr": {
+      "tooltip": "Henkilötiedot poistetaan ennen AI:lle lähetystä.",
+      "badge": "GDPR",
+      "itemsRedacted": "Piilotettu: {{count}}",
+      "noneFound": "Ei löytynyt",
+      "categories": {
+        "email": "sähköposti", "phone": "puhelin", "personal_id": "ID", "company_id": "rek.koodi",
+        "ip": "IP", "address": "osoite", "name": "nimi"
+      }
+    }
   }
 }

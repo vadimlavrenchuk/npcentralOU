@@ -342,5 +342,75 @@
       "vacation": "Puhkus",
       "sick_leave": "Haigusleht"
     }
+  },
+  "analytics": {
+    "title": "AI tootmislogi analüüs",
+    "subtitle": "Laadi fail või kleebi tekst — analüüs serveris (Claude + Nord Pool EE).",
+    "nav": "Analüütika",
+    "energyLabel": "Spot (EE)",
+    "energyUnit": "€/kWh",
+    "energyFallback": "varu",
+    "energySource": "Nord Pool (Elering)",
+    "upload": {
+      "step1": "Teksti eraldamine",
+      "step2": "Analüüs",
+      "step3": "Tulemused",
+      "extractingFile": "Fail",
+      "orPasteText": "või kleebi tekst",
+      "dragActive": "Lohista fail siia",
+      "dropzoneTitle": "Lohista fail või klõpsa valimiseks",
+      "dropzoneHint": "PDF, DOCX, TXT, pildid (OCR) · kuni 20 MB"
+    },
+    "form": {
+      "placeholder": "Kleebi tootmislogi tekst…",
+      "submit": "Analüüsi",
+      "submitting": "Analüüsin…",
+      "example": "Näidis",
+      "demo": "Demo"
+    },
+    "status": { "ready": "Valmis", "events": "Sündmused", "saved": "Salvestatud" },
+    "error": { "prefix": "Viga", "rawLabel": "Mudeli vastus" },
+    "financial": {
+      "totalCost": "Kogukulu",
+      "totalCostDesc": "Töö + elekter + õhk",
+      "profitLeak": "Kadumine",
+      "profitLeakDesc": "Üle normi seadistusaeg",
+      "profitLeakNone": "Normis",
+      "aiTitle": "AI kokkuvõte"
+    },
+    "eventTypes": {
+      "setup": "Seadistus",
+      "work": "Töö",
+      "downtime": "Seisak",
+      "failure": "Rike"
+    },
+    "eventCard": {
+      "start": "Algus", "end": "Lõpp", "duration": "Kestus", "wear": "Kulumine",
+      "energy": "Energia", "air": "Õhk", "cost": "Kulu", "profitLeak": "Kadumine",
+      "laborOverhead": "Töö+OH", "energyCost": "Elekter", "airCost": "Õhk"
+    },
+    "chart": { "title": "Aeg tüübi kaupa", "total": "Kokku" },
+    "actionPlan": { "title": "Tegevuskava", "subtitle": "Kolm sammu" },
+    "export": {
+      "pdf": "Ekspordi PDF", "pdfDesc": "Aruanne", "excel": "Ekspordi Excel", "excelDesc": "Sündmused",
+      "reportTitle": "Logi analüüs", "generatedOn": "Loodud", "machinesLabel": "Masinate",
+      "gdprFooter": "Isikuandmed eemaldatud (GDPR)", "sheetEvents": "Sündmused", "sheetSummary": "Kokkuvõte",
+      "gdprNote": "Tekst anonümiseeritud enne töötlemist.",
+      "columns": {
+        "machine": "Masin", "type": "Tüüp", "start": "Algus", "end": "Lõpp", "durationH": "h",
+        "energy": "kWh", "air": "m³", "wear": "%", "cost": "€", "laborCost": "Töö €",
+        "energyCost": "Elekter €", "airCost": "Õhk €", "profitLeak": "Kadumine €", "notes": "Märkused"
+      }
+    },
+    "gdpr": {
+      "tooltip": "Isikuandmed eemaldatakse enne AI-sse saatmist.",
+      "badge": "GDPR",
+      "itemsRedacted": "Peidetud: {{count}}",
+      "noneFound": "Mustreid ei leitud",
+      "categories": {
+        "email": "e-post", "phone": "telefon", "personal_id": "ID", "company_id": "reg.kood",
+        "ip": "IP", "address": "aadress", "name": "nimi"
+      }
+    }
   }
 }

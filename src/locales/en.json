@@ -383,5 +383,119 @@
       "vacation": "Vacation",
       "sick_leave": "Sick Leave"
     }
+  },
+  "analytics": {
+    "title": "AI production log analytics",
+    "subtitle": "Upload a log or paste text — analysis runs on the server (Claude + Nord Pool EE).",
+    "nav": "Analytics",
+    "energyLabel": "Spot (EE)",
+    "energyUnit": "€/kWh",
+    "energyFallback": "fallback",
+    "energySource": "Nord Pool via Elering",
+    "upload": {
+      "step1": "Extract text",
+      "step2": "Analyze",
+      "step3": "Results",
+      "extractingFile": "File",
+      "orPasteText": "or paste text",
+      "dragActive": "Drop the file here",
+      "dropzoneTitle": "Drag a file here or click to select",
+      "dropzoneHint": "PDF, DOCX, TXT, images (OCR) · max 20 MB"
+    },
+    "form": {
+      "placeholder": "Paste production log text…",
+      "submit": "Analyze",
+      "submitting": "Analyzing…",
+      "example": "Load example",
+      "demo": "Demo view"
+    },
+    "status": {
+      "ready": "Analysis complete",
+      "events": "Events",
+      "saved": "Saved to DB"
+    },
+    "error": {
+      "prefix": "Error",
+      "rawLabel": "Model raw response"
+    },
+    "financial": {
+      "totalCost": "Total cost",
+      "totalCostDesc": "Labor + energy + air (session)",
+      "profitLeak": "Profit leak",
+      "profitLeakDesc": "Excess setup time vs standard",
+      "profitLeakNone": "Within standard",
+      "aiTitle": "Analyst summary"
+    },
+    "eventTypes": {
+      "setup": "Setup",
+      "work": "Production",
+      "downtime": "Downtime",
+      "failure": "Failure"
+    },
+    "eventCard": {
+      "start": "Start",
+      "end": "End",
+      "duration": "Duration",
+      "wear": "Tool wear",
+      "energy": "Energy",
+      "air": "Air",
+      "cost": "Cost",
+      "profitLeak": "Leak",
+      "laborOverhead": "Labor+OH",
+      "energyCost": "Energy",
+      "airCost": "Air"
+    },
+    "chart": {
+      "title": "Time by event type",
+      "total": "Total"
+    },
+    "actionPlan": {
+      "title": "Action plan",
+      "subtitle": "Three concrete steps for engineering"
+    },
+    "export": {
+      "pdf": "Export PDF",
+      "pdfDesc": "Report with tables and AI summary",
+      "excel": "Export Excel",
+      "excelDesc": "Events + summary",
+      "reportTitle": "Production log analysis",
+      "generatedOn": "Generated",
+      "machinesLabel": "Machines",
+      "gdprFooter": "PII anonymized before AI (GDPR)",
+      "sheetEvents": "Events",
+      "sheetSummary": "Summary",
+      "gdprNote": "Source text was anonymized before processing.",
+      "columns": {
+        "machine": "Machine",
+        "type": "Type",
+        "start": "Start",
+        "end": "End",
+        "durationH": "Duration (h)",
+        "energy": "kWh",
+        "air": "Air m³",
+        "wear": "Wear %",
+        "cost": "Cost €",
+        "laborCost": "Labor €",
+        "energyCost": "Energy €",
+        "airCost": "Air €",
+        "profitLeak": "Leak €",
+        "notes": "Notes"
+      }
+    },
+    "gdpr": {
+      "tooltip": "Personal data is removed locally before sending to the AI API.",
+      "badge": "GDPR",
+      "itemsRedacted": "{{count}} items redacted",
+      "noneFound": "No obvious PII patterns",
+      "categories": {
+        "email": "email",
+        "phone": "phone",
+        "personal_id": "ID",
+        "company_id": "reg. code",
+        "ip": "IP",
+        "address": "address",
+        "name": "name"
+      }
+    }
   }
 }

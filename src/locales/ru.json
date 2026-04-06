@@ -363,5 +363,119 @@
       "vacation": "Отпуск",
       "sick_leave": "Больничный"
     }
+  },
+  "analytics": {
+    "title": "ИИ-анализ производственных журналов",
+    "subtitle": "Загрузите файл или вставьте текст — разбор на сервере (Claude + Nord Pool EE).",
+    "nav": "Аналитика",
+    "energyLabel": "Спот (EE)",
+    "energyUnit": "€/кВт·ч",
+    "energyFallback": "запасной",
+    "energySource": "Nord Pool (Elering)",
+    "upload": {
+      "step1": "Извлечь текст",
+      "step2": "Анализ",
+      "step3": "Результат",
+      "extractingFile": "Файл",
+      "orPasteText": "или вставьте текст",
+      "dragActive": "Отпустите файл здесь",
+      "dropzoneTitle": "Перетащите файл или нажмите для выбора",
+      "dropzoneHint": "PDF, DOCX, TXT, изображения (OCR) · до 20 МБ"
+    },
+    "form": {
+      "placeholder": "Вставьте текст журнала…",
+      "submit": "Анализировать",
+      "submitting": "Анализ…",
+      "example": "Пример",
+      "demo": "Демо"
+    },
+    "status": {
+      "ready": "Готово",
+      "events": "События",
+      "saved": "Сохранено в БД"
+    },
+    "error": {
+      "prefix": "Ошибка",
+      "rawLabel": "Сырой ответ модели"
+    },
+    "financial": {
+      "totalCost": "Суммарная стоимость",
+      "totalCostDesc": "Труд + энергия + воздух (сессия)",
+      "profitLeak": "Потери (переналадка)",
+      "profitLeakDesc": "Сверхнормативное время наладки",
+      "profitLeakNone": "В норме",
+      "aiTitle": "Вывод аналитика"
+    },
+    "eventTypes": {
+      "setup": "Наладка",
+      "work": "Работа",
+      "downtime": "Простой",
+      "failure": "Авария"
+    },
+    "eventCard": {
+      "start": "Начало",
+      "end": "Конец",
+      "duration": "Длительность",
+      "wear": "Износ",
+      "energy": "Энергия",
+      "air": "Воздух",
+      "cost": "Стоимость",
+      "profitLeak": "Потери",
+      "laborOverhead": "Труд+накл.",
+      "energyCost": "Энергия",
+      "airCost": "Воздух"
+    },
+    "chart": {
+      "title": "Время по типам событий",
+      "total": "Всего"
+    },
+    "actionPlan": {
+      "title": "План действий",
+      "subtitle": "Три шага для инженера"
+    },
+    "export": {
+      "pdf": "PDF",
+      "pdfDesc": "Отчёт с таблицами и ИИ",
+      "excel": "Excel",
+      "excelDesc": "События и сводка",
+      "reportTitle": "Анализ журнала",
+      "generatedOn": "Создан",
+      "machinesLabel": "Станки",
+      "gdprFooter": "ПДн обезличены до ИИ (GDPR)",
+      "sheetEvents": "События",
+      "sheetSummary": "Сводка",
+      "gdprNote": "Исходный текст был обезличен.",
+      "columns": {
+        "machine": "Станок",
+        "type": "Тип",
+        "start": "Начало",
+        "end": "Конец",
+        "durationH": "Часы",
+        "energy": "кВт·ч",
+        "air": "Воздух м³",
+        "wear": "Износ %",
+        "cost": "Стоимость €",
+        "laborCost": "Труд €",
+        "energyCost": "Энергия €",
+        "airCost": "Воздух €",
+        "profitLeak": "Потери €",
+        "notes": "Заметки"
+      }
+    },
+    "gdpr": {
+      "tooltip": "Персональные данные удаляются до отправки в ИИ.",
+      "badge": "GDPR",
+      "itemsRedacted": "Скрыто: {{count}}",
+      "noneFound": "Явных ПДн не найдено",
+      "categories": {
+        "email": "email",
+        "phone": "телефон",
+        "personal_id": "ID",
+        "company_id": "рег.код",
+        "ip": "IP",
+        "address": "адрес",
+        "name": "имя"
+      }
+    }
   }
 }

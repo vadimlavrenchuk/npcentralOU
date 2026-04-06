@@ -11,7 +11,8 @@ import {
   Equipment, 
   Inventory,
   Reports,
-  Schedule
+  Schedule,
+  Analytics
 } from '../pages';
 import { UserRole } from '../types/permissions';
 
@@ -61,6 +62,15 @@ export const AppRouter: React.FC = () => {
               <Reports />
             </RoleBasedRoute>
           } 
+        />
+
+        <Route
+          path="analytics"
+          element={
+            <RoleBasedRoute allowedRoles={[UserRole.ADMIN, UserRole.CHIEF_MECHANIC, UserRole.ACCOUNTANT]}>
+              <Analytics />
+            </RoleBasedRoute>
+          }
         />
         
         {/* Schedule - All roles (read-only for non-admins) */}
