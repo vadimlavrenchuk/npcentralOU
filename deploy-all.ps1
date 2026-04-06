@@ -26,9 +26,9 @@ Write-Host "Frontend: upload to server..." -ForegroundColor Cyan
 scp -r dist/* root@kontrollitud.ee:/tmp/frontend-verifed/
 if ($LASTEXITCODE -ne 0) { Write-Host "Frontend SCP failed." -ForegroundColor Red; exit 1 }
 
-Write-Host "Frontend: copy into proxy_app_1..." -ForegroundColor Cyan
-ssh root@kontrollitud.ee 'docker cp /tmp/frontend-verifed/. proxy_app_1:/var/www/mechanic-pro-demo/frontend/ && rm -rf /tmp/frontend-verifed'
-if ($LASTEXITCODE -ne 0) { Write-Host "Frontend docker cp failed." -ForegroundColor Red; exit 1 }
+Write-Host "Frontend: rsync to host /var/www (proxy_app_1 mounts /var/www read-only)..." -ForegroundColor Cyan
+ssh root@kontrollitud.ee 'rsync -a --delete /tmp/frontend-verifed/ /var/www/mechanic-pro-demo/frontend/ && rm -rf /tmp/frontend-verifed'
+if ($LASTEXITCODE -ne 0) { Write-Host "Frontend rsync failed." -ForegroundColor Red; exit 1 }
 
 Write-Host "`nBackend logs (last 8):" -ForegroundColor Cyan
 ssh root@kontrollitud.ee "docker logs mechanic-pro-demo --tail 8"
